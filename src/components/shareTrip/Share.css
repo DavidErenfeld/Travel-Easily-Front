@@ -1,0 +1,22 @@
+.types-travelers-buttons-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+}
+
+.qq {
+  grid-column: 2/-1;
+  grid-row: 1;
+  text-align: end;
+}
+
+.types-travelers-buttons {
+  display: inline;
+  font-size: 3.6rem;
+  color: #fff;
+  font-weight: 600;
+  width: 18rem;
+  grid-column: 1/2;
+  grid-row: 1;
+  color: #e6e7f6;
+}

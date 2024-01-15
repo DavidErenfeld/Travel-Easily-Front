@@ -1,0 +1,25 @@
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  grid-column: 1/ -1;
+  grid-row: 1;
+  margin: 2rem 4rem;
+
+  align-self: self-start;
+  padding: 1rem;
+  /* background-color: #fff; */
+  border-radius: 4px;
+}
+
+.personal-area-logo {
+  height: 3.5rem;
+  width: 3.5rem;
+  cursor: pointer;
+}
+
+.img-logo {
+  max-height: 90px;
+  width: 200px;
+  border-radius: 9px;
+}
