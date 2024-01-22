@@ -1,4 +1,4 @@
-import IconPersonalAriea from "../IconPersonalAriea";
+import IconPersonalAriea from "../icons/IconPersonalAriea";
 import "./Header.css";
 
 function Header() {

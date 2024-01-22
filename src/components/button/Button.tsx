@@ -2,13 +2,19 @@ import "./Button.css";
 
 export interface ButtonProps {
   text: string;
-  onClick: () => void;
+  onClickButton: (buttonId: string) => void;
+  clickedButtonId: string | null;
 }
 
-function Button({ text, onClick }: ButtonProps) {
+function Button({ text, onClickButton, clickedButtonId }: ButtonProps) {
+  // console.log("onClickButton type in Button component:", typeof onClickButton);
   return (
     <>
-      <button onClick={onClick} className="btn">
+      <button
+        className="btn"
+        style={clickedButtonId === text ? { backgroundColor: "#077b83" } : {}}
+        onClick={() => onClickButton(text)}
+      >
         {text}
       </button>
     </>

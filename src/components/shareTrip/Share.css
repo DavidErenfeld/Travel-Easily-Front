@@ -1,14 +1,27 @@
-.types-travelers-buttons-section {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
+.share-title {
+  grid-column: 1/-1;
+  font-size: 2.6rem;
+  color: #fff;
 }
 
-.qq {
-  grid-column: 2/-1;
-  grid-row: 1;
-  text-align: end;
+.type-trip-title {
+  width: 100%;
+  grid-column: 1/-1;
+  font-size: 2.6rem;
+  color: #fff;
 }
+
+.types-buttons-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 4rem;
+  row-gap: 2rem;
+  justify-self: center;
+}
+
+/***************************
+TYPE-TRAVELERS SECTION
+****************************/
 
 .types-travelers-buttons {
   display: inline;
@@ -19,4 +32,171 @@
   grid-column: 1/2;
   grid-row: 1;
   color: #e6e7f6;
+}
+
+/***************************
+TRIP-LOCATION SECTION
+****************************/
+
+.trip-location-section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  margin-left: 3rem;
+}
+
+.numOfDays-country-box {
+  grid-column: 1/-1;
+  display: flex;
+  gap: 3rem;
+  flex-direction: column;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+
+.selection-box {
+  outline: none;
+  font-size: 2rem;
+  padding: 1.6rem;
+  border-radius: 9px;
+  background: none;
+  color: #fff;
+  backdrop-filter: blur(0.5rem);
+  width: 100%;
+}
+
+.save-location {
+  width: 14rem;
+  font-size: 2.2rem;
+  margin-top: 6rem;
+  padding: 1rem;
+  font-weight: 500;
+  border-radius: 12px;
+}
+
+.country-list {
+  max-height: 8rem;
+  overflow-y: auto;
+  border-top: none;
+  width: 80%;
+  font-size: 1.6rem;
+  padding: 1.2rem;
+  border: none;
+  color: #fff;
+
+  scrollbar-width: none; /* עבור דפדפני Firefox */
+  -ms-overflow-style: none; /* עבור Internet Explorer 10+ */
+}
+
+.country-list::-webkit-scrollbar {
+  display: none;
+}
+
+.country-list div {
+  padding: 1.2rem;
+  cursor: pointer;
+  border-radius: 7px;
+  overflow-y: auto;
+}
+
+.country-list div:hover {
+  backdrop-filter: blur(1rem);
+}
+
+.selection-box::placeholder {
+  font-size: 2rem;
+  color: #fff; /* שינוי צבע ה-placeholder */
+  opacity: 1; /* אופציונלי - קובע את שקיפות הטקסט */
+}
+
+.selected {
+  backdrop-filter: blur(1rem);
+  cursor: pointer; /* מראה למשתמש שהוא יכול ללחוץ על האופציה */
+}
+
+/***************************
+ DESCRIPTION SECTION
+****************************/
+
+.description-box {
+  resize: none;
+  outline: none;
+  grid-column: 1/-1;
+  font-size: 1.6rem;
+  padding: 1.6rem;
+  margin-right: 10px;
+  height: 20rem;
+  border-radius: 7px;
+  background: none;
+  color: #ffffff;
+  backdrop-filter: blur(1rem);
+  font-family: "Rubik", sans-serif;
+}
+
+.description-box::placeholder {
+  font-size: 1.6rem; /* שינוי גודל הגופן */
+  color: #fff; /* שינוי צבע הגופן */
+  text-align: start; /* הטקסט יתחיל מהצד השמאלי */
+  vertical-align: top; /* הטקסט יתחיל מהחלק העליון */
+  opacity: 1; /* אופציונלי - קובע את שקיפות הטקסט */
+  font-family: "Rubik", sans-serif;
+}
+
+.save-description {
+  border-radius: 9px !important;
+}
+
+.change-day-description-block {
+  position: absolute;
+  bottom: -2.8rem;
+  left: 0;
+  display: flex;
+  gap: 1rem;
+}
+
+.change-day-description {
+  color: #fff;
+  font-size: 1.6rem;
+  font-weight: 500;
+  cursor: pointer;
+  /* border: 1px solid #e6e7f6; */
+  border-radius: 5px;
+  padding: 5px 15px;
+  background-color: #4a4a4a;
+}
+
+.change-day-description:hover {
+  background-color: #077b83;
+  color: #cfcfcf;
+}
+
+.icons-description-box {
+  position: absolute;
+  bottom: 4px;
+  right: 1.8rem;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  justify-content: end;
+  margin-top: 5px;
+}
+
+.icons-descripton-trip {
+  height: 3rem;
+  width: 3rem;
+  fill: #fff;
+  cursor: pointer;
+
+  font-weight: 700;
+}
+.icon-menu-descripton-trip {
+  height: 4rem;
+  width: 4rem;
+  fill: #fff;
+  cursor: pointer;
+}
+
+.aaa {
+  position: relative;
 }

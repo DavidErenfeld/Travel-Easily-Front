@@ -1,5 +1,4 @@
 import Heading from "../Heading/Heading";
-import Button from "../button/Button";
 import Header from "../header/Header";
 import "./MainPage.css";
 
@@ -15,8 +14,12 @@ function MainPage({ goToSearch, goToShare }: MainPageProps) {
       <section className="hero-section">
         <Heading text="The new why to travel" />
         <div className="buttons-container">
-          <Button onClick={goToShare} text="Share trip" />
-          <Button onClick={goToSearch} text="Search trip" />
+          <button className="btn" onClick={goToShare}>
+            Share trip
+          </button>
+          <button className="btn" onClick={goToSearch}>
+            Search trip
+          </button>
         </div>
       </section>
     </>
