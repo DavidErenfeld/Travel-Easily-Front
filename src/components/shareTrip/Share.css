@@ -129,7 +129,7 @@ TRIP-LOCATION SECTION
   height: 20rem;
   border-radius: 7px;
   background: none;
-  color: #ffffff;
+  color: #fff;
   backdrop-filter: blur(1rem);
   font-family: "Rubik", sans-serif;
 }
@@ -156,18 +156,18 @@ TRIP-LOCATION SECTION
 }
 
 .change-day-description {
-  color: #fff;
+  color: #0f3d03;
   font-size: 1.6rem;
   font-weight: 500;
   cursor: pointer;
   /* border: 1px solid #e6e7f6; */
   border-radius: 5px;
   padding: 5px 15px;
-  background-color: #4a4a4a;
+  background-color: #6fe31d;
 }
 
 .change-day-description:hover {
-  background-color: #077b83;
+  background-color: #5c5c5c;
   color: #cfcfcf;
 }
 
@@ -185,7 +185,7 @@ TRIP-LOCATION SECTION
 .icons-descripton-trip {
   height: 3rem;
   width: 3rem;
-  fill: #fff;
+  fill: #6fe31d;
   cursor: pointer;
 
   font-weight: 700;
@@ -193,7 +193,7 @@ TRIP-LOCATION SECTION
 .icon-menu-descripton-trip {
   height: 4rem;
   width: 4rem;
-  fill: #fff;
+  fill: #6fe31d;
   cursor: pointer;
 }
 

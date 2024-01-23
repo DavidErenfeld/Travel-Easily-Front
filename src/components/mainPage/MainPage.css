@@ -1,17 +1,3 @@
-.background {
-  position: fixed; /* או absolute, תלוי בצרכים שלך */
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background-image: url("/imgs/img_index.jpg");
-  /* background-image: url('path_to_your_image.jpg'); */
-  background-size: cover;
-  background-position: center;
-  filter: blur(0.2rem);
-  z-index: -1; /* כדי שהרקע יהיה מאחורי התוכן */
-}
-
 .hero-section {
   height: 100vh;
   display: grid;

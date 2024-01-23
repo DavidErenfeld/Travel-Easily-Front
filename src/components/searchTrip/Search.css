@@ -1,0 +1,189 @@
+.main-search-section {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  margin-top: 9.6rem;
+}
+
+/*******************************
+/ SEARCH-SECTION
+*******************************/
+.search-input {
+  padding: 1rem 2rem;
+  border-radius: 7px;
+  font-size: 1.8rem;
+  backdrop-filter: blur(1rem);
+  background: none;
+  color: #fff;
+  resize: none;
+  outline: none;
+  box-shadow: 0.5px 0.5px 0.5px 1px rgba(165, 195, 224, 0.97);
+  border: none;
+}
+
+.search-input::placeholder {
+  color: #fff;
+  opacity: 1;
+}
+
+/*******************************
+/ TRIP-SECTION
+*******************************/
+.trip-section {
+  grid-column: 1/2;
+  margin-top: 6rem;
+}
+
+.trip-box {
+  position: relative;
+  height: 20rem;
+  border-radius: 7px;
+  backdrop-filter: blur(1rem);
+  margin: 0 9.6rem;
+  margin-bottom: 9rem;
+  box-shadow: 0.1px 2px 5px 0.01px rgba(185, 186, 187, 0.76);
+  z-index: 1;
+  overflow: auto;
+}
+
+.trip-box::-webkit-scrollbar {
+  display: none;
+}
+
+.trip-day {
+  display: inline-block;
+  color: #6fe31d;
+  font-size: 2rem;
+  /* padding: 2rem 1.6rem 1.2rem 1.6rem; */
+  margin: 2rem 1.6rem 1.2rem 1.6rem;
+  font-weight: 600;
+  /* border-bottom: 3px solid #8fa3f3; */
+  /* border-radius: 7px; */
+  /* background-color: #2c5b0c; */
+  /* margin-bottom: 2rem; */
+}
+
+.trip-description {
+  display: inline-block;
+  padding: 0 1.6rem;
+  font-size: 1.6rem;
+  color: #ffffff;
+  line-height: 1.5;
+  letter-spacing: 0.5px;
+  backdrop-filter: blur(1rem);
+  /* font-weight: 600; */
+}
+
+.trip-tags-box {
+  position: absolute;
+  top: 5px;
+  right: 4px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.trip-tags {
+  color: #fff;
+  padding: 1rem 1.5rem;
+  border-radius: 4px;
+  font-size: 1.4rem;
+  background-color: #8fa3f3;
+}
+
+.trip-day-description {
+  padding: 1.2rem;
+  margin-bottom: 3px;
+  /* overflow: hidden; */
+}
+
+.trip-description {
+  overflow-y: hidden;
+}
+
+/*******************************
+/ profile-picture
+*******************************/
+
+.profile {
+  display: flex;
+  align-items: end;
+  gap: 0.1px;
+  position: absolute;
+  top: -29.6px;
+  left: 98.9px;
+  transform: translateY(-60%);
+  z-index: 2;
+  cursor: pointer;
+}
+.profile-name {
+  color: #d2dafa;
+  font-size: 1.6rem;
+  font-weight: 600;
+  /* text-shadow: 0.5px 0.5px 0.5px rgba(5, 16, 28, 0.97);
+  text-shadow: #1c40cf; */
+  /* align-self: flex-end; */
+}
+
+.profile-picture {
+  /* transform: translateX(-50%); */
+
+  height: 6rem;
+  width: 6rem;
+  border-radius: 50%;
+  border: 2px solid #8fa3f3;
+}
+.a {
+  position: relative;
+}
+.comments-icon,
+.like-icon {
+  height: 4rem;
+  width: 4rem;
+  fill: #0f3d03;
+  background-color: #6fe31d;
+  border-radius: 50%;
+  padding: 6px;
+  cursor: pointer;
+}
+
+/* .comments-icon {
+  height: 3rem;
+  width: 3rem;
+  fill: #ffffff;
+  background-color: #38720f;
+  border-radius: 50%;
+  padding: 4px;
+} */
+
+.like-comments {
+  z-index: 2;
+  position: absolute;
+  bottom: -14px;
+  right: 108px;
+  display: flex;
+  gap: 9px;
+}
+
+.like-box,
+.comments-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1px;
+}
+.num-of-likes,
+.num-of-comments {
+  display: inline-block;
+  position: absolute;
+  top: -5.9px;
+  right: -6.4px;
+  color: #0f3d03;
+  background-color: #ffffff;
+  width: 2rem;
+  height: 2rem;
+  font-size: 1.6rem;
+  text-align: center;
+  padding: 2px;
+  border-radius: 50%;
+  z-index: 2;
+}

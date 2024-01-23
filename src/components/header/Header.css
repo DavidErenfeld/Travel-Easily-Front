@@ -16,6 +16,7 @@ header {
   height: 3.5rem;
   width: 3.5rem;
   cursor: pointer;
+  stroke: #6fe31d !important;
 }
 
 .img-logo {
