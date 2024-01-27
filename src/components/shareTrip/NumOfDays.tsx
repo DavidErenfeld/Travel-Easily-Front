@@ -6,9 +6,14 @@ import LeftArrow from "../icons/LeftArrow";
 
 export interface NumOfDaysProps {
   onClickSave: (days: number) => void;
+  onCountrySelect: (country: string) => void;
   onClickRightArrow: () => void;
 }
-function NumOfDays({ onClickSave, onClickRightArrow }: NumOfDaysProps) {
+function NumOfDays({
+  onClickSave,
+  onClickRightArrow,
+  onCountrySelect,
+}: NumOfDaysProps) {
   const [days, setDays] = useState(0);
 
   const handleSaveClick = () => {
@@ -26,7 +31,7 @@ function NumOfDays({ onClickSave, onClickRightArrow }: NumOfDaysProps) {
           placeholder="How many days did you travel?"
           onChange={(e) => setDays(parseInt(e.target.value, 10))}
         />
-        <Country />
+        <Country onCountrySelect={onCountrySelect} />
       </div>
     </section>
   );

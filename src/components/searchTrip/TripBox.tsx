@@ -1,78 +1,92 @@
+import { useState } from "react";
 import CommentsIcon from "../icons/CommentsIcon";
 import Like from "../icons/Like";
 import "./Search.css";
+import { ITrips } from "./Search";
 
-export interface TripBoxProps {
-  onClickTrip: () => void;
-  onClickLike: () => void;
-  numOfLikes: number;
-  onClickComments: () => void;
+interface TripBoxProps {
+  trip: ITrips;
 }
-function TripBox({
-  onClickTrip,
-  onClickLike,
-  numOfLikes,
-  onClickComments,
-}: TripBoxProps) {
-  return (
-    <div className="a">
-      <div className="profile">
-        <img className="profile-picture" src="imgs/Chavi.jpg" />
-        <p className="profile-name">Chvi Erenfeld</p>
-      </div>
 
-      <div className="like-comments">
-        <div className="like-box">
-          <div className="num-of-likes">{numOfLikes}</div>
+function TripBox({ trip }: TripBoxProps) {
+  const [numOfLikes, setNumOfLikes] = useState(0);
+  const [isLikeClickd, setIsLikeClickd] = useState(false);
+
+  const onClickTrip = () => {
+    console.log("Trip Clickd");
+  };
+
+  const onClickComments = () => {
+    console.log("Comments Clickd");
+  };
+
+  const onClickLike = () => {
+    console.log("Like Clickd");
+    if (!isLikeClickd) {
+      setNumOfLikes(numOfLikes + 1);
+      setIsLikeClickd(true);
+    } else {
+      setIsLikeClickd(false);
+      numOfLikes > 0 ? setNumOfLikes(numOfLikes - 1) : onClickLike();
+    }
+  };
+
+  return (
+    <article className="trip-container">
+      <header className="user-profile">
+        <img className="profile-picture" src="imgs/Chavi.jpg" alt="Profile" />
+        <p className="profile-name">{trip.userName}</p>
+      </header>
+
+      <div className="interaction-section">
+        <div className="like-section">
+          <span className="likes-count">{trip.numOfLikes}</span>
           <Like onClickLike={onClickLike} />
         </div>
-        <div className="comments-box">
-          <div className="num-of-comments">0</div>
+        <div className="comments-section">
+          <span className="comments-count">{trip.numOfComments}</span>
           <CommentsIcon onClickComments={onClickComments} />
         </div>
       </div>
-      <div className="trip-box">
-        <div className="trip-tags-box">
-          <span className="trip-tags">romantic couple</span>
-          <span className="trip-tags">attractions</span>
-          <span className="trip-tags">Israel</span>
-          <span className="trip-tags">3 days</span>
+
+      <section className="trip-details" onClick={onClickTrip}>
+        <div className="trip-tags">
+          <span className="tag">{trip.typeTraveler}</span>
+          <span className="tag">{trip.typeTrip}</span>
+          <span className="tag">{trip.country}</span>
+          <span className="tag">{trip.numOfDays}</span>
         </div>
 
-        <div onClick={onClickTrip} className="trip-day-description">
-          <p className="trip-day">day 1</p>
-          <p className="trip-description">
-            Start with exploring historical sites, followed by lunch at a local
-            bistro. Afternoon spent exploring historical sites and evening at a
-            popular local spot, with exploring historical sites, followed by
-            lunch at a local bistro. Afternoon spent exploring,with exploring
-            historical sites, followed by lunch at a local bistro. Afternoon
-            spent exploring
-          </p>
+        {trip.tripDescription.map((trip, index) => (
+          <div className="trip-day-details">
+            <h3 className="day-title">Day {index + 1}</h3>
+            <p className="day-description">{trip}</p>
+          </div>
+        ))}
+
+        {/* 
+        <div className="trip-day-details">
+          <h3 className="day-title">day 2</h3>
+          <p className="day-description">{trips[1]}</p>
         </div>
-        <div className="trip-day-description">
-          <p className="trip-day">day 2</p>
-          <p className="trip-description">
-            Start with exploring historical sites, followed by lunch at a local
-            bistro. Afternoon spent exploring historical sites and evening at a
-            popular local spot, with bistro. Afternoon spent exploring
-            historical
-          </p>
-        </div>
-        <div className="trip-day-description">
-          <p className="trip-day">day 3</p>
-          <p className="trip-description">
-            Start with exploring historical sites, followed by lunch at a local
-            bistro. Afternoon spent exploring historical sites and evening at a
-            popular local spot, with bistro. Afternoon spent exploring
-            historical,followed by lunch at a local bistro. Afternoon spent
-            exploring historical sites and evening at a popular local spot, with
-            bistro. Afternoon spent
-          </p>
-        </div>
-      </div>
-    </div>
+
+        <div className="trip-day-details">
+          <h3 className="day-title">day 3</h3>
+          <p className="day-description">{trips[2]}</p>
+        </div> */}
+      </section>
+    </article>
   );
 }
 
 export default TripBox;
+
+// <main className="main-search-section">
+// <div className="arrow-to-main">
+//   <LeftArrow onClickLeftArrow={onClickRightArrow} />
+// </div>
+
+// {trips.map((trip, index) => (
+//   <TripBox trip={trip} key={trip._id} /> // העברת אובייקט trip והוספת מפתח
+// ))}
+// </main>

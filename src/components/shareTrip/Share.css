@@ -200,3 +200,114 @@ TRIP-LOCATION SECTION
 .aaa {
   position: relative;
 }
+
+/***************************
+ SUCCESSFUL-MESSAGE SECTION
+****************************/
+
+.successful-message {
+  position: relative;
+  display: inline-block;
+  grid-column: 1/-1;
+  text-align: center;
+  background: linear-gradient(135deg, #6e8efb, #a777e3);
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 1s ease-out;
+  margin-left: 4rem;
+  margin-right: 4rem;
+}
+
+.successful-message > h1 {
+  margin-bottom: 1rem;
+  font-size: 5rem;
+  color: #6fe31d;
+  animation: slideInFromLeft 1s ease-out;
+}
+
+.successful-message > h2 {
+  font-size: 3rem;
+  color: #fff;
+  animation: slideInFromRight 1s ease-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.successful-message p {
+  color: #2c5b0c; /* צבע הטקסט */
+  font-size: 2rem; /* גודל הפונט */
+  margin-top: 1rem; /* מרווח מעל הפסקה */
+  margin-bottom: 1rem; /* מרווח מתחת לפסקה */
+  line-height: 1.6; /* גובה השורה */
+  max-width: 600px; /* מקסימום רוחב של הפסקה */
+  margin-left: auto; /* מרכז את הפסקה */
+  margin-right: auto; /* מרכז את הפסקה */
+  text-align: center; /* יישור הטקסט למרכז */
+}
+
+@keyframes sparkle {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+.sparkle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #2e0deb;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  animation: sparkle 1s ease-out infinite;
+}
+
+/* ניתן להוסיף עוד זיקוקים עם מיקומים שונים וזמני אנימציה שונים */
+.sparkle1 {
+  animation-delay: 0.1s;
+}
+
+.sparkle2 {
+  animation-delay: 0.2s;
+}
+
+.btn-homepage {
+  position: absolute;
+  bottom: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+}

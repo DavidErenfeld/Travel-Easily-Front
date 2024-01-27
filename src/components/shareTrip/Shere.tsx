@@ -5,8 +5,14 @@ import TypesTravelers from "./TypesTravelers";
 import TypeTrip from "./TypeTrip";
 import NumOfDays from "./NumOfDays";
 import Description from "./Description";
+import SuccessfulCompletion from "./SuccessfulCompletion";
 
-function Share() {
+export interface ShareProps {
+  isUserConnected: boolean;
+  goToMainPage: () => void;
+}
+
+function Share({ isUserConnected, goToMainPage }: ShareProps) {
   const [isTravelerTypeSelected, setIsTravelerTypeSelected] = useState(false);
   const [selectedTravelerType, setSelectedTravelerType] = useState<
     string | null
@@ -17,7 +23,16 @@ function Share() {
 
   const [isNumOfDaysSelected, setIsNumOfDaysSelected] = useState(false);
 
-  const [numOfDays, setIsnumOfDays] = useState(0);
+  const [numOfDays, setNumOfDays] = useState(0);
+  const [selectedCountry, setSelectedCountry] = useState(false);
+
+  const [sendSuccessMessage, setSendSuccessMessage] = useState(false);
+
+  const handleCountrySelect = (country: string) => {
+    console.log("Selected Country:", country);
+    if (country !== null) setSelectedCountry(true);
+    // כאן תוכל לבצע פעולות נוספות עם המדינה הנבחרת
+  };
 
   const onClickLeftArrow1 = () => {
     if (selectedTravelerType) setIsTravelerTypeSelected(true);
@@ -28,19 +43,23 @@ function Share() {
   };
 
   const onClickLeftArrow3 = (days: number) => {
-    if (numOfDays > 0) setIsNumOfDaysSelected(true);
-    setIsnumOfDays(days);
+    if (numOfDays > 0 && selectedCountry) setIsNumOfDaysSelected(true);
+    setNumOfDays(days);
   };
 
   const onClickRightArrow1 = () => {
-    setIsTravelerTypeSelected(false);
+    goToMainPage(); // שימוש בפונקציה לחזרה ל-MainPage
   };
 
   const onClickRightArrow2 = () => {
-    setIsTripTypeSelected(false);
+    setIsTravelerTypeSelected(false);
   };
 
   const onClickRightArrow3 = () => {
+    setIsTripTypeSelected(false);
+  };
+
+  const onClickRightArrow4 = () => {
     setIsNumOfDaysSelected(false);
   };
 
@@ -52,34 +71,53 @@ function Share() {
     setSelectedTripType(buttonId);
   };
 
+  const onClickLastDay = (num: number) => {
+    if (num === numOfDays) setSendSuccessMessage(true);
+  };
+
+  const onClickHomePage = () => {
+    goToMainPage();
+  };
+
+  const HeadingSecondryClassName = !sendSuccessMessage
+    ? "heading-secondry"
+    : "heading-secondry-hidden";
+
   return (
     <>
-      <Header />
+      <Header isUserConnected={isUserConnected} />
       <section className="hero-section">
-        <HeadingSecondry text="Helping people create an amazing travel experience!" />
+        <div className={HeadingSecondryClassName}>
+          <HeadingSecondry text="Helping people create an amazing travel experience!" />
+        </div>
         {!isTravelerTypeSelected ? (
           <TypesTravelers
             onClickLeftArrow={onClickLeftArrow1}
+            onClickRightArrow={onClickRightArrow1}
             onClickButtonTypeTraveler={onClickButtonTypeTraveler}
             clickedButtonId={selectedTravelerType}
           />
         ) : !isTripTypeSelected ? (
           <TypeTrip
-            onClickRightArrow={onClickRightArrow1}
+            onClickRightArrow={onClickRightArrow2}
             onClickLeftArrow={onClickLeftArrow2}
             onClickButtonTypeTrip={onClickButton2}
             clickedButtonId2={selectedTripType}
           />
         ) : !isNumOfDaysSelected ? (
           <NumOfDays
+            onCountrySelect={handleCountrySelect}
             onClickSave={onClickLeftArrow3}
-            onClickRightArrow={onClickRightArrow2}
-          />
-        ) : (
-          <Description
-            dayNumber={numOfDays}
             onClickRightArrow={onClickRightArrow3}
           />
+        ) : !sendSuccessMessage ? (
+          <Description
+            onClickLastDay={onClickLastDay}
+            dayNumber={numOfDays}
+            onClickRightArrow={onClickRightArrow4}
+          />
+        ) : (
+          <SuccessfulCompletion onClickHomePage={onClickHomePage} />
         )}
       </section>
     </>

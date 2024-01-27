@@ -1,12 +1,14 @@
-function IconPersonalAriea() {
+interface PersonalAreaProps {
+  onClick: () => void;
+}
+
+function IconPersonalAriea({ onClick }: PersonalAreaProps) {
   return (
-    <div className="personal-area-logo">
+    <div onClick={onClick} className="personal-area-logo">
       <svg
         className="personal-area-logo"
-        id="fi_3024605"
         enableBackground="new 0 0 189.524 189.524"
         viewBox="0 0 189.524 189.524"
-        xmlns="http://www.w3.org/2000/svg"
         height="3.5rem"
         width="3.5rem"
       >

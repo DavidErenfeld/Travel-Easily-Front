@@ -1,7 +1,16 @@
+import { useState } from "react";
 import IconPersonalAriea from "../icons/IconPersonalAriea";
 import "./Header.css";
 
-function Header() {
+export interface HeaderProps {
+  isUserConnected: boolean;
+  // onClick: () => void;
+}
+
+function Header({ isUserConnected }: HeaderProps) {
+  const onClickPersonalAriea = () => {
+    console.log("Personal Ariea Clickd");
+  };
   return (
     <header>
       <img
@@ -9,8 +18,14 @@ function Header() {
         src="/imgs/TRAVEL_easily_logo.jpg"
         alt="TRAVEL easily logo"
       />
-
-      <IconPersonalAriea />
+      {!isUserConnected ? (
+        <IconPersonalAriea onClick={onClickPersonalAriea} />
+      ) : (
+        <section className="user-profile-personal">
+          <img className="profile-picture" src="imgs/Chavi.jpg" alt="Profile" />
+          <p className="profile-name">Chavi Erenfeld</p>
+        </section>
+      )}
     </header>
   );
 }

@@ -5,20 +5,20 @@ import "./Share.css";
 
 interface TypesTravelersProps {
   onClickLeftArrow: () => void;
+  onClickRightArrow: () => void;
   onClickButtonTypeTraveler: (buttonId: string) => void;
   clickedButtonId: string | null;
- 
 }
 function TypesTravelers({
   onClickLeftArrow,
+  onClickRightArrow,
   onClickButtonTypeTraveler,
   clickedButtonId,
- 
 }: TypesTravelersProps) {
   return (
     <section className="container">
       <LeftArrow onClickLeftArrow={onClickLeftArrow} />
-
+      <RightArrow onClickRightArrow={onClickRightArrow} />
       <p className="share-title">We are</p>
       <Button
         text="romantic couple"

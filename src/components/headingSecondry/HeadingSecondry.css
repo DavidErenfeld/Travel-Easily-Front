@@ -9,7 +9,8 @@
   grid-row: 1;
   padding-left: 2rem;
   text-align: start;
+}
 
-  /* text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
-    1px 1px 0 rgb(154, 154, 154); */
+.heading-secondry-hidden {
+  display: none;
 }

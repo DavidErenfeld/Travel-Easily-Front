@@ -4,29 +4,75 @@ import { useState } from "react";
 import MainPage from "./mainPage/MainPage";
 import Search from "./searchTrip/Search";
 import Share from "./shareTrip/Shere";
+import Form from "./Form/Register";
+import Login from "./Form/Login";
+import Register from "./Form/Register";
 
 function App() {
-  const [isSearchClicked, setIsSearchClicked] = useState(false);
-  const [isShareClicked, setIsShareClicked] = useState(false);
+  const [currentPage, setCurrentPage] = useState("mainPage");
+  const [userEmail, setUserEmail] = useState<string | null>(null);
+  const [isUserConnected, setIsUserConnected] = useState(false);
 
-  const onClickSearch = () => {
-    setIsSearchClicked(true);
+  const goToSearch = () => setCurrentPage("search");
+  const goToShare = () => {
+    setCurrentPage(isUserConnected ? "share" : "login");
   };
 
-  const onClickShare = () => {
-    setIsShareClicked(true);
+  const goToMainPage = () => {
+    setCurrentPage("mainPage");
   };
+
+  const handleLogin = (email: string) => {
+    setUserEmail(email);
+    if (email === "1020dudu@gmail.com") {
+      setIsUserConnected(true);
+      setCurrentPage("share");
+    } else {
+      setCurrentPage("register");
+    }
+  };
+
+  const onClickRegisterInLoginPage = () => {
+    setCurrentPage("register");
+  };
+
+  let displayedPage;
+  switch (currentPage) {
+    case "search":
+      displayedPage = (
+        <Search goToMainPage={goToMainPage} isUserConnected={isUserConnected} />
+      );
+      break;
+    case "share":
+      displayedPage = (
+        <Share isUserConnected={isUserConnected} goToMainPage={goToMainPage} />
+      );
+      break;
+    case "login":
+      displayedPage = (
+        <Login
+          onLogin={handleLogin}
+          onClickRegister={onClickRegisterInLoginPage}
+        />
+      );
+      break;
+    case "register":
+      displayedPage = <Register />;
+      break;
+    default:
+      displayedPage = (
+        <MainPage
+          goToSearch={goToSearch}
+          goToShare={goToShare}
+          isUserConnected={isUserConnected}
+        />
+      );
+  }
 
   return (
     <>
       <div className="background"></div>
-      {!isSearchClicked && !isShareClicked ? (
-        <MainPage goToSearch={onClickSearch} goToShare={onClickShare} />
-      ) : isSearchClicked ? (
-        <Search />
-      ) : (
-        <Share />
-      )}
+      <div>{displayedPage}</div>
     </>
   );
 }

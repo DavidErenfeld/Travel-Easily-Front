@@ -10,9 +10,14 @@ import LeftArrow from "../icons/LeftArrow";
 interface DescriptionProps {
   dayNumber: number;
   onClickRightArrow: () => void;
+  onClickLastDay: (num: number) => void;
 }
 
-function Description({ dayNumber, onClickRightArrow }: DescriptionProps) {
+function Description({
+  dayNumber,
+  onClickRightArrow,
+  onClickLastDay,
+}: DescriptionProps) {
   const [num, setNum] = useState(1);
   const [descriptions, setDescriptions] = useState(Array(dayNumber).fill(""));
 
@@ -27,6 +32,9 @@ function Description({ dayNumber, onClickRightArrow }: DescriptionProps) {
   const updateNextDay = () => {
     if (num < dayNumber) {
       setNum(num + 1);
+    }
+    if (num === dayNumber) {
+      onClickLastDay(num);
     }
   };
 

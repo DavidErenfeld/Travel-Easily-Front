@@ -1,14 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./Share.css";
 
-function CountryComponent() {
+interface CountryComponentProps {
+  onCountrySelect: (country: string) => void;
+}
+
+function CountryComponent({ onCountrySelect }: CountryComponentProps) {
   const [countries, setCountries] = useState<string[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [selectedSuggestionIndex, setSelectedSuggestionIndex] = useState(-1);
   const suggestionRefs = useRef<Array<HTMLDivElement | null>>([]);
 
-  // console.log(suggestion)
   useEffect(() => {
     fetch("https://restcountries.com/v3.1/all")
       .then((response) => response.json())
@@ -26,17 +29,23 @@ function CountryComponent() {
         )
       : [];
     setSuggestions(filtered);
-    setSelectedSuggestionIndex(-1); // אפס בחירה בכל פעם שהחיפוש משתנה
+    setSelectedSuggestionIndex(-1);
   }, [searchTerm, countries]);
 
   useEffect(() => {
-    if (suggestionRefs.current[selectedSuggestionIndex] !== null) {
+    if (suggestionRefs.current[selectedSuggestionIndex]) {
       suggestionRefs.current[selectedSuggestionIndex]?.scrollIntoView({
         behavior: "smooth",
         block: "nearest",
       });
     }
   }, [selectedSuggestionIndex]);
+
+  const selectCountry = (country: string) => {
+    setSearchTerm(country);
+    setSuggestions([]);
+    onCountrySelect(country);
+  };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     const suggestionsCount = suggestions.length;
@@ -51,8 +60,7 @@ function CountryComponent() {
         prevIndex > 0 ? prevIndex - 1 : prevIndex
       );
     } else if (e.key === "Enter" && selectedSuggestionIndex > -1) {
-      setSearchTerm(suggestions[selectedSuggestionIndex]);
-      setSuggestions([]);
+      selectCountry(suggestions[selectedSuggestionIndex]);
     }
   };
 
@@ -74,10 +82,7 @@ function CountryComponent() {
             key={index}
             ref={(el) => (suggestionRefs.current[index] = el)}
             className={index === selectedSuggestionIndex ? "selected" : ""}
-            onClick={() => {
-              setSearchTerm(suggestion);
-              setSuggestions([]);
-            }}
+            onClick={() => selectCountry(suggestion)}
             onMouseOver={() => setSelectedSuggestionIndex(index)}
           >
             {suggestion}

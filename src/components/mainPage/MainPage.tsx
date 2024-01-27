@@ -1,17 +1,22 @@
-import Heading from "../Heading/Heading";
+import React, { useState } from "react";
 import Header from "../header/Header";
+import Login from "../Form/Login";
+import Register from "../Form/Register";
+import Search from "../searchTrip/Search";
 import "./MainPage.css";
+import Heading from "../Heading/Heading";
 
 export interface MainPageProps {
   goToSearch: () => void;
   goToShare: () => void;
+  isUserConnected: boolean;
 }
-function MainPage({ goToSearch, goToShare }: MainPageProps) {
-  return (
-    <>
-      <Header />
 
-      <section className="hero-section">
+function MainPage({ goToSearch, goToShare, isUserConnected }: MainPageProps) {
+  return (
+    <section className="main-page-section">
+      <Header isUserConnected={isUserConnected} />
+      <div className="hero-section">
         <Heading text="The new why to travel" />
         <div className="buttons-container">
           <button className="btn" onClick={goToShare}>
@@ -21,8 +26,9 @@ function MainPage({ goToSearch, goToShare }: MainPageProps) {
             Search trip
           </button>
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 }
+
 export default MainPage;

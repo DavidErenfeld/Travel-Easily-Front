@@ -1,5 +1,10 @@
-.hero-section {
+.main-page--section {
+  position: relative;
   height: 100vh;
+}
+
+.hero-section {
+  /* height: 100vh; */
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 4.8rem;
@@ -16,4 +21,25 @@
   grid-column: 1/-1;
   align-self: center;
   justify-self: center;
+}
+.user-profile-personal {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-direction: column;
+  /* z-index: 2; */
+  cursor: pointer;
+}
+
+.profile-name {
+  color: #d2dafa;
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.profile-picture {
+  height: 6rem;
+  width: 6rem;
+  border-radius: 50%;
+  border: 2px solid #8fa3f3;
 }
