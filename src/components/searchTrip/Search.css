@@ -5,7 +5,6 @@
   display: grid;
   grid-template-columns: 3fr 1fr;
   margin-top: 9.6rem;
-  /* position: relative; */
 }
 
 /*******************************
@@ -30,18 +29,18 @@
 }
 
 /*******************************
-/ TRIP SECTION
+/ TRIP CARD
 *******************************/
-.trip-container {
+.trip-card {
   position: relative;
 }
 
-.trip-section {
+.trip-list-item {
   grid-column: 1/2;
   margin-top: 6rem;
 }
 
-.trip-details {
+.trip-card-details {
   position: relative;
   height: 20rem;
   border-radius: 7px;
@@ -53,7 +52,7 @@
   overflow: auto;
 }
 
-.trip-details::-webkit-scrollbar {
+.trip-card-details::-webkit-scrollbar {
   display: none;
 }
 
@@ -62,7 +61,7 @@
   margin-bottom: 3px;
 }
 
-.day-title {
+.trip-day-title {
   display: inline-block;
   color: #6fe31d;
   font-size: 2rem;
@@ -70,7 +69,7 @@
   font-weight: 600;
 }
 
-.day-description {
+.trip-day-description {
   display: inline-block;
   padding: 0 1.6rem;
   font-size: 1.6rem;
@@ -80,7 +79,7 @@
   backdrop-filter: blur(1rem);
 }
 
-.trip-tags {
+.trip-card-tags {
   position: absolute;
   top: 5px;
   right: 4px;
@@ -100,7 +99,7 @@
 /*******************************
 / PROFILE PICTURE
 *******************************/
-.user-profile {
+.trip-card-profile {
   position: absolute;
   top: -49.9px;
   left: 46.1px;
@@ -128,7 +127,7 @@
 /*******************************
 / LIKE AND COMMENTS
 *******************************/
-.interaction-section {
+.trip-interactions {
   z-index: 2;
   position: absolute;
   bottom: -14px;
@@ -179,4 +178,101 @@
   left: 7.5%;
   transform: translateY(-50%);
   z-index: 5;
+}
+
+/*******************************
+/ EXPANDED-TRIP SECTION
+*******************************/
+
+.trip-details-modal {
+  position: absolute;
+  top: 12rem;
+  left: auto;
+  grid-column: 1/-1;
+  max-height: 50rem;
+}
+
+.trip-details-content {
+  position: relative;
+  margin: 0 8rem;
+  backdrop-filter: blur(1rem);
+  height: 30rem;
+  border-radius: 7px;
+  z-index: 1;
+  overflow: auto;
+}
+
+.trip-details-content::-webkit-scrollbar {
+  display: none;
+}
+
+.expanded-trip-day-details > .trip-day-description {
+  padding: 0 2rem;
+  font-size: 1.6rem;
+  color: #fff;
+  line-height: 1.5;
+  letter-spacing: 0.5px;
+}
+.expanded-trip-day-details {
+  padding: 1.2rem;
+  margin-bottom: 3px;
+}
+
+.expanded-comments-section {
+  position: relative;
+  margin: 2rem 8rem;
+  backdrop-filter: blur(1rem);
+  overflow: auto;
+  width: 45%;
+}
+.expanded-comments-section::-webkit-scrollbar {
+  display: none;
+}
+
+.comments-input {
+  position: relative;
+  width: 80%;
+}
+.comments-input-fild {
+  position: absolute;
+  top: -1.5rem;
+  left: 0;
+  width: 100%;
+  height: 4rem;
+  background: none;
+  border-radius: 7px;
+  margin: 3rem;
+  color: #ebe9f9;
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  backdrop-filter: blur(1rem);
+  padding: 3px 4rem 3px 3rem;
+}
+
+.trip-comments-list {
+  margin-top: 4.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  align-items: flex-start;
+  padding: 3rem;
+}
+
+.comment-text {
+  font-size: 1.4rem;
+  color: #ffffff;
+  line-height: 1.5;
+  letter-spacing: 0.5px;
+  text-align: start;
+  border: 1px solid #6efe4a;
+  padding: 1rem 2rem;
+  border-radius: 7px;
+}
+
+.back-arrow > .left-arrow-icon {
+  position: absolute;
+  top: 50%;
+  left: 2.5rem;
+  transform: translateY(-50%);
+  z-index: 10;
 }

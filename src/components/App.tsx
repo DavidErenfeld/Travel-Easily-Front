@@ -22,6 +22,10 @@ function App() {
     setCurrentPage("mainPage");
   };
 
+  const onClickClose = () => {
+    goToMainPage();
+  };
+
   const handleLogin = (email: string) => {
     setUserEmail(email);
     if (email === "1020dudu@gmail.com") {
@@ -51,13 +55,14 @@ function App() {
     case "login":
       displayedPage = (
         <Login
+          onClickClose={onClickClose}
           onLogin={handleLogin}
           onClickRegister={onClickRegisterInLoginPage}
         />
       );
       break;
     case "register":
-      displayedPage = <Register />;
+      displayedPage = <Register onClickClose={onClickClose} />;
       break;
     default:
       displayedPage = (

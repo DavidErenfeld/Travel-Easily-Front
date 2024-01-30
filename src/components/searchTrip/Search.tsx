@@ -1,11 +1,10 @@
+import "./Search.css";
 import { useEffect, useState } from "react";
 import Header from "../header/Header";
-import "./Search.css";
 import TripBox from "./TripBox";
-import Trips from "../../ArryTrips";
 import LeftArrow from "../icons/LeftArrow";
 import axios from "axios";
-import { any } from "zod";
+import Trip from "./Trip";
 
 export interface SearchProps {
   isUserConnected: boolean;
@@ -39,8 +38,24 @@ export interface ITrips {
 function Search({ goToMainPage, isUserConnected }: SearchProps) {
   const [trips, setTrips] = useState<ITrips[]>([]);
   const [errors, setErrors] = useState();
-  const onClickRightArrow = () => {
+  const [selectedTrip, setSelectedTrip] = useState<ITrips | null>(null);
+  const [isTripSelected, setIsTripSelected] = useState(false);
+
+  const selectTrip = (trip: ITrips) => {
+    setSelectedTrip(trip);
+    setIsTripSelected(true);
+  };
+
+  const deselectTrip = () => {
+    setIsTripSelected(false); // מבטל את בחירת הטיול
+  };
+
+  const onClickLeftArrow = () => {
     goToMainPage(); // שימוש בפונקציה לחזרה ל-MainPage
+  };
+
+  const goToList = () => {
+    setIsTripSelected(false);
   };
 
   useEffect(() => {
@@ -57,20 +72,27 @@ function Search({ goToMainPage, isUserConnected }: SearchProps) {
     };
   }, []);
 
+  const renderTrips = () => {
+    return trips.map((trip) => (
+      <div className="trip-list-item" key={trip._id}>
+        <TripBox trip={trip} onSelect={() => selectTrip(trip)} />
+      </div>
+    ));
+  };
+
   return (
     <>
       <Header isUserConnected={isUserConnected} />
-      <main className="main-search-section">
-        <div className="arrow-to-main">
-          <LeftArrow onClickLeftArrow={onClickRightArrow} />
-        </div>
-
-        {trips.map((trip, index) => (
-          <div className="trip-section">
-            <TripBox trip={trip} key={trip._id} />
+      {isTripSelected && selectedTrip ? (
+        <Trip goToList={goToList} trip={selectedTrip} onSelect={deselectTrip} />
+      ) : (
+        <main className="main-search-section">
+          <div className="arrow-to-main">
+            <LeftArrow onClickLeftArrow={onClickLeftArrow} />
           </div>
-        ))}
-      </main>
+          {renderTrips()}
+        </main>
+      )}
     </>
   );
 }

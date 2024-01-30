@@ -1,46 +1,35 @@
+import "./Search.css";
 import { useState } from "react";
 import CommentsIcon from "../icons/CommentsIcon";
 import Like from "../icons/Like";
-import "./Search.css";
 import { ITrips } from "./Search";
 
 interface TripBoxProps {
   trip: ITrips;
+  onSelect: () => void;
 }
 
-function TripBox({ trip }: TripBoxProps) {
+function TripBox({ trip, onSelect }: TripBoxProps) {
   const [numOfLikes, setNumOfLikes] = useState(0);
-  const [isLikeClickd, setIsLikeClickd] = useState(false);
-
-  const onClickTrip = () => {
-    console.log("Trip Clickd");
-  };
 
   const onClickComments = () => {
-    console.log("Comments Clickd");
+    console.log("Comments Clicked");
   };
 
   const onClickLike = () => {
-    console.log("Like Clickd");
-    if (!isLikeClickd) {
-      setNumOfLikes(numOfLikes + 1);
-      setIsLikeClickd(true);
-    } else {
-      setIsLikeClickd(false);
-      numOfLikes > 0 ? setNumOfLikes(numOfLikes - 1) : onClickLike();
-    }
+    console.log("Like Clicked");
   };
 
   return (
-    <article className="trip-container">
-      <header className="user-profile">
+    <article className="trip-card">
+      <header className="trip-card-profile">
         <img className="profile-picture" src="imgs/Chavi.jpg" alt="Profile" />
         <p className="profile-name">{trip.userName}</p>
       </header>
 
-      <div className="interaction-section">
+      <div className="trip-interactions">
         <div className="like-section">
-          <span className="likes-count">{trip.numOfLikes}</span>
+          <span className="likes-count">{numOfLikes}</span>
           <Like onClickLike={onClickLike} />
         </div>
         <div className="comments-section">
@@ -48,45 +37,22 @@ function TripBox({ trip }: TripBoxProps) {
           <CommentsIcon onClickComments={onClickComments} />
         </div>
       </div>
-
-      <section className="trip-details" onClick={onClickTrip}>
-        <div className="trip-tags">
+      <section className="trip-card-details" onClick={onSelect}>
+        <div className="trip-card-tags">
           <span className="tag">{trip.typeTraveler}</span>
           <span className="tag">{trip.typeTrip}</span>
           <span className="tag">{trip.country}</span>
-          <span className="tag">{trip.numOfDays}</span>
+          <span className="tag">{trip.numOfDays} days</span>
         </div>
-
-        {trip.tripDescription.map((trip, index) => (
+        {trip.tripDescription.map((description, index) => (
           <div className="trip-day-details">
-            <h3 className="day-title">Day {index + 1}</h3>
-            <p className="day-description">{trip}</p>
+            <h3 className="trip-day-title">Day {index + 1}</h3>
+            <p className="trip-day-description">{description}</p>
           </div>
         ))}
-
-        {/* 
-        <div className="trip-day-details">
-          <h3 className="day-title">day 2</h3>
-          <p className="day-description">{trips[1]}</p>
-        </div>
-
-        <div className="trip-day-details">
-          <h3 className="day-title">day 3</h3>
-          <p className="day-description">{trips[2]}</p>
-        </div> */}
       </section>
     </article>
   );
 }
 
 export default TripBox;
-
-// <main className="main-search-section">
-// <div className="arrow-to-main">
-//   <LeftArrow onClickLeftArrow={onClickRightArrow} />
-// </div>
-
-// {trips.map((trip, index) => (
-//   <TripBox trip={trip} key={trip._id} /> // העברת אובייקט trip והוספת מפתח
-// ))}
-// </main>

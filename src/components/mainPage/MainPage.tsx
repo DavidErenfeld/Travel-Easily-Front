@@ -1,8 +1,4 @@
-import React, { useState } from "react";
 import Header from "../header/Header";
-import Login from "../Form/Login";
-import Register from "../Form/Register";
-import Search from "../searchTrip/Search";
 import "./MainPage.css";
 import Heading from "../Heading/Heading";
 

@@ -13,7 +13,7 @@ form {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 4rem;
+  gap: 2rem;
   border-radius: 8px;
   z-index: 15;
   /* backdrop-filter: blur(1rem); */
@@ -21,11 +21,19 @@ form {
   padding: 3rem;
 }
 
+form > img {
+  position: absolute;
+  top: 9rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .title {
   font-size: 2rem;
   text-align: center;
   margin-top: 2rem;
   color: #fff;
+  margin-bottom: 120px;
 }
 
 .user-name,
@@ -84,4 +92,27 @@ form {
   font-weight: 500;
 
   color: #fff;
+}
+
+.image-box {
+  position: absolute;
+  top: 8.3rem;
+  left: 35%;
+}
+
+.icon-select-img {
+  position: absolute;
+  top: 9rem;
+  right: -10rem;
+}
+
+.icon-select-img > .icons-descripton-trip {
+  fill: #fff;
+}
+
+.close-icon {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  cursor: pointer;
 }

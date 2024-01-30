@@ -24,3 +24,17 @@ header {
   width: 200px;
   border-radius: 9px;
 }
+
+header > .user-profile-personal {
+  gap: 0.5rem;
+}
+
+header > .user-profile-personal > .profile-picture {
+  height: 4rem;
+  width: 4rem;
+}
+
+header > .user-profile-personal > .profile-name {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
