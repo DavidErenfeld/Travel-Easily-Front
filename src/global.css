@@ -24,11 +24,10 @@ body {
   left: 0;
   width: 100%;
   height: 100vh;
-  background-image: url("/imgs/img_index.jpg");
-  /* background-image: url('path_to_your_image.jpg'); */
-  background-size: cover;
+  background-image: url("/imgs/pexels-sagui-andrea-618848.jpg");
+  background-size: 100% 100%;
   background-position: center;
-  filter: blur(0.2rem);
+  /* filter: blur(0.2rem); */
   z-index: -1; /* כדי שהרקע יהיה מאחורי התוכן */
 }
 

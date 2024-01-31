@@ -7,13 +7,14 @@ import { ITrips } from "./Search";
 interface TripBoxProps {
   trip: ITrips;
   onSelect: () => void;
+  onCommentsSelect: (trip: ITrips) => void;
 }
 
-function TripBox({ trip, onSelect }: TripBoxProps) {
+function TripBox({ trip, onSelect, onCommentsSelect }: TripBoxProps) {
   const [numOfLikes, setNumOfLikes] = useState(0);
 
-  const onClickComments = () => {
-    console.log("Comments Clicked");
+  const onCommentsClick = () => {
+    onCommentsSelect(trip);
   };
 
   const onClickLike = () => {
@@ -34,7 +35,7 @@ function TripBox({ trip, onSelect }: TripBoxProps) {
         </div>
         <div className="comments-section">
           <span className="comments-count">{trip.numOfComments}</span>
-          <CommentsIcon onClickComments={onClickComments} />
+          <CommentsIcon onClickComments={onCommentsClick} />
         </div>
       </div>
       <section className="trip-card-details" onClick={onSelect}>

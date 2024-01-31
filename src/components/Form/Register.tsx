@@ -1,17 +1,20 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import z from "zod";
-import AddPicture from "../icons/AddPicture";
 import AddImgs from "../icons/AddImgs";
 import CloseIcon from "../icons/CloseIcon";
+import { uploadPhoto } from "../../services/fileService";
 
+// Interface for props of the Register component
 interface RegisterProps {
   onClickClose: () => void;
 }
-const defaultImage = "/imgs/user.png"; // או מקום מקומי כמו '/images/default.jpg'
 
-// סכמת האימות של Zod
+// Default image source
+const defaultImage = "/imgs/user.png"; // Can be a local path like '/images/default.jpg'
+
+// Schema for form validation using Zod
 const schema = z.object({
   userName: z
     .string()
@@ -22,19 +25,19 @@ const schema = z.object({
     .string()
     .min(8, "Password must be at least 8 characters long")
     .regex(/[a-z]/, "Password must include a lowercase letter"),
-  // אין צורך באימות לשדה התמונה במקרה זה
 });
 
+// FormData type, combining schema inference and image file
 type FormData = z.infer<typeof schema> & {
   image: FileList;
 };
 
 function Register({ onClickClose }: RegisterProps) {
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  // State for managing the File object
+  const [imgFile, setImgFile] = useState<File | null>(null);
+  // State for managing the display URL of the image
+  const [imgSrc, setImgSrc] = useState(defaultImage);
 
-  const openFilePicker = () => {
-    fileInputRef.current?.click();
-  };
   const {
     register,
     handleSubmit,
@@ -42,71 +45,80 @@ function Register({ onClickClose }: RegisterProps) {
     watch,
   } = useForm<FormData>({ resolver: zodResolver(schema) });
 
-  const selectedFile = watch("image");
+  const imageRef = useRef<HTMLInputElement>(null);
+  const [image] = watch(["image"]);
 
-  const onSubmit = async (data: FormData) => {
+  // Handle change in image input
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setImgFile(e.target.files[0]); // Store the File object
+      setImgSrc(URL.createObjectURL(e.target.files[0])); // Update display URL
+    }
+  };
+
+  useEffect(() => {
+    // Cleanup URL.createObjectURL to avoid memory leaks
+    return () => {
+      if (imgSrc) URL.revokeObjectURL(imgSrc);
+    };
+  }, [imgSrc]);
+
+  const onSubmit = async (data: FormData) => {};
+
+  const handleUploadTest = async () => {
+    if (!imgFile) {
+      alert("Please select an image first.");
+      return;
+    }
     try {
-      const response = await fetch("http://localhost:3000/auth/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userName: data.userName,
-          email: data.email,
-          password: data.password,
-        }),
-      });
-
-      if (response.ok) {
-        const responseData = await response.json();
-        console.log("רישום בוצע בהצלחה: ", responseData);
-        // ניתן להוסיף פעולות נוספות לאחר רישום מוצלח, לדוגמה ניתוב לעמוד אחר
-      } else {
-        console.log("שגיאה ברישום: ", await response.text());
-        // טיפול במקרה של שגיאה
-      }
+      const uploadedUrl = await uploadPhoto(imgFile);
+      console.log(`Image uploaded successfully: ${uploadedUrl}`);
+      // כאן תוכל להחליט אם לעדכן מצב כלשהו עם ה-URL החדש
     } catch (error) {
-      console.error("שגיאת רשת: ", error);
-      // טיפול בשגיאת רשת
+      console.error("Upload failed:", error);
+      alert("Failed to upload image.");
     }
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="close-icon">
-        <CloseIcon onClickClose={onClickClose} />
+        <CloseIcon onClick={onClickClose} />
       </div>
       <h3 className="title">Register</h3>
 
       <div className="image-box">
-        <div className="icon-select-img" onClick={openFilePicker}>
+        <div
+          className="icon-select-img"
+          onClick={() => imageRef.current?.click()} // Trigger file input on icon click
+        >
           <AddImgs />
         </div>
+        {/* Image selection and display logic */}
         <input
-          {...register("image")}
-          className="image-profile"
+          {...register("image", { required: true })}
           type="file"
-          id="image"
-          accept="image/*"
-          ref={fileInputRef}
-          style={{ display: "none" }} // הסתרת אלמנט הקלט
+          name="image"
+          ref={imageRef}
+          style={{ display: "none" }}
+          onChange={handleChange}
         />
-        <img
-          src={
-            selectedFile && selectedFile.length > 0
-              ? URL.createObjectURL(selectedFile[0])
-              : defaultImage
-          }
-          alt="Preview"
-          style={{
-            border: "2px solid #fff",
-            borderRadius: "50%",
-            width: "100px",
-            height: "100px",
-          }}
-        />
+        {imgSrc && (
+          <img
+            src={imgSrc}
+            alt="Preview"
+            style={{
+              border: "2px solid #fff",
+              borderRadius: "50%",
+              width: "100px",
+              height: "100px",
+              objectFit: "cover",
+              objectPosition: "center",
+            }}
+          />
+        )}
       </div>
+      {/* Input fields for user details */}
       <div className="input-box">
         <input
           {...register("userName")}
@@ -143,6 +155,10 @@ function Register({ onClickClose }: RegisterProps) {
       </div>
       <button type="submit" className="submit-btn">
         Submit
+      </button>
+      {/* כפתור לבדיקת העלאת התמונה */}
+      <button type="button" onClick={handleUploadTest}>
+        Test Upload Image
       </button>
     </form>
   );

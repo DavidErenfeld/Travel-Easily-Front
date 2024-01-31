@@ -3,36 +3,15 @@ import { useEffect, useState } from "react";
 import Header from "../header/Header";
 import TripBox from "./TripBox";
 import LeftArrow from "../icons/LeftArrow";
-import axios from "axios";
 import Trip from "./Trip";
+import tripsService, {
+  CanceledError,
+  ITrips,
+} from "../../services/tripsService";
 
 export interface SearchProps {
   isUserConnected: boolean;
   goToMainPage: () => void;
-}
-
-export interface ITrips {
-  _id?: string;
-  userName: string;
-  owner: string;
-  typeTraveler: string;
-  country: string;
-  typeTrip: string;
-  numOfDays: number;
-  tripDescription: string[];
-  numOfComments: number;
-  numOfLikes: number;
-
-  comments?: Array<{
-    owner: string;
-    comment: string;
-    date: Date;
-  }>;
-
-  likes?: Array<{
-    owner: string;
-    date: Date;
-  }>;
 }
 
 function Search({ goToMainPage, isUserConnected }: SearchProps) {
@@ -40,6 +19,7 @@ function Search({ goToMainPage, isUserConnected }: SearchProps) {
   const [errors, setErrors] = useState();
   const [selectedTrip, setSelectedTrip] = useState<ITrips | null>(null);
   const [isTripSelected, setIsTripSelected] = useState(false);
+  const [focusOnComments, setFocusOnComments] = useState(false);
 
   const selectTrip = (trip: ITrips) => {
     setSelectedTrip(trip);
@@ -58,24 +38,36 @@ function Search({ goToMainPage, isUserConnected }: SearchProps) {
     setIsTripSelected(false);
   };
 
+  const selectTripForComment = (trip: ITrips) => {
+    setSelectedTrip(trip);
+    setIsTripSelected(true);
+    // כאן אנחנו מסמנים שרוצים להציג את שדה התגובות מיד בפתיחה
+    setFocusOnComments(true);
+  };
+
   useEffect(() => {
-    axios
-      .get<ITrips[]>("http://localhost:3000/trips")
-      .then((res: any) => {
-        setTrips(res.data);
-      })
-      .catch((err) => {
-        setErrors(err.message);
-      });
+    const { req, abort } = tripsService.getAllTrips();
+    req.then((res) => {
+      setTrips(res.data);
+    });
+    req.catch((err) => {
+      console.log(err);
+      if (err instanceof CanceledError) return;
+      setErrors(err.message);
+    });
     return () => {
-      console.log("clean up");
+      abort();
     };
   }, []);
 
   const renderTrips = () => {
     return trips.map((trip) => (
       <div className="trip-list-item" key={trip._id}>
-        <TripBox trip={trip} onSelect={() => selectTrip(trip)} />
+        <TripBox
+          onCommentsSelect={selectTripForComment}
+          trip={trip}
+          onSelect={() => selectTrip(trip)}
+        />
       </div>
     ));
   };
@@ -84,7 +76,12 @@ function Search({ goToMainPage, isUserConnected }: SearchProps) {
     <>
       <Header isUserConnected={isUserConnected} />
       {isTripSelected && selectedTrip ? (
-        <Trip goToList={goToList} trip={selectedTrip} onSelect={deselectTrip} />
+        <Trip
+          goToList={goToList}
+          trip={selectedTrip}
+          onSelect={deselectTrip}
+          focusOnComments={focusOnComments} // העבר את הסטטוס הזה לקומפוננטת Trip
+        />
       ) : (
         <main className="main-search-section">
           <div className="arrow-to-main">

@@ -32,7 +32,7 @@ function Login({ onLogin, onClickRegister, onClickClose }: LoginProps) {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="login-form">
       <div className="close-icon">
-        <CloseIcon onClickClose={onClickClose} />
+        <CloseIcon onClick={onClickClose} />
       </div>
       <h3 className="title">Login</h3>
       <img

@@ -184,9 +184,14 @@
 / EXPANDED-TRIP SECTION
 *******************************/
 
+/* .trip-section {
+  position: relative;
+  height: 100vh;
+} */
+
 .trip-details-modal {
   position: absolute;
-  top: 12rem;
+  top: 13rem;
   left: auto;
   grid-column: 1/-1;
   max-height: 50rem;
@@ -196,7 +201,7 @@
   position: relative;
   margin: 0 8rem;
   backdrop-filter: blur(1rem);
-  height: 30rem;
+  height: auto;
   border-radius: 7px;
   z-index: 1;
   overflow: auto;
@@ -234,10 +239,10 @@
   width: 80%;
 }
 .comments-input-fild {
-  position: absolute;
-  top: -1.5rem;
-  left: 0;
-  width: 100%;
+  resize: none;
+  outline: none;
+  font-family: "Rubik", sans-serif;
+  width: 65%;
   height: 4rem;
   background: none;
   border-radius: 7px;
@@ -246,16 +251,34 @@
   font-size: 1.6rem;
   margin-bottom: 1rem;
   backdrop-filter: blur(1rem);
-  padding: 3px 4rem 3px 3rem;
+  padding: 3px 4rem 3px 1rem;
+  border: 3px solid #6fe31d;
+}
+
+.comments-input-fild::placeholder {
+  color: #6fe31d;
+  font-weight: 600;
+  text-align: start; /* הטקסט יתחיל מהצד השמאלי */
+  vertical-align: middle; /* הטקסט יתחיל מהחלק העליון */
+  opacity: 1; /* אופציונלי - קובע את שקיפות הטקסט */
+  font-family: "Rubik", sans-serif;
+}
+.submit-icon-box {
+  position: absolute;
+  top: 31px;
+  right: 279px;
 }
 
 .trip-comments-list {
-  margin-top: 4.5rem;
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  gap: 2rem;
   align-items: flex-start;
   padding: 3rem;
+}
+
+.trip-comments-list-hidden {
+  display: none;
 }
 
 .comment-text {
@@ -269,10 +292,16 @@
   border-radius: 7px;
 }
 
-.back-arrow > .left-arrow-icon {
-  position: absolute;
+.back-arrow {
+  position: fixed; /* שינוי מ-position: absolute ל-position: fixed */
   top: 50%;
   left: 2.5rem;
   transform: translateY(-50%);
   z-index: 10;
+}
+
+.back-arrow > .left-arrow-icon {
+  position: fixed;
+  left: 0;
+  top: 0;
 }
