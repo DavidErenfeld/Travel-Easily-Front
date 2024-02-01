@@ -38,3 +38,41 @@ header > .user-profile-personal > .profile-name {
   font-size: 1.4rem;
   font-weight: 500;
 }
+
+/*************************
+ PERSONAL-AREA SECTION
+*************************/
+
+.personal-area {
+  position: absolute;
+  top: 4rem;
+  right: 4rem;
+  text-decoration: none;
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  z-index: 20;
+}
+
+.personal-area > li {
+  transition: all 0.4s;
+  text-align: center;
+  font-size: 1.8rem;
+  cursor: pointer;
+  padding: 1.8rem 6rem;
+}
+
+.personal-area > li:nth-child(even) {
+  color: #2b3149;
+  background-color: #c7d1f9;
+}
+
+.personal-area > li:nth-child(odd) {
+  color: #2b3149;
+  background-color: #dde3fb;
+}
+
+.personal-area > li:hover {
+  color: #dde3fb;
+  background-color: #2b3149;
+}

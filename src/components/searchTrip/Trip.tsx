@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react";
 import LeftArrow from "../icons/LeftArrow";
-import { ITrips } from "./Search";
+import { ITrips } from "../../services/tripsService";
 import SubmitIcon from "../icons/SubmitIcon";
 
 export interface TripProps {
@@ -52,18 +52,27 @@ function Trip({ trip, goToList, focusOnComments }: TripProps) {
             </div>
           </div>
         </section>
-        <div className="expanded-comments-section">
-          <div className={classCommentsList}>
-            {/* {trip.comments?.map((comment, index) => (
-            <p className="comment-text">{comment.comment} </p>
-          ))} */}
+        {/* <div className="expanded-comments-section"> */}
+        <div className={classCommentsList}>
+          <div className="trip-comments-list">
+            {trip.comments?.map((comment, index) => (
+              <div className="comment-box">
+                <p className="comment-ditales">
+                  {String(comment.date)} {comment.owner}
+                </p>
+                <p className="comment-text">{comment.comment} </p>
+              </div>
+            ))}
             {/* תאריך ושם משתמש של כותב התגובה יתווספו כאן */}
-            <p className="comment-text">
-              Whole Day: Took a day trip to Scheveningen, the popular beach
-              resort town. Spent the day relaxing by the sea, enjoying the sun,
-              and strolling along the pier. The laid-back vibe was a perfect
-              break from the busy city touring.
-            </p>
+            <div className="comment-box">
+              <div className="comment-ditales">20/01/2023 david Erenfeld</div>
+              <p className="comment-text">
+                Whole Day: Took a day trip to Scheveningen, the popular beach
+                resort town. Spent the day relaxing by the sea, enjoying the
+                sun, and strolling along the pier. The laid-back vibe was a
+                perfect break from the busy city touring.
+              </p>
+            </div>
 
             <p className="comment-text">
               Whole Day: Took a day trip to Scheveningen, the popular beach

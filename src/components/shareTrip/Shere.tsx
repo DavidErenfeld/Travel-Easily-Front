@@ -10,9 +10,20 @@ import SuccessfulCompletion from "./SuccessfulCompletion";
 export interface ShareProps {
   isUserConnected: boolean;
   goToMainPage: () => void;
+  goToShare: () => void;
+  goToRegister: () => void;
+  goToLogin: () => void;
+  goToSearch: () => void;
 }
 
-function Share({ isUserConnected, goToMainPage }: ShareProps) {
+function Share({
+  isUserConnected,
+  goToMainPage,
+  goToShare,
+  goToSearch,
+  goToLogin,
+  goToRegister,
+}: ShareProps) {
   const [isTravelerTypeSelected, setIsTravelerTypeSelected] = useState(false);
   const [selectedTravelerType, setSelectedTravelerType] = useState<
     string | null
@@ -85,7 +96,13 @@ function Share({ isUserConnected, goToMainPage }: ShareProps) {
 
   return (
     <>
-      <Header isUserConnected={isUserConnected} />
+      <Header
+        goToShare={goToShare}
+        goToRegister={goToRegister}
+        goToLogin={goToLogin}
+        goToSearch={goToSearch}
+        isUserConnected={isUserConnected}
+      />
       <section className="hero-section">
         <div className={HeadingSecondryClassName}>
           <HeadingSecondry text="Helping people create an amazing travel experience!" />

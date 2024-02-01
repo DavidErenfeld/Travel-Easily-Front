@@ -73,6 +73,40 @@ body {
   box-shadow: 1px 0.2rem 0.5rem 1.5px #6fe31d;
 }
 
+.search-input-btn {
+  width: 25rem;
+  height: 5rem;
+  border-radius: 9px;
+  color: #fff;
+  background: none;
+  backdrop-filter: blur(1rem);
+  padding-left: 1rem;
+}
+
+.search-input-btn::placeholder {
+  font-size: 1.8rem;
+  color: #fff;
+}
+
+.search-input-box {
+  position: relative;
+}
+
+.search-button-icon {
+  position: absolute;
+  top: 50%;
+  right: 0.7rem;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+.search-icon {
+  height: 3rem;
+  width: 3rem;
+  fill: #6fe31d;
+  cursor: pointer;
+}
+
 .arrow-icon {
   padding: 3px;
   height: 4rem;

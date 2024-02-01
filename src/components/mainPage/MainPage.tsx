@@ -5,13 +5,27 @@ import Heading from "../Heading/Heading";
 export interface MainPageProps {
   goToSearch: () => void;
   goToShare: () => void;
+  goToLogin: () => void;
+  goToRegister: () => void;
   isUserConnected: boolean;
 }
 
-function MainPage({ goToSearch, goToShare, isUserConnected }: MainPageProps) {
+function MainPage({
+  goToSearch,
+  goToShare,
+  isUserConnected,
+  goToLogin,
+  goToRegister,
+}: MainPageProps) {
   return (
     <section className="main-page-section">
-      <Header isUserConnected={isUserConnected} />
+      <Header
+        goToShare={goToShare}
+        goToRegister={goToRegister}
+        goToLogin={goToLogin}
+        goToSearch={goToSearch}
+        isUserConnected={isUserConnected}
+      />
       <div className="hero-section">
         <Heading text="The new why to travel" />
         <div className="buttons-container">

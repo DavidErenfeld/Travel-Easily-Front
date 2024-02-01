@@ -7,6 +7,21 @@
   margin-top: 9.6rem;
 }
 
+.search-btns-section {
+  position: absolute;
+  top: 15rem;
+  right: 10rem;
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+}
+
+.trip-list-item {
+  /* grid-row: 1; */
+  grid-column: 1/2;
+  margin-top: 2rem;
+}
+
 /*******************************
 / SEARCH INPUT
 *******************************/
@@ -33,11 +48,6 @@
 *******************************/
 .trip-card {
   position: relative;
-}
-
-.trip-list-item {
-  grid-column: 1/2;
-  margin-top: 6rem;
 }
 
 .trip-card-details {
@@ -252,12 +262,12 @@
   margin-bottom: 1rem;
   backdrop-filter: blur(1rem);
   padding: 3px 4rem 3px 1rem;
-  border: 3px solid #6fe31d;
+  border: 2.5px solid #6fe31d;
 }
 
 .comments-input-fild::placeholder {
   color: #6fe31d;
-  font-weight: 600;
+  /* font-weight: 600; */
   text-align: start; /* הטקסט יתחיל מהצד השמאלי */
   vertical-align: middle; /* הטקסט יתחיל מהחלק העליון */
   opacity: 1; /* אופציונלי - קובע את שקיפות הטקסט */
@@ -272,7 +282,7 @@
 .trip-comments-list {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 4rem;
   align-items: flex-start;
   padding: 3rem;
 }
@@ -281,14 +291,25 @@
   display: none;
 }
 
+.comment-box {
+  position: relative;
+}
+.comment-ditales {
+  position: absolute;
+  bottom: -1.6rem;
+  left: 0;
+  font-size: 1.2rem;
+  color: #b1bff7;
+}
+
 .comment-text {
   font-size: 1.4rem;
   color: #ffffff;
   line-height: 1.5;
   letter-spacing: 0.5px;
   text-align: start;
-  border: 1px solid #6efe4a;
-  padding: 1rem 2rem;
+  border: 1px solid #6fe31d;
+  padding: 1rem 2rem 1rem 0.8rem;
   border-radius: 7px;
 }
 

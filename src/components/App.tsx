@@ -4,7 +4,6 @@ import { useState } from "react";
 import MainPage from "./mainPage/MainPage";
 import Search from "./searchTrip/Search";
 import Share from "./shareTrip/Shere";
-import Form from "./Form/Register";
 import Login from "./Form/Login";
 import Register from "./Form/Register";
 
@@ -20,6 +19,14 @@ function App() {
 
   const goToMainPage = () => {
     setCurrentPage("mainPage");
+  };
+
+  const goToLogin = () => {
+    setCurrentPage("login");
+  };
+
+  const goToRegister = () => {
+    setCurrentPage("register");
   };
 
   const onClickClose = () => {
@@ -44,12 +51,26 @@ function App() {
   switch (currentPage) {
     case "search":
       displayedPage = (
-        <Search goToMainPage={goToMainPage} isUserConnected={isUserConnected} />
+        <Search
+          isUserConnected={isUserConnected}
+          goToMainPage={goToMainPage}
+          goToShare={goToShare}
+          goToSearch={goToSearch}
+          goToLogin={goToLogin}
+          goToRegister={goToRegister}
+        />
       );
       break;
     case "share":
       displayedPage = (
-        <Share isUserConnected={isUserConnected} goToMainPage={goToMainPage} />
+        <Share
+          isUserConnected={isUserConnected}
+          goToMainPage={goToMainPage}
+          goToShare={goToShare}
+          goToSearch={goToSearch}
+          goToLogin={goToLogin}
+          goToRegister={goToRegister}
+        />
       );
       break;
     case "login":
@@ -62,11 +83,15 @@ function App() {
       );
       break;
     case "register":
-      displayedPage = <Register onClickClose={onClickClose} />;
+      displayedPage = (
+        <Register goToMainPage={goToMainPage} onClickClose={onClickClose} />
+      );
       break;
     default:
       displayedPage = (
         <MainPage
+          goToRegister={goToRegister}
+          goToLogin={goToLogin}
           goToSearch={goToSearch}
           goToShare={goToShare}
           isUserConnected={isUserConnected}

@@ -1,6 +1,6 @@
 import "./Share.css";
 
-import AddImgs from "../icons/AddImgs";
+import AddImgs from "../icons/AddImgsIcon";
 
 import AddPicture from "../icons/AddPicture";
 import { useState } from "react";

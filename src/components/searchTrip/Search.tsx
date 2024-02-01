@@ -8,13 +8,25 @@ import tripsService, {
   CanceledError,
   ITrips,
 } from "../../services/tripsService";
+import SearchButton from "./SearchButton";
 
 export interface SearchProps {
   isUserConnected: boolean;
   goToMainPage: () => void;
+  goToShare: () => void;
+  goToRegister: () => void;
+  goToLogin: () => void;
+  goToSearch: () => void;
 }
 
-function Search({ goToMainPage, isUserConnected }: SearchProps) {
+function Search({
+  isUserConnected,
+  goToMainPage,
+  goToShare,
+  goToSearch,
+  goToLogin,
+  goToRegister,
+}: SearchProps) {
   const [trips, setTrips] = useState<ITrips[]>([]);
   const [errors, setErrors] = useState();
   const [selectedTrip, setSelectedTrip] = useState<ITrips | null>(null);
@@ -60,6 +72,14 @@ function Search({ goToMainPage, isUserConnected }: SearchProps) {
     };
   }, []);
 
+  const onCluckSearchByCountry = () => {
+    console.log("on Cluck Search By Country");
+  };
+
+  const onClickSearchIcon = () => {
+    console.log("on Click Search Icon");
+  };
+
   const renderTrips = () => {
     return trips.map((trip) => (
       <div className="trip-list-item" key={trip._id}>
@@ -74,7 +94,13 @@ function Search({ goToMainPage, isUserConnected }: SearchProps) {
 
   return (
     <>
-      <Header isUserConnected={isUserConnected} />
+      <Header
+        goToShare={goToShare}
+        goToRegister={goToRegister}
+        goToLogin={goToLogin}
+        goToSearch={goToSearch}
+        isUserConnected={isUserConnected}
+      />
       {isTripSelected && selectedTrip ? (
         <Trip
           goToList={goToList}
@@ -87,6 +113,28 @@ function Search({ goToMainPage, isUserConnected }: SearchProps) {
           <div className="arrow-to-main">
             <LeftArrow onClickLeftArrow={onClickLeftArrow} />
           </div>
+          <section className="search-btns-section">
+            <SearchButton
+              text="search by country"
+              onClickSearchIcon={onClickSearchIcon}
+              onClickSearchInput={onCluckSearchByCountry}
+            />
+            <SearchButton
+              text="search by country"
+              onClickSearchIcon={onClickSearchIcon}
+              onClickSearchInput={onCluckSearchByCountry}
+            />
+            <SearchButton
+              text="search by country"
+              onClickSearchIcon={onClickSearchIcon}
+              onClickSearchInput={onCluckSearchByCountry}
+            />
+            <SearchButton
+              text="search by country"
+              onClickSearchIcon={onClickSearchIcon}
+              onClickSearchInput={onCluckSearchByCountry}
+            />
+          </section>
           {renderTrips()}
         </main>
       )}

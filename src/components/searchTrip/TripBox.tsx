@@ -2,7 +2,7 @@ import "./Search.css";
 import { useState } from "react";
 import CommentsIcon from "../icons/CommentsIcon";
 import Like from "../icons/Like";
-import { ITrips } from "./Search";
+import { ITrips } from "../../services/tripsService";
 
 interface TripBoxProps {
   trip: ITrips;
@@ -11,7 +11,7 @@ interface TripBoxProps {
 }
 
 function TripBox({ trip, onSelect, onCommentsSelect }: TripBoxProps) {
-  const [numOfLikes, setNumOfLikes] = useState(0);
+  const [numOfLikes, setNumOfLikes] = useState(trip.numOfLikes);
 
   const onCommentsClick = () => {
     onCommentsSelect(trip);
@@ -39,6 +39,7 @@ function TripBox({ trip, onSelect, onCommentsSelect }: TripBoxProps) {
         </div>
       </div>
       <section className="trip-card-details" onClick={onSelect}>
+        
         <div className="trip-card-tags">
           <span className="tag">{trip.typeTraveler}</span>
           <span className="tag">{trip.typeTrip}</span>
