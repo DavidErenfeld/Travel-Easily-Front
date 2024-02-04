@@ -84,6 +84,7 @@ function Search({
     return trips.map((trip) => (
       <div className="trip-list-item" key={trip._id}>
         <TripBox
+          isUserConnected={isUserConnected}
           onCommentsSelect={selectTripForComment}
           trip={trip}
           onSelect={() => selectTrip(trip)}
@@ -91,6 +92,8 @@ function Search({
       </div>
     ));
   };
+
+  
 
   return (
     <>

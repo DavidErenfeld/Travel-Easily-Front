@@ -6,16 +6,16 @@ import "./Share.css";
 export interface TypeTripProps {
   onClickLeftArrow: () => void;
   onClickRightArrow: () => void;
- 
+
   onClickButtonTypeTrip: (buttonId: string) => void;
-  clickedButtonId2: string | null;
+  clickedTypeTripId: string | null;
 }
 
 function TypeTrip({
   onClickRightArrow,
   onClickLeftArrow,
   onClickButtonTypeTrip,
-  clickedButtonId2,
+  clickedTypeTripId,
 }: TypeTripProps) {
   return (
     <section className="container">
@@ -26,37 +26,37 @@ function TypeTrip({
       <Button
         text="attractions"
         onClickButton={onClickButtonTypeTrip}
-        clickedButtonId={clickedButtonId2}
+        clickedButtonId={clickedTypeTripId}
       />
 
       <Button
         text="romantic"
         onClickButton={onClickButtonTypeTrip}
-        clickedButtonId={clickedButtonId2}
+        clickedButtonId={clickedTypeTripId}
       />
 
       <Button
         text="nature"
         onClickButton={onClickButtonTypeTrip}
-        clickedButtonId={clickedButtonId2}
+        clickedButtonId={clickedTypeTripId}
       />
 
       <Button
         text="parties"
         onClickButton={onClickButtonTypeTrip}
-        clickedButtonId={clickedButtonId2}
+        clickedButtonId={clickedTypeTripId}
       />
 
       <Button
         text="food"
         onClickButton={onClickButtonTypeTrip}
-        clickedButtonId={clickedButtonId2}
+        clickedButtonId={clickedTypeTripId}
       />
 
       <Button
         text="integrated"
         onClickButton={onClickButtonTypeTrip}
-        clickedButtonId={clickedButtonId2}
+        clickedButtonId={clickedTypeTripId}
       />
     </section>
   );

@@ -1,30 +1,47 @@
 import "./Search.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CommentsIcon from "../icons/CommentsIcon";
 import Like from "../icons/Like";
-import { ITrips } from "../../services/tripsService";
+import TripsService, { ITrips } from "../../services/tripsService";
 
 interface TripBoxProps {
   trip: ITrips;
   onSelect: () => void;
   onCommentsSelect: (trip: ITrips) => void;
+  isUserConnected: boolean;
 }
 
-function TripBox({ trip, onSelect, onCommentsSelect }: TripBoxProps) {
+function TripBox({
+  trip,
+  onSelect,
+  onCommentsSelect,
+  isUserConnected,
+}: TripBoxProps) {
   const [numOfLikes, setNumOfLikes] = useState(trip.numOfLikes);
 
   const onCommentsClick = () => {
     onCommentsSelect(trip);
   };
 
-  const onClickLike = () => {
-    console.log("Like Clicked");
+  const onClickLike = async () => {
+    const trip_id = trip._id || "";
+    if (isUserConnected) {
+      try {
+        const response = await TripsService.addLike(trip_id);
+        console.log(response);
+        setNumOfLikes(response.numOfLikes);
+        console.log(numOfLikes);
+      } catch (error) {
+        console.error("Failed to add like:", error);
+        // טיפול בשגיאה, למשל על ידי הצגת הודעה למשתמש
+      }
+    }
   };
 
   return (
     <article className="trip-card">
       <header className="trip-card-profile">
-        <img className="profile-picture" src="imgs/Chavi.jpg" alt="Profile" />
+        <img className="profile-picture" src={trip.imgUrl} alt="Profile" />
         <p className="profile-name">{trip.userName}</p>
       </header>
 
@@ -39,7 +56,6 @@ function TripBox({ trip, onSelect, onCommentsSelect }: TripBoxProps) {
         </div>
       </div>
       <section className="trip-card-details" onClick={onSelect}>
-        
         <div className="trip-card-tags">
           <span className="tag">{trip.typeTraveler}</span>
           <span className="tag">{trip.typeTrip}</span>

@@ -11,12 +11,18 @@ interface DescriptionProps {
   dayNumber: number;
   onClickRightArrow: () => void;
   onClickLastDay: (num: number) => void;
+  updateDescriptions: (descriptions: string[]) => void;
+  handleFinish: () => void;
+  finish: boolean;
 }
 
 function Description({
+  finish,
   dayNumber,
+  updateDescriptions,
   onClickRightArrow,
   onClickLastDay,
+  handleFinish,
 }: DescriptionProps) {
   const [num, setNum] = useState(1);
   const [descriptions, setDescriptions] = useState(Array(dayNumber).fill(""));
@@ -30,6 +36,7 @@ function Description({
   };
 
   const updateNextDay = () => {
+    updateDescriptions(descriptions);
     if (num < dayNumber) {
       setNum(num + 1);
     }
@@ -61,14 +68,26 @@ function Description({
         <AddPicture />
       </div>
 
-      <div className="change-day-description-block">
-        <p onClick={updateNextDay} className="change-day-description">
-          next day
+      {!finish ? (
+        <div className="change-day-description-block">
+          {
+            <p onClick={updateNextDay} className="change-day-description">
+              "next day"
+            </p>
+          }
+          {num > 1 && (
+            <p onClick={updateDayBefore} className="change-day-description">
+              day before
+            </p>
+          )}
+
+          {/* {num === dayNumber && <button onClick={handleFinish}>send</button>} */}
+        </div>
+      ) : (
+        <p className="change-day-description" onClick={handleFinish}>
+          send
         </p>
-        <p onClick={updateDayBefore} className="change-day-description">
-          day before
-        </p>
-      </div>
+      )}
     </section>
   );
 }

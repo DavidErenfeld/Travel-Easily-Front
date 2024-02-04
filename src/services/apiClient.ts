@@ -1,6 +1,7 @@
-import axios, { CanceledError } from "axios";
+import axios, { AxiosRequestConfig, CanceledError } from "axios";
 
 export { CanceledError };
+
 const apiClient = axios.create({
   baseURL: "http://localhost:3000",
 });

@@ -33,14 +33,9 @@ function App() {
     goToMainPage();
   };
 
-  const handleLogin = (email: string) => {
-    setUserEmail(email);
-    if (email === "1020dudu@gmail.com") {
-      setIsUserConnected(true);
-      setCurrentPage("share");
-    } else {
-      setCurrentPage("register");
-    }
+  const handleLogin = (isConnected: boolean) => {
+    setIsUserConnected(isConnected);
+    goToMainPage();
   };
 
   const onClickRegisterInLoginPage = () => {
@@ -84,7 +79,7 @@ function App() {
       break;
     case "register":
       displayedPage = (
-        <Register goToMainPage={goToMainPage} onClickClose={onClickClose} />
+        <Register goToLogin={goToLogin} onClickClose={onClickClose} />
       );
       break;
     default:

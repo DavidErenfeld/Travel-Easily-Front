@@ -7,13 +7,13 @@ interface TypesTravelersProps {
   onClickLeftArrow: () => void;
   onClickRightArrow: () => void;
   onClickButtonTypeTraveler: (buttonId: string) => void;
-  clickedButtonId: string | null;
+  clickedTypeTravelerId: string | null;
 }
 function TypesTravelers({
   onClickLeftArrow,
   onClickRightArrow,
   onClickButtonTypeTraveler,
-  clickedButtonId,
+  clickedTypeTravelerId,
 }: TypesTravelersProps) {
   return (
     <section className="container">
@@ -23,37 +23,37 @@ function TypesTravelers({
       <Button
         text="romantic couple"
         onClickButton={onClickButtonTypeTraveler}
-        clickedButtonId={clickedButtonId}
+        clickedButtonId={clickedTypeTravelerId}
       />
 
       <Button
         text="happy family"
         onClickButton={onClickButtonTypeTraveler}
-        clickedButtonId={clickedButtonId}
+        clickedButtonId={clickedTypeTravelerId}
       />
 
       <Button
         text="friends"
         onClickButton={onClickButtonTypeTraveler}
-        clickedButtonId={clickedButtonId}
+        clickedButtonId={clickedTypeTravelerId}
       />
 
       <Button
         text="seniors"
         onClickButton={onClickButtonTypeTraveler}
-        clickedButtonId={clickedButtonId}
+        clickedButtonId={clickedTypeTravelerId}
       />
 
       <Button
         text="single"
         onClickButton={onClickButtonTypeTraveler}
-        clickedButtonId={clickedButtonId}
+        clickedButtonId={clickedTypeTravelerId}
       />
 
       <Button
         text="groups"
         onClickButton={onClickButtonTypeTraveler}
-        clickedButtonId={clickedButtonId}
+        clickedButtonId={clickedTypeTravelerId}
       />
     </section>
   );

@@ -6,11 +6,12 @@ import CloseIcon from "../icons/CloseIcon";
 import { uploadPhoto } from "../../services/fileService";
 import AddImgsIcon from "../icons/AddImgsIcon";
 import { registerUser } from "../../services/registerService";
+import axios from "axios";
 
 // Interface for props of the Register component
 interface RegisterProps {
   onClickClose: () => void;
-  goToMainPage: () => void;
+  goToLogin: () => void;
   // isUserConect: boolean
 }
 
@@ -36,12 +37,12 @@ type FormData = z.infer<typeof schema> & {
   imgUrl?: string; // עכשיו הטיפוס כולל גם את המאפיין imgUrl כאופציונלי
 };
 
-function Register({ onClickClose, goToMainPage }: RegisterProps) {
+function Register({ onClickClose, goToLogin }: RegisterProps) {
   // State for managing the File object
   const [imgFile, setImgFile] = useState<File | null>(null);
   // State for managing the display URL of the image
   const [imgSrc, setImgSrc] = useState(defaultImage);
-  const [isUserConecte, setIsUserConecte] = useState(false);
+  const [registerError, setRegisterError] = useState<string | null>(null);
 
   const {
     register,
@@ -81,8 +82,7 @@ function Register({ onClickClose, goToMainPage }: RegisterProps) {
   };
 
   const onSubmit = async (data: FormData) => {
-    // בדיקה אם קובץ תמונה נבחר והועלה
-    let imgUrl = defaultImage; // הגדרת URL ברירת מחדל אם ההעלאה נכשלת או לא בוצעה
+    let imgUrl = defaultImage;
     if (imgFile) {
       imgUrl = (await handleUploadImage(imgFile)) || defaultImage;
     }
@@ -92,20 +92,28 @@ function Register({ onClickClose, goToMainPage }: RegisterProps) {
         userName: data.userName,
         email: data.email,
         password: data.password,
-        imgUrl: imgUrl, // שימוש ב-URL של התמונה שהועלתה או ב-URL ברירת המחדל
+        imgUrl: imgUrl,
       });
       console.log("user is registered: ", registerResult);
-      setIsUserConecte(true);
-      goToMainPage();
-      // פעולות לאחר הרישום המוצלח, למשל ניתוב לדף אחר
+
+      goToLogin();
     } catch (error) {
-      console.error("Register failed", error);
-      alert("Failed to register user");
+      // בדיקה אם השגיאה היא מסוג AxiosError וקיימת בה תגובה מהשרת
+      if (axios.isAxiosError(error) && error.response) {
+        // גישה לתוכן השגיאה מתוך ה-response
+        const errorMessage = error.response.data;
+        // הצגת הודעת השגיאה למשתמש
+        setRegisterError(errorMessage + " Please try again");
+      } else {
+        // הצגת הודעת שגיאה כללית אם השגיאה אינה מסוג AxiosError
+        setRegisterError("An unexpected error occurred. Please try again.");
+      }
     }
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+      {registerError && <div className="text-danger">{registerError}</div>}
       <div className="close-icon">
         <CloseIcon onClick={onClickClose} />
       </div>

@@ -80,7 +80,6 @@
 }
 
 .trip-day-description {
-  display: inline-block;
   padding: 0 1.6rem;
   font-size: 1.6rem;
   color: #ffffff;
@@ -132,6 +131,8 @@
   width: 6rem;
   border-radius: 50%;
   border: 2px solid #8fa3f3;
+  object-fit: cover; /* מבטיח שהתמונה מכסה את האלמנט, תוך שמירה על יחס הממדים */
+  object-position: center; /* מרכז את התמונה באלמנט */
 }
 
 /*******************************
@@ -200,6 +201,7 @@
 } */
 
 .trip-details-modal {
+  width: 100%;
   position: absolute;
   top: 13rem;
   left: auto;
@@ -208,6 +210,7 @@
 }
 
 .trip-details-content {
+  width: 85%;
   position: relative;
   margin: 0 8rem;
   backdrop-filter: blur(1rem);

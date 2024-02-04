@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "../header/Header";
 import HeadingSecondry from "../headingSecondry/HeadingSecondry";
 import TypesTravelers from "./TypesTravelers";
@@ -6,6 +6,7 @@ import TypeTrip from "./TypeTrip";
 import NumOfDays from "./NumOfDays";
 import Description from "./Description";
 import SuccessfulCompletion from "./SuccessfulCompletion";
+import TripsService, { ITrips } from "../../services/tripsService";
 
 export interface ShareProps {
   isUserConnected: boolean;
@@ -29,19 +30,39 @@ function Share({
     string | null
   >(null);
 
+  // 1
   const [isTripTypeSelected, setIsTripTypeSelected] = useState(false);
+  // 2
   const [selectedTripType, setSelectedTripType] = useState<string | null>(null);
+  // 3
+  const [numOfDays, setNumOfDays] = useState(0);
+  // 4
+  const [country, setCountry] = useState<string | null>(null);
+  // 5
+  const [description, setDescription] = useState<string[]>([]);
+
+  const updateDescriptions = (newDescriptions: string[]) => {
+    setDescription(newDescriptions);
+    console.log(description);
+  };
+
+  useEffect(() => {
+    console.log(description); // ידפיס את הערכים המעודכנים של description
+  }, [description]);
 
   const [isNumOfDaysSelected, setIsNumOfDaysSelected] = useState(false);
 
-  const [numOfDays, setNumOfDays] = useState(0);
   const [selectedCountry, setSelectedCountry] = useState(false);
 
   const [sendSuccessMessage, setSendSuccessMessage] = useState(false);
+  const [finish, setFinish] = useState(false);
 
   const handleCountrySelect = (country: string) => {
     console.log("Selected Country:", country);
-    if (country !== null) setSelectedCountry(true);
+    if (country !== null) {
+      setSelectedCountry(true);
+      setCountry(country);
+    }
     // כאן תוכל לבצע פעולות נוספות עם המדינה הנבחרת
   };
 
@@ -74,18 +95,38 @@ function Share({
     setIsNumOfDaysSelected(false);
   };
 
-  const onClickButtonTypeTraveler = (buttonId: string) => {
-    setSelectedTravelerType(buttonId);
+  const onClickButtonTypeTraveler = (TravelerType: string) => {
+    setSelectedTravelerType(TravelerType);
   };
 
-  const onClickButton2 = (buttonId: string) => {
-    setSelectedTripType(buttonId);
+  const onClickButton2 = (TripType: string) => {
+    setSelectedTripType(TripType);
+  };
+  const onClickLastDay = async (num: number) => {
+    if (num === numOfDays) {
+      setFinish(true);
+    }
+  };
+  const trip2: ITrips = {
+    typeTraveler: selectedTravelerType ?? "",
+    country: country ?? "",
+    typeTrip: selectedTripType ?? "",
+    numOfDays: numOfDays,
+    tripDescription: description,
+    numOfComments: 0,
+    numOfLikes: 0,
   };
 
-  const onClickLastDay = (num: number) => {
-    if (num === numOfDays) setSendSuccessMessage(true);
+  const send = async () => {
+    try {
+      const response = await TripsService.postTrip(trip2);
+      console.log(response); // להדפיס את התגובה או להשתמש בה לפעולה הבאה
+    } catch (error) {
+      console.error("Failed to post trip:", error);
+      // טיפול בשגיאה, למשל על ידי הצגת הודעה למשתמש
+    }
+    setSendSuccessMessage(true);
   };
-
   const onClickHomePage = () => {
     goToMainPage();
   };
@@ -112,14 +153,14 @@ function Share({
             onClickLeftArrow={onClickLeftArrow1}
             onClickRightArrow={onClickRightArrow1}
             onClickButtonTypeTraveler={onClickButtonTypeTraveler}
-            clickedButtonId={selectedTravelerType}
+            clickedTypeTravelerId={selectedTravelerType}
           />
         ) : !isTripTypeSelected ? (
           <TypeTrip
             onClickRightArrow={onClickRightArrow2}
             onClickLeftArrow={onClickLeftArrow2}
             onClickButtonTypeTrip={onClickButton2}
-            clickedButtonId2={selectedTripType}
+            clickedTypeTripId={selectedTripType}
           />
         ) : !isNumOfDaysSelected ? (
           <NumOfDays
@@ -129,9 +170,12 @@ function Share({
           />
         ) : !sendSuccessMessage ? (
           <Description
+            finish={finish}
+            handleFinish={send}
             onClickLastDay={onClickLastDay}
             dayNumber={numOfDays}
             onClickRightArrow={onClickRightArrow4}
+            updateDescriptions={updateDescriptions}
           />
         ) : (
           <SuccessfulCompletion onClickHomePage={onClickHomePage} />

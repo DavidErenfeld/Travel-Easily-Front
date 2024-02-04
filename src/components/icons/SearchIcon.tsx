@@ -6,7 +6,6 @@ function SearchIcon({ onClick }: SearchIconProps) {
   return (
     <svg
       onClick={onClick}
-      enable-background="new 0 0 48 48"
       viewBox="0 0 48 48"
       id="fi_2811790"
       className="search-icon"

@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import z from "zod";
 import "./Form.css";
 import CloseIcon from "../icons/CloseIcon";
+import { loginUser } from "../../services/loginService";
+import axios from "axios";
 
 const loginSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
@@ -13,24 +15,44 @@ const loginSchema = z.object({
 type LoginFormData = z.infer<typeof loginSchema>;
 
 interface LoginProps {
-  onLogin: (email: string) => void;
+  onLogin: (isConnect: boolean) => void;
   onClickRegister: () => void;
   onClickClose: () => void;
 }
 
-function Login({ onLogin, onClickRegister, onClickClose }: LoginProps) {
+function Login({ onClickRegister, onClickClose, onLogin }: LoginProps) {
+  const [loginError, setLoginError] = useState<string | null>(null);
+  const [emgUrl, setEmgUrl] = useState("");
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<LoginFormData>({ resolver: zodResolver(loginSchema) });
 
-  const onSubmit = (data: LoginFormData) => {
-    onLogin(data.email);
+  const onSubmit = async (data: LoginFormData) => {
+    try {
+      const response = await loginUser({
+        email: data.email,
+        password: data.password,
+      });
+      console.log("user is logt");
+      onLogin(true);
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        // גישה לתוכן השגיאה מתוך ה-response
+        const errorMessage = error.response.data;
+        // הצגת הודעת השגיאה למשתמש
+        setLoginError(errorMessage + " Please try again");
+      } else {
+        // הצגת הודעת שגיאה כללית אם השגיאה אינה מסוג AxiosError
+        setLoginError("An unexpected error occurred. Please try again.");
+      }
+    }
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="login-form">
+      {loginError && <div className="text-danger">{loginError}</div>}
       <div className="close-icon">
         <CloseIcon onClick={onClickClose} />
       </div>
