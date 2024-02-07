@@ -9,7 +9,7 @@ import axios from "axios";
 
 const loginSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
-  password: z.string().min(8, "Password must be at least 8 characters long"),
+  password: z.string().min(4, "Password must be at least 8 characters long"),
 });
 
 type LoginFormData = z.infer<typeof loginSchema>;
@@ -23,6 +23,7 @@ interface LoginProps {
 function Login({ onClickRegister, onClickClose, onLogin }: LoginProps) {
   const [loginError, setLoginError] = useState<string | null>(null);
   const [emgUrl, setEmgUrl] = useState("");
+
   const {
     register,
     handleSubmit,

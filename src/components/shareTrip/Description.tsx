@@ -72,7 +72,7 @@ function Description({
         <div className="change-day-description-block">
           {
             <p onClick={updateNextDay} className="change-day-description">
-              "next day"
+              next day
             </p>
           }
           {num > 1 && (

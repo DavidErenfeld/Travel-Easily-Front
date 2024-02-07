@@ -9,21 +9,31 @@ import SuccessfulCompletion from "./SuccessfulCompletion";
 import TripsService, { ITrips } from "../../services/tripsService";
 
 export interface ShareProps {
+  imgUrl: string;
+  userName: string;
   isUserConnected: boolean;
+  goToPersonalArea: () => void;
   goToMainPage: () => void;
   goToShare: () => void;
   goToRegister: () => void;
   goToLogin: () => void;
+  goToMyTrips: () => void;
   goToSearch: () => void;
+  endaleLogOut: () => void;
 }
 
 function Share({
   isUserConnected,
+  imgUrl,
+  userName,
+  goToPersonalArea,
   goToMainPage,
   goToShare,
   goToSearch,
   goToLogin,
+  goToMyTrips,
   goToRegister,
+  endaleLogOut,
 }: ShareProps) {
   const [isTravelerTypeSelected, setIsTravelerTypeSelected] = useState(false);
   const [selectedTravelerType, setSelectedTravelerType] = useState<
@@ -138,9 +148,14 @@ function Share({
   return (
     <>
       <Header
+        userName={userName}
+        imgUrl={imgUrl}
+        endaleLogOut={endaleLogOut}
+        goToPersonalArea={goToPersonalArea}
         goToShare={goToShare}
         goToRegister={goToRegister}
         goToLogin={goToLogin}
+        goToMyTrips={goToMyTrips}
         goToSearch={goToSearch}
         isUserConnected={isUserConnected}
       />

@@ -1,26 +1,35 @@
 import { useEffect, useRef, useState } from "react";
 import IconPersonalAriea from "../icons/IconPersonalAriea";
 import "./Header.css";
-import PersonalArea from "./PersonalArea";
+import Navigation from "./Navigation";
+import tripsService from "../../services/tripsService";
 
 export interface HeaderProps {
+  userName: string;
+  imgUrl: string;
   isUserConnected: boolean;
+  goToPersonalArea: () => void;
   goToSearch: () => void;
   goToLogin: () => void;
   goToRegister: () => void;
   goToShare: () => void;
-  // goToLogOut: () => void;
-  // goToMyTrips: () => void;
+  endaleLogOut: () => void;
+  goToMyTrips: () => void;
 }
 
 function Header({
   isUserConnected,
+  goToPersonalArea,
   goToSearch,
   goToLogin,
   goToRegister,
   goToShare,
+  goToMyTrips,
+  endaleLogOut,
+  imgUrl,
+  userName,
 }: HeaderProps) {
-  const [isPersonalAreaClicked, setIsPersonalAreaClicked] = useState(false);
+  const [isNavigationClicked, setNavigationClicked] = useState(false);
   const personalAreaRef = useRef<HTMLDivElement>(null); // מציין שה-ref הוא של אלמנט div
 
   useEffect(() => {
@@ -30,7 +39,7 @@ function Header({
         personalAreaRef.current &&
         !personalAreaRef.current.contains(event.target as Node)
       ) {
-        setIsPersonalAreaClicked(false);
+        setNavigationClicked(false);
       }
     };
 
@@ -40,15 +49,20 @@ function Header({
       // הסרת event listener כאשר הקומפוננטה יוסרת מה-DOM
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [isPersonalAreaClicked]);
+  }, [isNavigationClicked]);
 
-  const onClickPersonalAriea = () => {
-    setIsPersonalAreaClicked(true);
+  const onClickNavigation = () => {
+    setNavigationClicked(true);
   };
 
   const onClickSignIn = () => {
     goToLogin();
   };
+
+  const onClickPersonalArea = () => {
+    goToPersonalArea();
+  };
+
   const onClickSignUp = () => {
     goToRegister();
   };
@@ -61,10 +75,16 @@ function Header({
   };
 
   const onClickMyTrips = () => {
-    console.log("onClickMyTrips");
+    goToMyTrips();
   };
-  const onClickLogOut = () => {
-    console.log("onClickLogOut");
+
+  const onClickLogOut = async () => {
+    try {
+      const response = await tripsService.logout();
+      endaleLogOut();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -74,28 +94,25 @@ function Header({
         src="/imgs/TRAVEL_easily_logo.jpg"
         alt="TRAVEL easily logo"
       />
-      {!isPersonalAreaClicked ? (
+      {!isNavigationClicked ? (
         !isUserConnected ? (
-          <IconPersonalAriea onClick={onClickPersonalAriea} />
+          <IconPersonalAriea onClick={onClickNavigation} />
         ) : (
           <section
-            onClick={onClickPersonalAriea}
+            onClick={onClickNavigation}
             className="user-profile-personal"
           >
-            <img
-              className="profile-picture"
-              src="imgs/Chavi.jpg"
-              alt="Profile"
-            />
-            <p className="profile-name">Chavi Erenfeld</p>
+            <img className="profile-picture" src={imgUrl} alt="Profile-img" />
+            <p className="profile-name">{userName}</p>
           </section>
         )
       ) : (
         <div ref={personalAreaRef}>
-          <PersonalArea
+          <Navigation
             isUserConected={isUserConnected}
             onClickSignIn={onClickSignIn}
             onClickSignUp={onClickSignUp}
+            onClickPersonalArea={onClickPersonalArea}
             onClickShareTrip={onClickShareTrip}
             onClickSearchTrip={onClickSearchTrip}
             onClickMyTrips={onClickMyTrips}

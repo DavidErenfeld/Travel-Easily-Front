@@ -136,6 +136,11 @@ body {
   right: -38px;
   top: 53%;
 }
+
+.edit-icon {
+  height: 2rem;
+  width: 2rem;
+}
 .arrows-section {
   position: absolute;
   bottom: 1.8rem;

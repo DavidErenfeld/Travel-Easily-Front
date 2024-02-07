@@ -5,13 +5,15 @@ import z from "zod";
 import CloseIcon from "../icons/CloseIcon";
 import { uploadPhoto } from "../../services/fileService";
 import AddImgsIcon from "../icons/AddImgsIcon";
-import { registerUser } from "../../services/registerService";
+import { googleSignin, registerUser } from "../../services/registerService";
 import axios from "axios";
+import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
 
 // Interface for props of the Register component
 interface RegisterProps {
   onClickClose: () => void;
   goToLogin: () => void;
+  onLogin: (isConnect: boolean) => void;
   // isUserConect: boolean
 }
 
@@ -37,7 +39,7 @@ type FormData = z.infer<typeof schema> & {
   imgUrl?: string; // עכשיו הטיפוס כולל גם את המאפיין imgUrl כאופציונלי
 };
 
-function Register({ onClickClose, goToLogin }: RegisterProps) {
+function Register({ onClickClose, goToLogin, onLogin }: RegisterProps) {
   // State for managing the File object
   const [imgFile, setImgFile] = useState<File | null>(null);
   // State for managing the display URL of the image
@@ -109,6 +111,23 @@ function Register({ onClickClose, goToLogin }: RegisterProps) {
         setRegisterError("An unexpected error occurred. Please try again.");
       }
     }
+  };
+
+  const onGoogleLoginSuccess = async (
+    credentialResponse: CredentialResponse
+  ) => {
+    console.log(credentialResponse);
+    try {
+      const res = await googleSignin(credentialResponse);
+      console.log("user is logt");
+      onLogin(true);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const onGoogleLoginFailure = () => {
+    console.log("Googel login failde");
   };
 
   return (
@@ -188,6 +207,10 @@ function Register({ onClickClose, goToLogin }: RegisterProps) {
       <button type="submit" className="submit-btn">
         Submit
       </button>
+      <GoogleLogin
+        onSuccess={onGoogleLoginSuccess}
+        onError={onGoogleLoginFailure}
+      />
     </form>
   );
 }

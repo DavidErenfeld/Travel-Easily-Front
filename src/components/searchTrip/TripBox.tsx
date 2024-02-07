@@ -1,5 +1,5 @@
 import "./Search.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import CommentsIcon from "../icons/CommentsIcon";
 import Like from "../icons/Like";
 import TripsService, { ITrips } from "../../services/tripsService";
@@ -9,6 +9,7 @@ interface TripBoxProps {
   onSelect: () => void;
   onCommentsSelect: (trip: ITrips) => void;
   isUserConnected: boolean;
+  updateTripCommentsCount: (tripId: string, newNumOfComments: number) => void;
 }
 
 function TripBox({
@@ -16,6 +17,7 @@ function TripBox({
   onSelect,
   onCommentsSelect,
   isUserConnected,
+  updateTripCommentsCount,
 }: TripBoxProps) {
   const [numOfLikes, setNumOfLikes] = useState(trip.numOfLikes);
 
@@ -63,7 +65,9 @@ function TripBox({
           <span className="tag">{trip.numOfDays} days</span>
         </div>
         {trip.tripDescription.map((description, index) => (
-          <div className="trip-day-details">
+          <div className="trip-day-details" key={index}>
+            {" "}
+            {/* הוספת מאפיין key עם הערך של index */}
             <h3 className="trip-day-title">Day {index + 1}</h3>
             <p className="trip-day-description">{description}</p>
           </div>

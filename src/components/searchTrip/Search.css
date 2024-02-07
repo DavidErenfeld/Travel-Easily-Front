@@ -53,13 +53,14 @@
 .trip-card-details {
   position: relative;
   height: 20rem;
+  max-width: 78rem;
   border-radius: 7px;
   backdrop-filter: blur(1rem);
   margin: 0 9.6rem;
   margin-bottom: 9rem;
   box-shadow: 0.1px 2px 5px 0.01px rgba(185, 186, 187, 0.76);
   z-index: 1;
-  overflow: auto;
+  overflow-y: auto;
 }
 
 .trip-card-details::-webkit-scrollbar {
@@ -251,7 +252,7 @@
   position: relative;
   width: 80%;
 }
-.comments-input-fild {
+.comments-input-field {
   resize: none;
   outline: none;
   font-family: "Rubik", sans-serif;
@@ -268,7 +269,7 @@
   border: 2.5px solid #6fe31d;
 }
 
-.comments-input-fild::placeholder {
+.comments-input-field::placeholder {
   color: #6fe31d;
   /* font-weight: 600; */
   text-align: start; /* הטקסט יתחיל מהצד השמאלי */
@@ -280,29 +281,55 @@
   position: absolute;
   top: 31px;
   right: 279px;
+  cursor: pointer;
 }
 
 .trip-comments-list {
+  max-width: 50%;
   display: flex;
   flex-direction: column;
   gap: 4rem;
-  align-items: flex-start;
+  align-items: stretch;
   padding: 3rem;
-}
-
-.trip-comments-list-hidden {
-  display: none;
+  margin: 0 8rem;
 }
 
 .comment-box {
-  position: relative;
+  width: 100%;
+  backdrop-filter: blur(1rem);
+  overflow-x: clip;
+  z-index: 1;
 }
-.comment-ditales {
+
+.comment-box::-webkit-scrollbar {
+  z-index: -1;
+}
+
+.delete-comment {
+  background-color: #6fe31d;
   position: absolute;
-  bottom: -1.6rem;
+  bottom: -2.9rem;
+  right: 0;
+  border-radius: 5px;
+  padding: 4px;
+  border: none;
+  width: 8rem;
+  font-size: 1.6rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.delete-comment:hover {
+  background-color: #8fa3f3;
+}
+
+.comment-details {
+  position: absolute;
+  bottom: -1.7rem;
   left: 0;
   font-size: 1.2rem;
-  color: #b1bff7;
+  color: #8fa3f3;
+  z-index: 40;
 }
 
 .comment-text {

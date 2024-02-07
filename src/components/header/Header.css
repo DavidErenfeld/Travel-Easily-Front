@@ -40,10 +40,10 @@ header > .user-profile-personal > .profile-name {
 }
 
 /*************************
- PERSONAL-AREA SECTION
+ NAVIGATION SECTION
 *************************/
 
-.personal-area {
+.navigation {
   position: absolute;
   top: 4rem;
   right: 4rem;
@@ -54,7 +54,7 @@ header > .user-profile-personal > .profile-name {
   z-index: 20;
 }
 
-.personal-area > li {
+.navigation > li {
   transition: all 0.4s;
   text-align: center;
   font-size: 1.8rem;
@@ -62,17 +62,83 @@ header > .user-profile-personal > .profile-name {
   padding: 1.8rem 6rem;
 }
 
-.personal-area > li:nth-child(even) {
+.navigation > li:nth-child(even) {
   color: #2b3149;
   background-color: #c7d1f9;
 }
 
-.personal-area > li:nth-child(odd) {
+.navigation > li:nth-child(odd) {
   color: #2b3149;
   background-color: #dde3fb;
 }
 
-.personal-area > li:hover {
+.navigation > li:hover {
   color: #dde3fb;
   background-color: #2b3149;
+}
+
+/*************************
+ PERSONAL-AREA SECTION
+*************************/
+.personal-area-section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin: 10rem auto;
+  width: 25rem;
+  height: 30rem;
+  align-items: center;
+  padding-top: 6rem;
+  gap: 2rem;
+  background: linear-gradient(135deg, #6e8efb, #5edb0a);
+  border-radius: 9px;
+}
+
+.personal-area-section > .profile-img {
+  height: 8rem;
+  width: 8rem;
+  border-radius: 50%;
+  border: 2px solid #5edb0a;
+  object-fit: cover;
+  object-position: center;
+}
+.personal-area-section > .profile-name {
+  font-size: 2rem;
+}
+
+.edit-box {
+  position: absolute;
+  left: 5px;
+  bottom: 5px;
+  display: flex;
+  gap: 4rem;
+  align-items: center;
+}
+
+.btn-edit {
+  height: 4rem;
+  width: 10rem;
+  color: #fff;
+  background-color: #6e8efb;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-edit:hover {
+  background-color: #5edb0a;
+}
+
+.edit-icon-box {
+  position: absolute;
+  top: 123px;
+  left: 158px;
+}
+
+.edit-icon {
+  cursor: pointer;
+  height: 2rem;
+  width: 2rem;
+  fill: #050d2a;
 }

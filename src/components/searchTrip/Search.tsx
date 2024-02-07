@@ -12,26 +12,51 @@ import SearchButton from "./SearchButton";
 
 export interface SearchProps {
   isUserConnected: boolean;
+  imgUrl: string;
+  userName: string;
+  goToPersonalArea: () => void;
   goToMainPage: () => void;
   goToShare: () => void;
   goToRegister: () => void;
   goToLogin: () => void;
   goToSearch: () => void;
+  goToMyTrips: () => void;
+  endaleLogOut: () => void;
 }
 
 function Search({
+  userName,
+  imgUrl,
   isUserConnected,
+  goToPersonalArea,
   goToMainPage,
   goToShare,
   goToSearch,
   goToLogin,
+  goToMyTrips,
   goToRegister,
+  endaleLogOut,
 }: SearchProps) {
   const [trips, setTrips] = useState<ITrips[]>([]);
   const [errors, setErrors] = useState();
   const [selectedTrip, setSelectedTrip] = useState<ITrips | null>(null);
   const [isTripSelected, setIsTripSelected] = useState(false);
   const [focusOnComments, setFocusOnComments] = useState(false);
+
+  // בקומפוננטת Search
+
+  const updateTripCommentsCount = (
+    tripId: string,
+    newNumOfComments: number
+  ) => {
+    setTrips((prevTrips) =>
+      prevTrips.map((trip) =>
+        trip._id === tripId
+          ? { ...trip, numOfComments: newNumOfComments }
+          : trip
+      )
+    );
+  };
 
   const selectTrip = (trip: ITrips) => {
     setSelectedTrip(trip);
@@ -67,9 +92,6 @@ function Search({
       if (err instanceof CanceledError) return;
       setErrors(err.message);
     });
-    return () => {
-      abort();
-    };
   }, []);
 
   const onCluckSearchByCountry = () => {
@@ -85,27 +107,32 @@ function Search({
       <div className="trip-list-item" key={trip._id}>
         <TripBox
           isUserConnected={isUserConnected}
-          onCommentsSelect={selectTripForComment}
+          onCommentsSelect={() => selectTripForComment(trip)}
           trip={trip}
           onSelect={() => selectTrip(trip)}
+          updateTripCommentsCount={updateTripCommentsCount}
         />
       </div>
     ));
   };
 
-  
-
   return (
     <>
       <Header
+        userName={userName}
+        imgUrl={imgUrl}
+        endaleLogOut={endaleLogOut}
         goToShare={goToShare}
+        goToPersonalArea={goToPersonalArea}
         goToRegister={goToRegister}
         goToLogin={goToLogin}
         goToSearch={goToSearch}
+        goToMyTrips={goToMyTrips}
         isUserConnected={isUserConnected}
       />
-      {isTripSelected && selectedTrip ? (
+      {isTripSelected && selectedTrip && isUserConnected ? (
         <Trip
+          updateTripCommentsCount={updateTripCommentsCount}
           goToList={goToList}
           trip={selectedTrip}
           onSelect={deselectTrip}
