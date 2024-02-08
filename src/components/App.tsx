@@ -10,6 +10,7 @@ import MyTrips from "./myTrips/MyTrips";
 import UpdateTrip from "./myTrips/UpdateTrip";
 import PersonalArea from "./header/PersonalArea";
 import { refreshAccessToken } from "../services/apiClient";
+import tripsService from "../services/tripsService";
 
 function App() {
   const [currentPage, setCurrentPage] = useState("mainPage");
@@ -60,34 +61,39 @@ function App() {
     setCurrentPage("register");
   };
 
-  const endaleLogOut = () => {
-    setIsUserConnected(false);
-    goToMainPage();
+  const endaleLogOut = async () => {
+    try {
+      const response = await tripsService.logout();
+      setIsUserConnected(false);
+      goToMainPage();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  // useEffect(() => {
-  //   const checkAuthStatus = async () => {
-  //     const refreshToken = localStorage.getItem("refreshToken");
-  //     if (refreshToken) {
-  //       try {
-  //         // ניסיון לרענן את ה-access token באמצעות ה-refresh token
-  //         await refreshAccessToken(); // מניחים שהפונקציה עודכנת להחזיר אמת/שקר או לזרוק שגיאה בהתאם
-  //         setIsUserConnected(true);
-  //         goToMainPage(); // נניח שזו הפונקציה שמנווטת לדף הבית
-  //       } catch (error) {
-  //         console.error("Failed to refresh token:", error);
-  //         setIsUserConnected(false);
-  //         goToLogin(); // נניח שזו הפונקציה שמנווטת לדף הלוגין
-  //       }
-  //     } else {
-  //       // אין refresh token, כנראה המשתמש לא מחובר
-  //       setIsUserConnected(false);
-  //       goToLogin();
-  //     }
-  //   };
+  useEffect(() => {
+    const checkAuthStatus = async () => {
+      const refreshToken = localStorage.getItem("refreshToken");
+      if (refreshToken) {
+        try {
+          // ניסיון לרענן את ה-access token באמצעות ה-refresh token
+          await refreshAccessToken(); // מניחים שהפונקציה עודכנת להחזיר אמת/שקר או לזרוק שגיאה בהתאם
+          setIsUserConnected(true);
+          goToMainPage(); // נניח שזו הפונקציה שמנווטת לדף הבית
+        } catch (error) {
+          console.error("Failed to refresh token:", error);
+          // setIsUserConnected(false);
+          // goToLogin(); // נניח שזו הפונקציה שמנווטת לדף הלוגין
+        }
+      } else {
+        // אין refresh token, כנראה המשתמש לא מחובר
+        setIsUserConnected(false);
+        goToMainPage();
+      }
+    };
 
-  //   checkAuthStatus();
-  // }, []);
+    checkAuthStatus();
+  }, []);
 
   let displayedPage;
   switch (currentPage) {

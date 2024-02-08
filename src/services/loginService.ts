@@ -1,20 +1,22 @@
-import apiClient from "./apiClient";
+import { apiClient } from "./apiClient";
+import { IUser } from "./registerService";
 
-export interface IUserLogin {
-  email: string;
-  password: string;
-}
+// export interface IUserLogin {
+//   email: string;
+//   password: string;
 
-export const loginUser = (user: IUserLogin) => {
-  return new Promise<IUserLogin>((resolve, reject) => {
+// }
+
+export const loginUser = (user: IUser) => {
+  return new Promise<IUser>((resolve, reject) => {
     console.log("Login...");
     console.log(user);
     apiClient
       .post("/auth/login", user)
-      .then((response) => {
+      .then((response: any) => {
         localStorage.setItem("token", response.data.accessToken);
-        localStorage.setItem("loggedUserId", response.data.user_Id);
         localStorage.setItem("refreshToken", response.data.refreshToken);
+        localStorage.setItem("loggedUserId", response.data.user_Id);
         localStorage.setItem("imgUrl", response.data.imgUrl);
         localStorage.setItem("userName", response.data.userName);
 
@@ -22,7 +24,7 @@ export const loginUser = (user: IUserLogin) => {
         console.log(response);
         resolve(response.data);
       })
-      .catch((error) => {
+      .catch((error: any) => {
         console.log(error);
         reject(error);
       });

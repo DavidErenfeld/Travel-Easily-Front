@@ -100,51 +100,56 @@ function Trip({
   };
 
   return (
-    <>
+    <article className="trip-details-modal">
       <div className="back-arrow">
         <LeftArrow onClickLeftArrow={goToList} />
       </div>
-      <article className="trip-details-modal">
-        <section className="trip-details-content">
-          <div className="trip-card-tags">
-            <span className="tag">{trip.typeTraveler}</span>
-            <span className="tag">{trip.typeTrip}</span>
-            <span className="tag">{trip.country}</span>
-            <span className="tag">{`${trip.numOfDays} days`}</span>
-          </div>
-          {trip.tripDescription.map((desc, index) => (
-            <div className="expanded-trip-day-details" key={index}>
-              <h3 className="trip-day-title">{`Day ${index + 1}`}</h3>
-              <p className="trip-day-description">{desc}</p>
-            </div>
-          ))}
-          <div className="comments-input">
-            <input
-              ref={commentsInputRef}
-              className="comments-input-field"
-              type="text"
-              placeholder="Write your comment here"
-              value={comment}
-              onChange={handleCommentChange}
-            />
-            <div className="submit-icon-box" onClick={submitComment}>
-              <SubmitIcon />
-            </div>
-          </div>
-        </section>
-        <div className="trip-comments-list">
-          {comments.map((comment, index) => (
-            <div key={index} className="comment-box">
-              <p className="comment-details">{`${formatDate(comment.date)} ${
-                comment.owner
-              }`}</p>
-              {renderDeleteButton(comment._id || "", comment.ownerId || "")}
-              <p className="comment-text">{comment.comment}</p>
-            </div>
-          ))}
+      <section className="trip-details-content">
+        <div className="trip-card-tags">
+          <span className="tag">{trip.typeTraveler}</span>
+          <span className="tag">{trip.typeTrip}</span>
+          <span className="tag">{trip.country}</span>
+          <span className="tag">{`${trip.numOfDays} days`}</span>
         </div>
-      </article>
-    </>
+        {trip.tripDescription.map((desc, index) => (
+          <div className="expanded-trip-day-details" key={index}>
+            <h3 className="trip-day-title">{`Day ${index + 1}`}</h3>
+            <p className="trip-day-description">{desc}</p>
+          </div>
+        ))}
+        <div className="comments-input">
+          <input
+            ref={commentsInputRef}
+            className="comments-input-field"
+            type="text"
+            placeholder="Write your comment here"
+            value={comment}
+            onChange={handleCommentChange}
+          />
+          <div className="submit-icon-box" onClick={submitComment}>
+            <SubmitIcon />
+          </div>
+        </div>
+      </section>
+      <div className="trip-comments-list">
+        {comments.map((comment, index) => (
+          <div key={index} className="comment-box">
+            <p className="comment-details">{`${formatDate(comment.date)} ${
+              comment.owner
+            }`}</p>
+            {renderDeleteButton(comment._id || "", comment.ownerId || "")}
+            <p className="comment-text">{comment.comment}</p>
+          </div>
+        ))}
+      </div>
+      {/* photos-section */}
+      <div className="image-gallery">
+        {trip.tripPhotos &&
+          trip.tripPhotos.map((photo, index) => (
+            <img key={index} alt="trip-img" src={photo} />
+          ))}
+      </div>
+    </article>
   );
 }
 

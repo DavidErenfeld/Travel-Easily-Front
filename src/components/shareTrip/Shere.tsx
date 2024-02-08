@@ -7,6 +7,7 @@ import NumOfDays from "./NumOfDays";
 import Description from "./Description";
 import SuccessfulCompletion from "./SuccessfulCompletion";
 import TripsService, { ITrips } from "../../services/tripsService";
+import { uploadPhoto } from "../../services/fileService";
 
 export interface ShareProps {
   imgUrl: string;
@@ -50,6 +51,12 @@ function Share({
   const [country, setCountry] = useState<string | null>(null);
   // 5
   const [description, setDescription] = useState<string[]>([]);
+  // 6
+  const [tripPhotos, setTripPhotos] = useState<string[]>([]);
+
+  const updateTripPhotos = (newPhotos: string[]) => {
+    setTripPhotos(newPhotos);
+  };
 
   const updateDescriptions = (newDescriptions: string[]) => {
     setDescription(newDescriptions);
@@ -118,6 +125,8 @@ function Share({
     }
   };
   const trip2: ITrips = {
+    userName: userName,
+    imgUrl: imgUrl,
     typeTraveler: selectedTravelerType ?? "",
     country: country ?? "",
     typeTrip: selectedTripType ?? "",
@@ -125,6 +134,7 @@ function Share({
     tripDescription: description,
     numOfComments: 0,
     numOfLikes: 0,
+    tripPhotos: tripPhotos,
   };
 
   const send = async () => {
@@ -191,6 +201,7 @@ function Share({
             dayNumber={numOfDays}
             onClickRightArrow={onClickRightArrow4}
             updateDescriptions={updateDescriptions}
+            updateTripPhotos={updateTripPhotos}
           />
         ) : (
           <SuccessfulCompletion onClickHomePage={onClickHomePage} />

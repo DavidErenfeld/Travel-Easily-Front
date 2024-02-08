@@ -13,6 +13,7 @@ export interface ITrips {
   tripDescription: string[];
   numOfComments: number;
   numOfLikes: number;
+  tripPhotos?: string[];
 
   comments?: Array<{
     _id?: string;
@@ -184,6 +185,8 @@ const logout = () => {
       )
       .then((response) => {
         console.log(response);
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
         resolve(response.data);
       })
       .catch((error) => {

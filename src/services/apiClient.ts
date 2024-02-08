@@ -1,77 +1,97 @@
-import axios, { CanceledError } from "axios";
+import axios, {
+  CanceledError,
+  AxiosRequestConfig,
+  AxiosError,
+  AxiosResponse,
+} from "axios";
 
 export { CanceledError };
-
-const apiClient = axios.create({
-  baseURL: "http://localhost:3000",
-});
-export async function refreshAccessToken() {
-  const refreshToken = localStorage.getItem("refreshToken");
-  if (!refreshToken) {
-    console.error("No refresh token found");
-    throw new Error("Login required");
-  }
-  try {
-    const response = await apiClient.post(
-      `/auth/refresh`,
-      {},
-      {
-        headers: {
-          Authorization: `JWT ${refreshToken}`,
-        },
-      }
-    );
-    const { accessToken, refreshToken: newRefreshToken } = response.data; // שימו לב לשינוי כאן
-    localStorage.setItem("accessToken", accessToken);
-    localStorage.setItem("refreshToken", newRefreshToken); // תיקון: עדכון המפתח הנכון
-
-    apiClient.defaults.headers.common["Authorization"] = `JWT ${accessToken}`;
-    console.log(accessToken);
-    return accessToken;
-  } catch (error) {
-    console.error("Error refreshing access token", error);
-    throw new Error("Failed to refresh token");
-  }
+interface CustomAxiosRequestConfig extends AxiosRequestConfig {
+  _retry?: boolean;
 }
 
-// Interceptor לבקשות - ודא שה-token תמיד עדכני
-// apiClient.interceptors.request.use(
-//   (config) => {
-//     const token = localStorage.getItem("accessToken");
-//     if (token) {
-//       config.headers["Authorization"] = `JWT ${token}`;
-//     }
-//     return config;
-//   },
-//   (error) => Promise.reject(error)
-// );
+let isTokenRefreshing: boolean = false;
+let subscribers: ((accessToken: string) => void)[] = [];
 
-let isRefreshing = false; // דגל לסימון שתהליך ריענון מתבצע
+function onTokenRefreshed(accessToken: string): void {
+  subscribers.forEach((callback) => callback(accessToken));
+  subscribers = [];
+}
 
-// Interceptor לתגובות
+function addSubscriber(callback: (accessToken: string) => void): void {
+  subscribers.push(callback);
+}
+
+export const apiClient = axios.create({
+  baseURL: "http://localhost:3000",
+});
+
 apiClient.interceptors.response.use(
-  (response) => response,
-  async (error) => {
-    const originalRequest = error.config;
-    if (
-      error.response?.status === 401 &&
-      !originalRequest._retry &&
-      !isRefreshing
-    ) {
-      originalRequest._retry = true;
-      isRefreshing = true; // סימון שתהליך ריענון התחיל
-      try {
-        const accessToken = await refreshAccessToken();
-        originalRequest.headers["Authorization"] = "JWT " + accessToken;
-        isRefreshing = false; // סימון שתהליך ריענון הסתיים
-        return apiClient(originalRequest);
-      } catch (refreshError) {
-        isRefreshing = false; // סימון שתהליך ריענון הסתיים בשגיאה
-        return Promise.reject(refreshError);
+  (response: AxiosResponse) => response,
+  async (error: AxiosError) => {
+    // השתמש ב-type assertion כדי להגיד ל-TypeScript שה-config הוא מטיפוס המורחב שהגדרנו
+    const originalRequest = error.config as CustomAxiosRequestConfig;
+
+    if (error.response?.status === 401 && !originalRequest._retry) {
+      if (!isTokenRefreshing) {
+        isTokenRefreshing = true;
+        originalRequest._retry = true;
+
+        try {
+          const accessToken = await refreshAccessToken();
+          apiClient.defaults.headers.common[
+            "Authorization"
+          ] = `JWT ${accessToken}`;
+          if (originalRequest.headers)
+            originalRequest.headers["Authorization"] = `JWT ${accessToken}`;
+          return apiClient(originalRequest);
+        } catch (refreshError) {
+          console.error("Error in token refresh", refreshError);
+          return Promise.reject(refreshError);
+        } finally {
+          isTokenRefreshing = false;
+        }
+      } else {
+        return new Promise((resolve, reject) => {
+          addSubscriber((accessToken: string) => {
+            if (originalRequest.headers) {
+              originalRequest.headers["Authorization"] = `JWT ${accessToken}`;
+            }
+            resolve(apiClient(originalRequest));
+          });
+        });
       }
     }
+
     return Promise.reject(error);
   }
 );
 
+export async function refreshAccessToken(): Promise<string> {
+  const refreshToken: string | null = localStorage.getItem("refreshToken");
+  if (!refreshToken)
+    throw new Error("No refresh token available. Login required.");
+
+  try {
+    const response: AxiosResponse = await axios.post(
+      `${apiClient.defaults.baseURL}/auth/refresh`,
+      {},
+      {
+        headers: { Authorization: `JWT ${refreshToken}` },
+      }
+    );
+
+    const { accessToken, refreshToken: newRefreshToken } = response.data;
+    localStorage.setItem("accessToken", accessToken);
+    localStorage.setItem("refreshToken", newRefreshToken);
+    apiClient.defaults.headers.common["Authorization"] = `JWT ${accessToken}`;
+    onTokenRefreshed(accessToken);
+    return accessToken;
+  } catch (error) {
+    console.error("Refresh token error: ", error);
+    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("accessToken");
+    throw new Error("Failed to refresh token, login required.");
+  }
+}
 export default apiClient;

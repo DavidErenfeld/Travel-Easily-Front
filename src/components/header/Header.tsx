@@ -79,12 +79,7 @@ function Header({
   };
 
   const onClickLogOut = async () => {
-    try {
-      const response = await tripsService.logout();
-      endaleLogOut();
-    } catch (error) {
-      console.log(error);
-    }
+    endaleLogOut();
   };
 
   return (

@@ -22,8 +22,10 @@ interface LoginProps {
 
 function Login({ onClickRegister, onClickClose, onLogin }: LoginProps) {
   const [loginError, setLoginError] = useState<string | null>(null);
-  const [emgUrl, setEmgUrl] = useState("");
+  // const [imgUrl, setEmgUrl] = useState("");
 
+  const userName = localStorage.getItem("userName") || "";
+  const imgUrl = localStorage.getItem("umgUrl") || "";
   const {
     register,
     handleSubmit,
@@ -35,6 +37,8 @@ function Login({ onClickRegister, onClickClose, onLogin }: LoginProps) {
       const response = await loginUser({
         email: data.email,
         password: data.password,
+        userName: userName,
+        imgUrl: imgUrl,
       });
       console.log("user is logt");
       onLogin(true);
