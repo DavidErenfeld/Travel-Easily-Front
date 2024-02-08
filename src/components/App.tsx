@@ -18,31 +18,26 @@ function App() {
   const [tripId, setTripId] = useState("");
   const imgUrl = localStorage.getItem("imgUrl") || "";
   const userName = localStorage.getItem("userName") || "";
+
   const goToSearch = () => setCurrentPage("search");
   const goToShare = () => {
     setCurrentPage(isUserConnected ? "share" : "login");
   };
-
   const goToMainPage = () => {
     setCurrentPage("mainPage");
   };
-
   const goToPersonalArea = () => {
     setCurrentPage("personalArea");
   };
-
   const goToMyTrips = () => {
     setCurrentPage("myTrips");
   };
-
   const goToLogin = () => {
     setCurrentPage("login");
   };
-
   const goToRegister = () => {
     setCurrentPage("register");
   };
-
   const goToUpdateTrip = (tripId: string) => {
     setCurrentPage("updateTrip");
     setTripId(tripId);
@@ -76,22 +71,17 @@ function App() {
       const refreshToken = localStorage.getItem("refreshToken");
       if (refreshToken) {
         try {
-          // ניסיון לרענן את ה-access token באמצעות ה-refresh token
-          await refreshAccessToken(); // מניחים שהפונקציה עודכנת להחזיר אמת/שקר או לזרוק שגיאה בהתאם
+          await refreshAccessToken();
           setIsUserConnected(true);
-          goToMainPage(); // נניח שזו הפונקציה שמנווטת לדף הבית
+          goToMainPage();
         } catch (error) {
           console.error("Failed to refresh token:", error);
-          // setIsUserConnected(false);
-          // goToLogin(); // נניח שזו הפונקציה שמנווטת לדף הלוגין
         }
       } else {
-        // אין refresh token, כנראה המשתמש לא מחובר
         setIsUserConnected(false);
         goToMainPage();
       }
     };
-
     checkAuthStatus();
   }, []);
 
@@ -140,13 +130,11 @@ function App() {
         />
       );
       break;
-
     case "personalArea":
       displayedPage = (
         <PersonalArea goToMainPage={goToMainPage} imgUrl={imgUrl} />
       );
       break;
-
     case "myTrips":
       displayedPage = (
         <MyTrips
@@ -165,7 +153,6 @@ function App() {
         />
       );
       break;
-
     case "updateTrip":
       displayedPage = (
         <UpdateTrip

@@ -17,7 +17,6 @@ function TripBox({
   onSelect,
   onCommentsSelect,
   isUserConnected,
-  updateTripCommentsCount,
 }: TripBoxProps) {
   const [numOfLikes, setNumOfLikes] = useState(trip.numOfLikes);
 
@@ -66,7 +65,6 @@ function TripBox({
         </div>
         {trip.tripDescription.map((description, index) => (
           <div className="trip-day-details" key={index}>
-            {" "}
             {/* הוספת מאפיין key עם הערך של index */}
             <h3 className="trip-day-title">Day {index + 1}</h3>
             <p className="trip-day-description">{description}</p>

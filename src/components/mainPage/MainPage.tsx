@@ -42,7 +42,7 @@ function MainPage({
         isUserConnected={isUserConnected}
       />
       <div className="hero-section">
-        <Heading text="The new why to travel" />
+        <Heading text="The new way to travel" />
         <div className="buttons-container">
           <button className="btn" onClick={goToShare}>
             Share trip

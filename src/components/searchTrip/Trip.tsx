@@ -26,12 +26,10 @@ function Trip({
   );
   const loggedUserId = localStorage.getItem("loggedUserId");
 
-  // Handles input changes for the comment field
   const handleCommentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setComment(e.target.value);
   };
 
-  // Submits a new comment to the server
   const submitComment = async () => {
     if (comment && trip._id) {
       try {
@@ -46,19 +44,16 @@ function Trip({
     }
   };
 
-  // Focuses the comment input field when the component mounts, if focusOnComments is true
   useEffect(() => {
     if (focusOnComments && commentsInputRef.current) {
       commentsInputRef.current.focus();
     }
   }, [focusOnComments]);
 
-  // Updates the numOfComments state
   const updateNumOfComments = () => {
     setNumOfComments(comments.length);
   };
 
-  // Keep numOfComments updated with comments changes
   useEffect(() => {
     updateNumOfComments();
   }, [comments]);
@@ -68,18 +63,15 @@ function Trip({
       try {
         const response = await tripsService.deleteComment(trip._id, commentId);
         console.log("The comment has been deleted");
-        // הסרת התגובה מהמצב המקומי אחרי מחיקה מוצלחת
         setComments(comments.filter((comment) => comment._id !== commentId));
-        console.log("the commente is removed");
+        setNumOfComments(numOfComments - 1);
       } catch (error) {
         console.log("=============" + error);
       }
     }
   };
 
-  // Renders a delete button for comments owned by the logged-in user
   const renderDeleteButton = (commentId: string, commentOwnerId: string) => {
-    // console.log(`loggedUserId: ${loggedUserId}`);
     if (commentOwnerId === loggedUserId) {
       return (
         <button
@@ -93,7 +85,6 @@ function Trip({
     return null;
   };
 
-  // Formats the comment date string
   const formatDate = (dateString: Date) => {
     const date = new Date(dateString);
     return date.toLocaleString("he-IL");
@@ -142,7 +133,6 @@ function Trip({
           </div>
         ))}
       </div>
-      {/* photos-section */}
       <div className="image-gallery">
         {trip.tripPhotos &&
           trip.tripPhotos.map((photo, index) => (

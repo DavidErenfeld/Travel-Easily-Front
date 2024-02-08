@@ -81,7 +81,7 @@ const getByOwnerId = (userId: string) => {
 const getByTripId = (tripId: string) => {
   const accessToken = localStorage.getItem("token"); // או לקבל את הטוקן כפרמטר אם אתה מעדיף
 
-  return new Promise((resolve, reject) => {
+  return new Promise<ITrips>((resolve, reject) => {
     console.log("Get By Id...");
     apiClient
       .get(`/trips/trip/${tripId}`, {
