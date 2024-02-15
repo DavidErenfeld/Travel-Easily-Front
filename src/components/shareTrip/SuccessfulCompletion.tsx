@@ -1,22 +1,30 @@
 interface SuccessfulCompletionProps {
   onClickHomePage: () => void;
+  title: string;
+  secondaryTitle: string;
+  text: string;
+  buttonText: string;
 }
-function SuccessfulCompletion({ onClickHomePage }: SuccessfulCompletionProps) {
+function SuccessfulCompletion({
+  title,
+  secondaryTitle,
+  text,
+  onClickHomePage,
+  buttonText,
+}: SuccessfulCompletionProps) {
   return (
     <section className="successful-message">
       <button onClick={onClickHomePage} className="btn btn-homepage">
-        home page
+        {buttonText}
       </button>
 
-      <h1>Congratulations</h1>
-      <h2>Your trip will help users to travel easily!</h2>
-      <p>
-        Thank you for sharing your travel experience with our community. Your
-        insight is invaluable and helps others to enjoy their journeys even
-        more. Keep exploring and sharing!
-      </p>
+      <h1>{title}</h1>
+      <h2>{secondaryTitle}</h2>
+      <p>{text}</p>
     </section>
   );
 }
 
 export default SuccessfulCompletion;
+{
+}

@@ -5,6 +5,18 @@
   display: grid;
   grid-template-columns: 3fr 1fr;
   margin-top: 9.6rem;
+  animation: slideInFromLeft 1s ease-out forwards;
+}
+
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 .search-btns-section {
@@ -14,6 +26,23 @@
   display: flex;
   flex-direction: column;
   gap: 5rem;
+  animation: slideInFromRight 1s ease-out forwards;
+}
+
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(50%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(80%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 .trip-list-item {
@@ -25,6 +54,16 @@
 /*******************************
 / SEARCH INPUT
 *******************************/
+
+.search-btns-box {
+  position: absolute;
+  top: 50%;
+  right: 8rem;
+  transform: translateY(-30%);
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
 .search-input {
   padding: 1rem 2rem;
   border-radius: 7px;
@@ -34,7 +73,7 @@
   color: #fff;
   resize: none;
   outline: none;
-  box-shadow: 0.5px 0.5px 0.5px 1px rgba(165, 195, 224, 0.97);
+  box-shadow: 0.5px 0.5px 0.5px 1px #a5c3e0f7;
   border: none;
 }
 
@@ -103,7 +142,7 @@
   padding: 1rem 1.5rem;
   border-radius: 4px;
   font-size: 1.4rem;
-  background-color: #8fa3f3;
+  background-color: #48527a;
 }
 
 /*******************************
@@ -131,7 +170,7 @@
   height: 6rem;
   width: 6rem;
   border-radius: 50%;
-  border: 2px solid #8fa3f3;
+  border: 2px solid #48527a;
   object-fit: cover; /* מבטיח שהתמונה מכסה את האלמנט, תוך שמירה על יחס הממדים */
   object-position: center; /* מרכז את התמונה באלמנט */
 }
@@ -177,7 +216,7 @@
 .like-icon {
   height: 4rem;
   width: 4rem;
-  fill: #0f3d03;
+  fill: #0b1703;
   background-color: #6fe31d;
   border-radius: 50%;
   padding: 6px;
@@ -195,24 +234,31 @@
 /*******************************
 / EXPANDED-TRIP SECTION
 *******************************/
-
-/* .trip-section {
-  position: relative;
-  height: 100vh;
-} */
-
 .trip-details-modal {
+  display: grid;
   grid-template-columns: 1fr 1fr;
-  width: 100%;
   grid-column: 1/-1;
   height: auto;
+  margin: 0 8rem;
+  backdrop-filter: blur(1rem);
+  animation: fadeInZoom 1s ease-out forwards;
+}
+
+@keyframes fadeInZoom {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .trip-details-content {
   grid-row: 1;
   grid-column: 1/-1;
   position: relative;
-  margin: 0 8rem;
   backdrop-filter: blur(1rem);
   height: auto;
   border-radius: 7px;
@@ -252,34 +298,29 @@
   width: 80%;
 }
 .comments-input-field {
-  resize: none;
   outline: none;
   font-family: "Rubik", sans-serif;
-  width: 65%;
+  width: 58%;
   height: 4rem;
   background: none;
   border-radius: 7px;
-  margin: 3rem;
+  margin: 3rem 0;
   color: #ebe9f9;
   font-size: 1.6rem;
   margin-bottom: 1rem;
   backdrop-filter: blur(1rem);
   padding: 3px 4rem 3px 1rem;
+  margin-left: 2rem;
   border: 2.5px solid #6fe31d;
 }
 
 .comments-input-field::placeholder {
   color: #6fe31d;
-  /* font-weight: 600; */
-  text-align: start; /* הטקסט יתחיל מהצד השמאלי */
-  vertical-align: middle; /* הטקסט יתחיל מהחלק העליון */
-  opacity: 1; /* אופציונלי - קובע את שקיפות הטקסט */
-  font-family: "Rubik", sans-serif;
 }
 .submit-icon-box {
   position: absolute;
   top: 31px;
-  right: 279px;
+  right: 35rem;
   cursor: pointer;
 }
 
@@ -290,8 +331,9 @@
   flex-direction: column;
   gap: 4rem;
   align-items: stretch;
-  padding: 3rem;
-  margin: 0 12rem;
+  padding: 3rem 2rem 3rem 0;
+  margin-bottom: 1rem;
+  margin-left: 2rem;
 }
 
 .comment-box {
@@ -307,6 +349,7 @@
 
 .delete-comment {
   background-color: #6fe31d;
+  color: #0b1703;
   position: absolute;
   bottom: -2.9rem;
   right: 0;
@@ -320,7 +363,8 @@
 }
 
 .delete-comment:hover {
-  background-color: #8fa3f3;
+  background-color: #48527a;
+  color: #f4f6fe;
 }
 
 .comment-details {
@@ -343,39 +387,61 @@
   border-radius: 7px;
 }
 
-.back-arrow {
-  position: fixed; /* שינוי מ-position: absolute ל-position: fixed */
-  top: 50%;
-  left: 2.5rem;
-  transform: translateY(-50%);
-  z-index: 10;
-}
-
-.back-arrow > .left-arrow-icon {
-  position: fixed;
-  left: 0;
-  top: 0;
-}
-
 /*******************************
 / PHOTOS SECTION
 *******************************/
 
+.photos-btn {
+  position: absolute;
+  top: 0.4rem;
+  right: 42rem;
+  color: #0b1703;
+  background-color: #6fe31d;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.photos-btn:hover {
+  background-color: #48527a;
+  color: #fff;
+}
+
 .image-gallery {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  grid-row: 2;
-  grid-column: 2/-1;
-  gap: 10px;
-  padding: 10px;
-  margin: auto;
-  border-radius: 8px; /* רובד לגריד */
+  width: 100%;
+  grid-column: 1/-1;
+  gap: 2rem;
+  padding: 5rem;
+  margin: 2rem auto;
+  border-radius: 9px;
   justify-content: center;
   align-items: center;
   backdrop-filter: blur(1rem);
+  animation: slideInFromLeft 2s ease-out forwards;
 }
 
-.image-gallery img {
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  cursor: pointer;
+}
+
+.img-trip {
   width: 100%;
   height: 200px;
   max-height: 200px;
@@ -384,7 +450,7 @@
   background-color: #f8f8f8;
 }
 
-.image-gallery img:hover {
+.img-trip:hover {
   opacity: 0.8; /* שינוי שקיפות */
   transform: scale(1.05); /* הגדלה קלה */
   transition: transform 0.3s ease, opacity 0.3s ease; /* אנימציה חלקה */

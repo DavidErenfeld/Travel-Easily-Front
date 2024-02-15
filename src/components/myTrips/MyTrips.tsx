@@ -4,7 +4,7 @@ import tripsService, {
   CanceledError,
   ITrips,
 } from "../../services/tripsService";
-import TripBox from "../searchTrip/TripBox";
+import TripBox from "../searchTrip/TripList";
 import Header from "../header/Header";
 
 interface MyTripsProps {
@@ -117,14 +117,16 @@ function MyTrips({
                 update
               </button>
             </span>
-            <TripBox
-              key={trip._id}
-              trip={trip}
-              updateTripCommentsCount={updateTripCommentsCount}
-              isUserConnected={isUserConnected}
-              onCommentsSelect={() => console.log("onCommentsSelect")}
-              onSelect={() => console.log("onSelect")}
-            />
+            <div className="my-trip-box">
+              <TripBox
+                key={trip._id}
+                trip={trip}
+                updateTripCommentsCount={updateTripCommentsCount}
+                isUserConnected={isUserConnected}
+                onCommentsSelect={() => console.log("onCommentsSelect")}
+                onSelect={() => console.log("onSelect")}
+              />
+            </div>
           </div>
         ))}
       </section>

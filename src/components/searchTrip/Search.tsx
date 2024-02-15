@@ -1,16 +1,15 @@
-import "./Search.css";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../header/Header";
-import TripBox from "./TripBox";
+import TripBox from "./TripList";
 import LeftArrow from "../icons/LeftArrow";
-import Trip from "./Trip";
+import Trip, { IComment } from "./SelectedTrip";
 import tripsService, {
   CanceledError,
   ITrips,
 } from "../../services/tripsService";
 import SearchButton from "./SearchButton";
 
-export interface SearchProps {
+interface SearchProps {
   isUserConnected: boolean;
   imgUrl: string;
   userName: string;
@@ -43,55 +42,69 @@ function Search({
   const [isTripSelected, setIsTripSelected] = useState(false);
   const [focusOnComments, setFocusOnComments] = useState(false);
 
-  // בקומפוננטת Search
-
-  const updateTripCommentsCount = (
-    tripId: string,
-    newNumOfComments: number
-  ) => {
-    setTrips((prevTrips) =>
-      prevTrips.map((trip) =>
-        trip._id === tripId
-          ? { ...trip, numOfComments: newNumOfComments }
-          : trip
-      )
-    );
-  };
-
-  const selectTrip = (trip: ITrips) => {
-    setSelectedTrip(trip);
-    setIsTripSelected(true);
-  };
-
-  const deselectTrip = () => {
-    setIsTripSelected(false); // מבטל את בחירת הטיול
-  };
-
-  const onClickLeftArrow = () => {
-    goToMainPage(); // שימוש בפונקציה לחזרה ל-MainPage
-  };
-
-  const goToList = () => {
-    setIsTripSelected(false);
-  };
-
-  const selectTripForComment = (trip: ITrips) => {
-    setSelectedTrip(trip);
-    setIsTripSelected(true);
-    // כאן אנחנו מסמנים שרוצים להציג את שדה התגובות מיד בפתיחה
-    setFocusOnComments(true);
-  };
-
-  useEffect(() => {
+  // פונקציה זו מבצעת רענון לנתוני הנסיעות מהשרת
+  const refreshData = async () => {
     const { req, abort } = tripsService.getAllTrips();
     req.then((res) => {
-      setTrips(res.data);
+      console.log(res.data);
+      setTrips(res.data); // כאן אנו עודכנים את הרשימה של הנסיעות
     });
     req.catch((err) => {
       console.log(err);
       if (err instanceof CanceledError) return;
       setErrors(err.message);
     });
+  };
+
+  // פונקציה זו מעדכנת את מספר התגובות בכל פעם שנוספה תגובה חדשה
+  const updateTripCommentsCount = () => {
+    refreshData();
+  };
+
+  // פונקציה זו מעדכנת את התגובות עבור נסיעת מסוימת
+  const updateCommentsForTrip = (tripId: string, newComments: IComment[]) => {
+    setTrips((prevTrips) =>
+      prevTrips.map((trip) => {
+        if (trip._id === tripId) {
+          return { ...trip, comments: newComments };
+        }
+        return trip;
+      })
+    );
+  };
+
+  // בחירת נסיעה מסוימת
+  const selectTrip = (trip: ITrips) => {
+    setSelectedTrip(trip);
+    setIsTripSelected(true);
+  };
+
+  // ביטול בחירת נסיעה
+  const deselectTrip = async () => {
+    setIsTripSelected(false);
+    await refreshData();
+  };
+
+  // טיפול בלחיצה על חץ החזרה
+  const onClickLeftArrow = () => {
+    !isTripSelected ? goToMainPage() : goToList();
+  };
+
+  // חזרה לרשימת הנסיעות ממצב נסיעה נבחרת
+  const goToList = () => {
+    setIsTripSelected(false);
+  };
+
+  // בחירת נסיעה לצורך הוספת תגובה
+  const selectTripForComment = (trip: ITrips) => {
+    setSelectedTrip(trip);
+    setIsTripSelected(true);
+    setFocusOnComments(true);
+  };
+
+  // רענון נתונים בעת טעינת העמוד
+  useEffect(() => {
+    refreshData();
   }, []);
 
   const onCluckSearchByCountry = () => {
@@ -102,6 +115,7 @@ function Search({
     console.log("on Click Search Icon");
   };
 
+  // פונקציה לעיצוב רשימת הנסיעות
   const renderTrips = () => {
     return trips.map((trip) => (
       <div className="trip-list-item" key={trip._id}>
@@ -116,8 +130,37 @@ function Search({
     ));
   };
 
+  const searchBtnsSectionClass = !isTripSelected
+    ? "search-btns-section"
+    : "hidden";
+
   return (
     <>
+      <div className="arrow-to-main">
+        <LeftArrow onClickLeftArrow={onClickLeftArrow} />
+      </div>
+      <section className={searchBtnsSectionClass}>
+        <SearchButton
+          text="search by country"
+          onClickSearchIcon={onClickSearchIcon}
+          onClickSearchInput={onCluckSearchByCountry}
+        />
+        <SearchButton
+          text="search by country"
+          onClickSearchIcon={onClickSearchIcon}
+          onClickSearchInput={onCluckSearchByCountry}
+        />
+        <SearchButton
+          text="search by country"
+          onClickSearchIcon={onClickSearchIcon}
+          onClickSearchInput={onCluckSearchByCountry}
+        />
+        <SearchButton
+          text="search by country"
+          onClickSearchIcon={onClickSearchIcon}
+          onClickSearchInput={onCluckSearchByCountry}
+        />
+      </section>
       <Header
         userName={userName}
         imgUrl={imgUrl}
@@ -130,45 +173,20 @@ function Search({
         goToMyTrips={goToMyTrips}
         isUserConnected={isUserConnected}
       />
+      {/* תנאי להצגת פרטי הנסיעה או רשימת הנסיעות */}
       {isTripSelected && selectedTrip && isUserConnected ? (
         <Trip
           updateTripCommentsCount={updateTripCommentsCount}
-          goToList={goToList}
+          updateCommentsForTrip={updateCommentsForTrip}
           trip={selectedTrip}
           onSelect={deselectTrip}
-          focusOnComments={focusOnComments} // העבר את הסטטוס הזה לקומפוננטת Trip
+          focusOnComments={focusOnComments}
         />
       ) : (
-        <main className="main-search-section">
-          <div className="arrow-to-main">
-            <LeftArrow onClickLeftArrow={onClickLeftArrow} />
-          </div>
-          <section className="search-btns-section">
-            <SearchButton
-              text="search by country"
-              onClickSearchIcon={onClickSearchIcon}
-              onClickSearchInput={onCluckSearchByCountry}
-            />
-            <SearchButton
-              text="search by country"
-              onClickSearchIcon={onClickSearchIcon}
-              onClickSearchInput={onCluckSearchByCountry}
-            />
-            <SearchButton
-              text="search by country"
-              onClickSearchIcon={onClickSearchIcon}
-              onClickSearchInput={onCluckSearchByCountry}
-            />
-            <SearchButton
-              text="search by country"
-              onClickSearchIcon={onClickSearchIcon}
-              onClickSearchInput={onCluckSearchByCountry}
-            />
-          </section>
-          {renderTrips()}
-        </main>
+        <main className="main-search-section">{renderTrips()}</main>
       )}
     </>
   );
 }
+
 export default Search;

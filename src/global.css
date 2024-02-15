@@ -53,6 +53,10 @@ body {
   justify-self: center;
 }
 
+.hidden {
+  display: none;
+}
+
 .btn {
   cursor: pointer;
   width: 18rem;
@@ -127,7 +131,7 @@ body {
 
 .left-arrow-icon {
   position: absolute;
-  left: -55px;
+  left: -7rem;
   top: 53%;
 }
 

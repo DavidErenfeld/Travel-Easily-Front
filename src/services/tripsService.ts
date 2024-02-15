@@ -1,3 +1,4 @@
+import { IComment } from "../components/searchTrip/SelectedTrip";
 import apiClient, { CanceledError } from "./apiClient";
 
 export { CanceledError };
@@ -196,15 +197,15 @@ const logout = () => {
   });
 };
 
-const addComment = (trip_id: string, comment: string) => {
+const addComment = (tripId: string, comment: IComment) => {
   const accessToken = localStorage.getItem("token"); // או לקבל את הטוקן כפרמטר אם אתה מעדיף
 
-  return new Promise<ITrips>((resolve, reject) => {
+  return new Promise<IComment>((resolve, reject) => {
     console.log("Add Comment...");
     apiClient
       .post(
-        `/trips/comments/${trip_id}`,
-        { owner: "david", comment: comment, date: new Date() },
+        `/trips/comments/${tripId}`,
+        { comment },
         {
           headers: {
             Authorization: `jwt ${accessToken}`,
