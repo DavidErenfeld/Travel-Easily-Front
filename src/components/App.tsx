@@ -1,4 +1,5 @@
 import "../global.css";
+import "../queries.css";
 import "../components/shareTrip/Share.css";
 import { useEffect, useState } from "react";
 import MainPage from "./mainPage/MainPage";

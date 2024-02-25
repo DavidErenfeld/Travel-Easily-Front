@@ -41,10 +41,10 @@ function TripBox({
 
   return (
     <article className="trip-card">
-      <header className="trip-card-profile">
+      <div className="trip-card-profile">
         <img className="profile-picture" src={trip.imgUrl} alt="Profile" />
         <p className="profile-name">{trip.userName}</p>
-      </header>
+      </div>
 
       <div className="trip-interactions">
         <div className="like-section">

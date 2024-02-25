@@ -14,6 +14,12 @@
   margin: auto 5rem;
 }
 
+@media (max-width: 48em) {
+  .hero-section {
+    grid-template-columns: 1fr 3fr 1fr;
+  }
+}
+
 .buttons-container {
   display: flex;
   gap: 40rem;
@@ -22,6 +28,12 @@
   align-self: center;
   justify-self: center;
 }
+
+.buttons-container .btn {
+  width: 19rem;
+  animation: none;
+}
+
 .user-profile-personal {
   display: flex;
   align-items: center;

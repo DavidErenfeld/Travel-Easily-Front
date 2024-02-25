@@ -2,7 +2,7 @@ import "./Share.css";
 import AddImgs from "../icons/AddImgsIcon";
 import AddPicture from "../icons/AddPicture";
 import RightArrow from "../icons/RightArrow";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { uploadPhoto } from "../../services/fileService";
 
 // Type definitions for props
@@ -30,6 +30,12 @@ function Description({
   const [tripPhotos, setTripPhotos] = useState<string[]>([]);
   const imgRef = useRef<HTMLInputElement>(null);
 
+  useEffect(() => {
+    // בודק אם יש רק יום אחד ומעדכן את isLastDay בהתאם
+    if (dayNumber === 1) {
+      setIsLastDay(true);
+    }
+  }, [dayNumber]);
   // Handles local file selection and uploads to server
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -56,17 +62,25 @@ function Description({
     updatedDescriptions[day - 1] = newDescription;
     setDescriptions(updatedDescriptions);
   };
-
-  // Navigation to next or previous day
+  const [isLastDay, setIsLastDay] = useState(false);
+  // Function to update the current day and check if it's the last day
   const updateNextDay = () => {
     updateDescriptions(descriptions);
-    if (num < dayNumber) setNum(num + 1);
-    if (num === dayNumber) onClickLastDay(num);
-  };
-  const updateDayBefore = () => {
-    if (num > 1) setNum(num - 1);
+    if (num < dayNumber) {
+      setNum(num + 1);
+      setIsLastDay(num + 1 === dayNumber); // Check if it's the last day
+    }
+    if (num === dayNumber) {
+      onClickLastDay(num);
+    }
   };
 
+  const updateDayBefore = () => {
+    if (num > 1) {
+      setNum(num - 1);
+      setIsLastDay(false); // If going back, definitely not the last day
+    }
+  };
   return (
     <section className="container">
       <RightArrow onClickRightArrow={onClickRightArrow} />
@@ -84,26 +98,32 @@ function Description({
       />
       <div className="icons-description-box">
         <div onClick={() => imgRef.current?.click()}>
-          <AddImgs /> {/* Icon for adding images */}
+          <AddImgs />
         </div>
-        <AddPicture /> {/* Placeholder for future functionality */}
       </div>
-      {!finish ? (
+      {!finish && !isLastDay ? (
+        // Buttons for navigating between days when not on the last day and not finished
         <div className="change-day-description-block">
-          <p onClick={updateNextDay} className="change-day-description">
-            Next day
+          <p onClick={updateNextDay} className="change-day-button">
+            Next Day
           </p>
           {num > 1 && (
-            <p onClick={updateDayBefore} className="change-day-description">
-              Day before
+            <p onClick={updateDayBefore} className="change-day-button">
+              Previous Day
             </p>
           )}
         </div>
-      ) : (
-        <p className="change-day-description" onClick={handleFinish}>
-          Send
-        </p>
-      )}
+      ) : isLastDay ? (
+        // Adding "Previous Day" button even on the last day
+        <div className="change-day-description-block">
+          <p className="change-day-button" onClick={handleFinish}>
+            Send
+          </p>
+          <p onClick={updateDayBefore} className="change-day-button">
+            Previous Day
+          </p>
+        </div>
+      ) : null}
     </section>
   );
 }

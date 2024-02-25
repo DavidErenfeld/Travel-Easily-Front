@@ -18,20 +18,26 @@ export interface TripProps {
   onSelect: () => void;
   focusOnComments: boolean;
   updateTripCommentsCount: () => void;
-  updateCommentsForTrip: (tripId: string, newComments: IComment[]) => void;
+  // updateCommentsForTrip: (tripId: string, newComments: IComment[]) => void;
+  // isPhotosOpen: () => void;
+  closePhotos: () => void;
+  showPhotos: () => void;
+  photos: boolean;
 }
 
 function Trip({
+  closePhotos,
+  photos,
+  showPhotos,
   trip,
   focusOnComments,
   updateTripCommentsCount,
-  updateCommentsForTrip,
 }: TripProps) {
   const userName = localStorage.getItem("userName") || "";
   const loggedUserId = localStorage.getItem("loggedUserId") || "";
   // const [comments, setComments] = useState<IComment[]>(trip.comments || []);
   const [comment, setComment] = useState("");
-  const [photos, setPhotos] = useState(false);
+
   const [flag, setFlag] = useState(false);
   const commentsInputRef = useRef<HTMLInputElement>(null);
   const [selectedTrip, setTrip] = useState(trip);
@@ -51,7 +57,7 @@ function Trip({
         userName
       );
       try {
-        const newComment = await tripsService.addComment(trip._id, {
+        await tripsService.addComment(trip._id, {
           owner: userName,
           comment,
           date: new Date(),
@@ -76,7 +82,7 @@ function Trip({
   const deleteComment = async (commentId: string) => {
     if (trip._id && commentId) {
       try {
-        const response = await tripsService.deleteComment(trip._id, commentId);
+        await tripsService.deleteComment(trip._id, commentId);
         console.log("The comment has been deleted");
         updateTripCommentsCount();
         setFlag(!flag);
@@ -94,8 +100,6 @@ function Trip({
 
   const renderDeleteButton = (commentId: string, commentOwnerId: string) => {
     if (commentOwnerId === loggedUserId) {
-      console.log(`ownerid: ${commentOwnerId}`);
-      console.log(`commentOwnerId: ${commentOwnerId}`);
       return (
         <button
           onClick={() => deleteComment(commentId)}
@@ -113,20 +117,16 @@ function Trip({
     return date.toLocaleString("he-IL");
   };
 
-  const showPhotos = () => {
-    setPhotos(true);
-  };
-  const closePhotos = () => {
-    setPhotos(false);
-  };
+  // const showPhotos = () => {
+  //   setPhotos(true);
+  //   isPhotosOpen();
+  // };
 
   useEffect(() => {
     if (focusOnComments && commentsInputRef.current) {
       commentsInputRef.current.focus();
     }
   }, [focusOnComments]);
-
-  // useEffect(() => {}, [selectedTrip]);
 
   return (
     <article className="trip-details-modal">
@@ -139,6 +139,12 @@ function Trip({
               <span className="tag">{selectedTrip.typeTrip}</span>
               <span className="tag">{selectedTrip.country}</span>
               <span className="tag">{`${selectedTrip.numOfDays} days`}</span>
+              {selectedTrip.tripPhotos &&
+                selectedTrip.tripPhotos?.length > 0 && (
+                  <span className="tag photos-btn" onClick={showPhotos}>
+                    show pictures
+                  </span>
+                )}
             </div>
             {selectedTrip.tripDescription &&
               selectedTrip.tripDescription.map((desc, index) => (
@@ -147,11 +153,7 @@ function Trip({
                   <p className="trip-day-description">{desc}</p>
                 </div>
               ))}
-            {selectedTrip.tripPhotos && selectedTrip.tripPhotos?.length > 0 && (
-              <button className="tag photos-btn" onClick={showPhotos}>
-                show pictures
-              </button>
-            )}
+
             <div className="comments-input">
               <input
                 ref={commentsInputRef}

@@ -5,6 +5,6 @@ interface HeadingSecondryProps {
 }
 
 function HeadingSecondry({ text }: HeadingSecondryProps) {
-  return <p className="heading-secondry">{text}</p>;
+  return <p className="heading-secondry-text">{text}</p>;
 }
 export default HeadingSecondry;

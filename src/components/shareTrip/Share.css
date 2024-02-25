@@ -51,8 +51,6 @@ TRIP-LOCATION SECTION
   display: flex;
   gap: 3rem;
   flex-direction: column;
-  margin-right: 10px;
-  margin-top: 10px;
 }
 
 .selection-box {
@@ -63,6 +61,7 @@ TRIP-LOCATION SECTION
   background: none;
   color: #fff;
   backdrop-filter: blur(0.5rem);
+  animation: slideInFromLeft 1.2s ease-out forwards;
   width: 100%;
 }
 
@@ -125,13 +124,13 @@ TRIP-LOCATION SECTION
   grid-column: 1/-1;
   font-size: 1.6rem;
   padding: 1.6rem;
-  margin-right: 10px;
   height: 20rem;
   border-radius: 7px;
   background: none;
   color: #fff;
   backdrop-filter: blur(1rem);
-  font-family: "Rubik", sans-serif;
+  animation: slideInFromLeft 1.2s ease-out forwards;
+  /* font-family: "Rubik", sans-serif; */
 }
 
 .description-box::placeholder {
@@ -143,9 +142,9 @@ TRIP-LOCATION SECTION
   font-family: "Rubik", sans-serif;
 }
 
-.save-description {
+/* .save-description {
   border-radius: 9px !important;
-}
+} */
 
 .change-day-description-block {
   position: absolute;
@@ -155,7 +154,7 @@ TRIP-LOCATION SECTION
   gap: 1rem;
 }
 
-.change-day-description {
+.change-day-button {
   color: #0f3d03;
   font-size: 1.6rem;
   font-weight: 500;
@@ -164,22 +163,25 @@ TRIP-LOCATION SECTION
   border-radius: 5px;
   padding: 5px 15px;
   background-color: #6fe31d;
+  transition: all 0.3s;
+  animation: slideInFromLeft 1.2s ease-out forwards;
 }
 
-.change-day-description:hover {
-  background-color: #5c5c5c;
-  color: #cfcfcf;
+.change-day-button:hover {
+  background-color: #6e8efb;
+  color: #e6e7f6;
 }
 
 .icons-description-box {
   position: absolute;
   bottom: 4px;
-  right: 1.8rem;
+  right: 1rem;
   display: flex;
   gap: 2rem;
   align-items: center;
   justify-content: end;
   margin-top: 5px;
+  animation: slideInFromLeft 1.2s ease-out forwards;
 }
 
 .icons-descripton-trip {
@@ -187,19 +189,23 @@ TRIP-LOCATION SECTION
   width: 3rem;
   fill: #6fe31d;
   cursor: pointer;
-
   font-weight: 700;
+  transition: all 0.2s;
 }
+
+.icons-descripton-trip:hover {
+  fill: #6e8efb;
+}
+
 .icon-menu-descripton-trip {
   height: 4rem;
   width: 4rem;
   fill: #6fe31d;
   cursor: pointer;
 }
-
-.aaa {
+/* .aaa {
   position: relative;
-}
+} */
 
 /***************************
  SUCCESSFUL-MESSAGE SECTION
@@ -262,15 +268,15 @@ TRIP-LOCATION SECTION
 }
 
 .successful-message p {
-  color: #2c5b0c; /* צבע הטקסט */
-  font-size: 2rem; /* גודל הפונט */
-  margin-top: 1rem; /* מרווח מעל הפסקה */
-  margin-bottom: 1rem; /* מרווח מתחת לפסקה */
-  line-height: 1.6; /* גובה השורה */
-  max-width: 600px; /* מקסימום רוחב של הפסקה */
-  margin-left: auto; /* מרכז את הפסקה */
-  margin-right: auto; /* מרכז את הפסקה */
-  text-align: center; /* יישור הטקסט למרכז */
+  color: #2c5b0c;
+  font-size: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }
 
 .btn-homepage {

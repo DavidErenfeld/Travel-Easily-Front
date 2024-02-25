@@ -7,8 +7,7 @@ import NumOfDays from "./NumOfDays";
 import Description from "./Description";
 import SuccessfulCompletion from "./SuccessfulCompletion";
 import TripsService, { ITrips } from "../../services/tripsService";
-import { uploadPhoto } from "../../services/fileService";
-
+import "../../queries.css";
 export interface ShareProps {
   imgUrl: string;
   userName: string;
@@ -208,8 +207,8 @@ function Share({
             title="Congratulations"
             secondaryTitle="Your trip will help users to travel easily!"
             text=" Thank you for sharing your travel experience with our community. Your
-        insight is invaluable and helps others to enjoy their journeys even
-        more. Keep exploring and sharing!"
+                   insight is invaluable and helps others to enjoy their journeys even
+                   more. Keep exploring and sharing!"
             buttonText="home page"
             onClickHomePage={onClickHomePage}
           />

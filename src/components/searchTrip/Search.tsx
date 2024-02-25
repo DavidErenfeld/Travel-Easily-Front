@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from "react";
+// Importing necessary libraries and components
+import { useEffect, useState } from "react";
 import Header from "../header/Header";
 import TripBox from "./TripList";
 import LeftArrow from "../icons/LeftArrow";
 import Trip, { IComment } from "./SelectedTrip";
+import SearchButton from "./SearchButton";
 import tripsService, {
   CanceledError,
   ITrips,
 } from "../../services/tripsService";
-import SearchButton from "./SearchButton";
+import { number } from "zod";
 
+// Interface for Search component props
 interface SearchProps {
   isUserConnected: boolean;
   imgUrl: string;
@@ -23,6 +26,7 @@ interface SearchProps {
   endaleLogOut: () => void;
 }
 
+// Main Search component
 function Search({
   userName,
   imgUrl,
@@ -36,112 +40,118 @@ function Search({
   goToRegister,
   endaleLogOut,
 }: SearchProps) {
+  // State hooks for managing trips, selection, and UI states
   const [trips, setTrips] = useState<ITrips[]>([]);
   const [errors, setErrors] = useState();
   const [selectedTrip, setSelectedTrip] = useState<ITrips | null>(null);
   const [isTripSelected, setIsTripSelected] = useState(false);
   const [focusOnComments, setFocusOnComments] = useState(false);
+  const [opnePhotos, setOpnePhotos] = useState(false);
+  const [photos, setPhotos] = useState(false);
 
-  // פונקציה זו מבצעת רענון לנתוני הנסיעות מהשרת
+  // Fetching trips data from the server
   const refreshData = async () => {
     const { req, abort } = tripsService.getAllTrips();
-    req.then((res) => {
-      console.log(res.data);
-      setTrips(res.data); // כאן אנו עודכנים את הרשימה של הנסיעות
-    });
-    req.catch((err) => {
-      console.log(err);
-      if (err instanceof CanceledError) return;
-      setErrors(err.message);
-    });
-  };
-
-  // פונקציה זו מעדכנת את מספר התגובות בכל פעם שנוספה תגובה חדשה
-  const updateTripCommentsCount = () => {
-    refreshData();
-  };
-
-  // פונקציה זו מעדכנת את התגובות עבור נסיעת מסוימת
-  const updateCommentsForTrip = (tripId: string, newComments: IComment[]) => {
-    setTrips((prevTrips) =>
-      prevTrips.map((trip) => {
-        if (trip._id === tripId) {
-          return { ...trip, comments: newComments };
-        }
-        return trip;
+    req
+      .then((res) => {
+        console.log(res.data);
+        setTrips(res.data);
       })
-    );
+      .catch((err) => {
+        console.log(err);
+        if (err instanceof CanceledError) return;
+        setErrors(err.message);
+      });
   };
 
-  // בחירת נסיעה מסוימת
+  // Selection and UI interaction handlers
   const selectTrip = (trip: ITrips) => {
-    setSelectedTrip(trip);
-    setIsTripSelected(true);
+    if (isUserConnected) {
+      setSelectedTrip(trip);
+      setIsTripSelected(true);
+    }
   };
 
-  // ביטול בחירת נסיעה
   const deselectTrip = async () => {
     setIsTripSelected(false);
     await refreshData();
   };
 
-  // טיפול בלחיצה על חץ החזרה
   const onClickLeftArrow = () => {
     !isTripSelected ? goToMainPage() : goToList();
   };
 
-  // חזרה לרשימת הנסיעות ממצב נסיעה נבחרת
   const goToList = () => {
     setIsTripSelected(false);
   };
 
-  // בחירת נסיעה לצורך הוספת תגובה
   const selectTripForComment = (trip: ITrips) => {
-    setSelectedTrip(trip);
-    setIsTripSelected(true);
-    setFocusOnComments(true);
+    if (isUserConnected) {
+      setSelectedTrip(trip);
+      setIsTripSelected(true);
+      setFocusOnComments(true);
+    }
   };
 
-  // רענון נתונים בעת טעינת העמוד
-  useEffect(() => {
-    refreshData();
-  }, []);
+  const closePhotos = () => {
+    setPhotos(false);
+    setOpnePhotos(false);
+  };
+
+  const showPhotos = () => {
+    setPhotos(true);
+    setOpnePhotos(true);
+  };
 
   const onCluckSearchByCountry = () => {
-    console.log("on Cluck Search By Country");
+    console.log("onCluckSearchByCountry");
   };
 
   const onClickSearchIcon = () => {
-    console.log("on Click Search Icon");
+    console.log("onClickSearchIcon");
   };
 
-  // פונקציה לעיצוב רשימת הנסיעות
+  // Rendering trips list
   const renderTrips = () => {
     return trips.map((trip) => (
-      <div className="trip-list-item" key={trip._id}>
+      <article className="trip-list-item" key={trip._id}>
+        {/* Changed div to article for semantic meaning */}
         <TripBox
           isUserConnected={isUserConnected}
           onCommentsSelect={() => selectTripForComment(trip)}
           trip={trip}
           onSelect={() => selectTrip(trip)}
-          updateTripCommentsCount={updateTripCommentsCount}
+          updateTripCommentsCount={refreshData}
         />
-      </div>
+      </article>
     ));
   };
 
+  // Conditional class names based on state
   const searchBtnsSectionClass = !isTripSelected
     ? "search-btns-section"
     : "hidden";
+  const arrowClass = !opnePhotos ? "arrow-to-main" : "hidden";
 
+  // useEffect hook for initial data load
+  useEffect(() => {
+    refreshData();
+  }, []);
+
+  // Component return statement
   return (
     <>
-      <div className="arrow-to-main">
+      <div className={arrowClass}>
         <LeftArrow onClickLeftArrow={onClickLeftArrow} />
       </div>
       <section className={searchBtnsSectionClass}>
         <SearchButton
-          text="search by country"
+          text="search by type traveler"
+          onClickSearchIcon={onClickSearchIcon}
+          onClickSearchInput={onCluckSearchByCountry}
+        />
+        <SearchButton
+          text="search by type trip"
           onClickSearchIcon={onClickSearchIcon}
           onClickSearchInput={onCluckSearchByCountry}
         />
@@ -151,12 +161,7 @@ function Search({
           onClickSearchInput={onCluckSearchByCountry}
         />
         <SearchButton
-          text="search by country"
-          onClickSearchIcon={onClickSearchIcon}
-          onClickSearchInput={onCluckSearchByCountry}
-        />
-        <SearchButton
-          text="search by country"
+          text="search by num of days"
           onClickSearchIcon={onClickSearchIcon}
           onClickSearchInput={onCluckSearchByCountry}
         />
@@ -173,11 +178,12 @@ function Search({
         goToMyTrips={goToMyTrips}
         isUserConnected={isUserConnected}
       />
-      {/* תנאי להצגת פרטי הנסיעה או רשימת הנסיעות */}
       {isTripSelected && selectedTrip && isUserConnected ? (
         <Trip
-          updateTripCommentsCount={updateTripCommentsCount}
-          updateCommentsForTrip={updateCommentsForTrip}
+          photos={photos}
+          closePhotos={closePhotos}
+          showPhotos={showPhotos}
+          updateTripCommentsCount={refreshData}
           trip={selectedTrip}
           onSelect={deselectTrip}
           focusOnComments={focusOnComments}

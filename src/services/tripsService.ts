@@ -40,15 +40,6 @@ export interface IUpdateTrips {
   tripDescription?: string[];
 }
 
-// export interface IComment {
-//   comments?: {
-//     ownerId?: string;
-//     owner?: string;
-//     comment: string;
-//     date: Date;
-//   };
-// }
-
 const getAllTrips = () => {
   const abortController = new AbortController();
   const req = apiClient.get<ITrips[]>("trips", {

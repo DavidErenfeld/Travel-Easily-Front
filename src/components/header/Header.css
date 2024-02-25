@@ -45,21 +45,22 @@ header > .user-profile-personal > .profile-name {
 
 .navigation {
   position: absolute;
-  top: 4rem;
-  right: 4rem;
+  top: 2rem;
+  right: 2rem;
   text-decoration: none;
   list-style-type: none;
   display: flex;
   flex-direction: column;
-  z-index: 20;
+  z-index: 2;
+  animation: slideInFromRight 1s ease-out forwards;
 }
 
 .navigation > li {
   transition: all 0.4s;
   text-align: center;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   cursor: pointer;
-  padding: 1.8rem 6rem;
+  padding: 1.4rem 4rem;
 }
 
 .navigation > li:nth-child(even) {

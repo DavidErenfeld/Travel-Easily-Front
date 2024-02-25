@@ -1,0 +1,63 @@
+/**************************/
+/* BELOW 1200px (Smaller desktops) */
+/**************************/
+
+/* 1250 / 16 = 84 */
+
+@media (max-width: 75em) {
+  .buttons-container {
+    gap: 26rem;
+  }
+
+  .heading-secondry {
+    font-size: 4.7rem;
+    margin-left: 2rem;
+  }
+}
+
+@media (max-width: 70em) {
+  html {
+    font-size: 50%;
+  }
+
+  .selection-box {
+    width: 97%;
+  }
+
+  .container .change-day-description-block {
+    bottom: -3.3rem;
+  }
+  .comment-box .delete-comment {
+    bottom: -3.4rem;
+  }
+}
+
+@media (max-width: 56em) {
+  html {
+    font-size: 45%;
+  }
+  .btn {
+    width: 18rem;
+  }
+}
+@media (max-width: 51em) {
+  .right-rrow-icon {
+    right: -9.5rem;
+  }
+  .heading-secondry {
+    font-size: 5rem;
+  }
+}
+
+@media (max-width: 48em) {
+  .container {
+    grid-column: 2/3;
+    width: 100%;
+  }
+  .right-rrow-icon {
+    right: -7rem;
+  }
+}
+
+@media (max-width: 45em) {
+}

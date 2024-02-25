@@ -37,6 +37,8 @@ function MyTrips({
 }: MyTripsProps) {
   const [trips, setTrips] = useState<ITrips[]>([]);
   const [errors, setErrors] = useState();
+  const [isDeleteClicked, setIsDeleteClicked] = useState(false);
+  const [tripId, setTripId] = useState("");
   const loggedUserId = localStorage.getItem("loggedUserId");
 
   const updateTripCommentsCount = (
@@ -80,10 +82,15 @@ function MyTrips({
         // מחיקת הטיול מהרשימה בממשק המשתמש
         const updatedTrips = trips.filter((trip) => trip._id !== tripId);
         setTrips(updatedTrips);
+        setIsDeleteClicked(false);
       })
       .catch((error) => {
         console.error("Error deleting trip:", error);
       });
+  };
+  const handleDeleteClicked = (tripId: string) => {
+    setTripId(tripId);
+    setIsDeleteClicked(true);
   };
 
   return (
@@ -100,36 +107,46 @@ function MyTrips({
         goToSearch={goToSearch}
         isUserConnected={isUserConnected}
       />
-      <section className="my-trip-section">
-        {trips.map((trip) => (
-          <div className="trip-list-item" key={trip._id}>
-            <span className="buttons-box">
-              <button
-                onClick={() => handleDeleteTrip(trip._id || "")}
-                className="btn-delete"
-              >
-                delete
-              </button>
-              <button
-                onClick={() => goToUpdateTrip(trip._id || "")}
-                className="btn-update"
-              >
-                update
-              </button>
-            </span>
-            <div className="my-trip-box">
-              <TripBox
-                key={trip._id}
-                trip={trip}
-                updateTripCommentsCount={updateTripCommentsCount}
-                isUserConnected={isUserConnected}
-                onCommentsSelect={() => console.log("onCommentsSelect")}
-                onSelect={() => console.log("onSelect")}
-              />
-            </div>
+      {isDeleteClicked ? (
+        <div className="pop-up">
+          <p>Are you sure you want to delete the trip?</p>
+          <div className="pop-up-buttons">
+            <button onClick={() => handleDeleteTrip(tripId)}>delete</button>
+            <button onClick={() => setIsDeleteClicked(false)}>cancel</button>
           </div>
-        ))}
-      </section>
+        </div>
+      ) : (
+        <section className="my-trip-section">
+          {trips.map((trip) => (
+            <div className="trip-list-item" key={trip._id}>
+              <span className="buttons-box">
+                <button
+                  onClick={() => goToUpdateTrip(trip._id || "")}
+                  className="btn-update"
+                >
+                  update
+                </button>
+                <button
+                  onClick={() => handleDeleteClicked(trip._id || "")}
+                  className="btn-delete"
+                >
+                  delete
+                </button>
+              </span>
+              <div className="my-trip-box">
+                <TripBox
+                  key={trip._id}
+                  trip={trip}
+                  updateTripCommentsCount={updateTripCommentsCount}
+                  isUserConnected={isUserConnected}
+                  onCommentsSelect={() => console.log("onCommentsSelect")}
+                  onSelect={() => console.log("onSelect")}
+                />
+              </div>
+            </div>
+          ))}
+        </section>
+      )}
     </>
   );
 }

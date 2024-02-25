@@ -43,6 +43,11 @@ body {
   margin: auto 5rem;
 }
 
+/* .main {
+  position: relative;
+  width: 100%;
+} */
+
 .container {
   position: relative;
   width: 80%;
@@ -59,22 +64,23 @@ body {
 
 .btn {
   cursor: pointer;
-  width: 18rem;
   font-size: 1.8rem;
   padding: 1.6rem;
   border-radius: 2.4rem;
   font-weight: 600;
   color: #fff;
   border: 0;
-  box-shadow: 0.5px 0.5px 0.5px 1px #6fe31d;
+  box-shadow: 0px 0.1px 1px 2px #6fe31d;
   background: none;
+  will-change: backdrop-filter;
   backdrop-filter: blur(1rem);
   transition: all 0.3s;
+  animation: slideInFromLeft 1.1s ease-out forwards;
 }
 
 .btn:hover {
   filter: blur(-5rem);
-  box-shadow: 1px 0.2rem 0.5rem 1.5px #6fe31d;
+  box-shadow: 0px 0.1px 1px 3px #48527a;
 }
 
 .search-input-btn {
@@ -83,7 +89,6 @@ body {
   border-radius: 9px;
   color: #fff;
   background: none;
-  backdrop-filter: blur(1rem);
   padding-left: 1rem;
 }
 
@@ -115,30 +120,33 @@ body {
   padding: 3px;
   height: 4rem;
   width: 4rem;
-  fill: #fff;
+  fill: #ebe9f9;
   border-radius: 50%;
   cursor: pointer;
-  box-shadow: 0.5px 0.5px 0.5px 1px #6fe31d;
+  box-shadow: 0px 0.1px 1px 3px #6fe31d;
   background: none;
   backdrop-filter: blur(1rem);
   transition: all 0.3s;
+  animation: slideInFromLeft 1s ease-out forwards;
 }
 
 .arrow-icon:hover {
   filter: blur(-5rem);
-  box-shadow: 1px 0.2rem 1rem 1px #6fe31d;
+  box-shadow: 0px 0.1px 1px 3px #48527a;
 }
 
 .left-arrow-icon {
   position: absolute;
   left: -7rem;
-  top: 53%;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .right-rrow-icon {
   position: absolute;
-  right: -38px;
-  top: 53%;
+  right: -7rem;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .edit-icon {
@@ -175,4 +183,47 @@ body {
   color: red;
   font-size: 1.2rem;
   text-align: start;
+}
+
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(50%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(80%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(50%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(80%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }

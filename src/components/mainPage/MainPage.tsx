@@ -1,5 +1,6 @@
 import Header from "../header/Header";
 import "./MainPage.css";
+// import "./queries.css";
 import Heading from "../Heading/Heading";
 
 export interface MainPageProps {

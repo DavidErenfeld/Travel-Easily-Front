@@ -207,6 +207,7 @@ function Register({ onClickClose, goToLogin, onLogin }: RegisterProps) {
       <button type="submit" className="submit-btn">
         Submit
       </button>
+
       <GoogleLogin
         onSuccess={onGoogleLoginSuccess}
         onError={onGoogleLoginFailure}

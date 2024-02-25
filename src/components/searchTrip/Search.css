@@ -5,44 +5,17 @@
   display: grid;
   grid-template-columns: 3fr 1fr;
   margin-top: 9.6rem;
-  animation: slideInFromLeft 1s ease-out forwards;
-}
-
-@keyframes slideInFromLeft {
-  from {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
 }
 
 .search-btns-section {
   position: absolute;
-  top: 15rem;
+  top: 30%;
   right: 10rem;
+
   display: flex;
   flex-direction: column;
   gap: 5rem;
-  animation: slideInFromRight 1s ease-out forwards;
-}
-
-@keyframes slideInFromRight {
-  from {
-    transform: translateX(50%);
-    opacity: 0;
-  }
-
-  to {
-    transform: translateX(80%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
+  animation: slideInFromRight 1.2s ease-out forwards;
 }
 
 .trip-list-item {
@@ -64,11 +37,11 @@
   flex-direction: column;
   gap: 4rem;
 }
+
 .search-input {
   padding: 1rem 2rem;
   border-radius: 7px;
-  font-size: 1.8rem;
-  backdrop-filter: blur(1rem);
+  font-size: 1.4rem;
   background: none;
   color: #fff;
   resize: none;
@@ -82,24 +55,34 @@
   opacity: 1;
 }
 
+.arrow-to-main {
+  position: absolute;
+  top: 50%;
+  left: 7.5%;
+  transform: translateY(-50%);
+  z-index: 5;
+}
+
 /*******************************
 / TRIP CARD
 *******************************/
 .trip-card {
   position: relative;
+  width: 72%;
+  margin: 0 9.6rem 8rem 9.6rem;
 }
 
 .trip-card-details {
   position: relative;
   height: 20rem;
-  max-width: 78rem;
+  width: 100%;
   border-radius: 7px;
+  will-change: backdrop-filter;
   backdrop-filter: blur(1rem);
-  margin: 0 9.6rem;
-  margin-bottom: 9rem;
   box-shadow: 0.1px 2px 5px 0.01px rgba(185, 186, 187, 0.76);
   z-index: 1;
   overflow-y: auto;
+  animation: slideInFromLeft 1.2s ease-out forwards;
 }
 
 .trip-card-details::-webkit-scrollbar {
@@ -126,6 +109,7 @@
   line-height: 1.5;
   letter-spacing: 0.5px;
   backdrop-filter: blur(1rem);
+  will-change: backdrop-filter;
 }
 
 .trip-card-tags {
@@ -133,15 +117,19 @@
   top: 5px;
   right: 4px;
   display: flex;
-  align-items: center;
+  max-width: 70%;
+  align-items: stretch;
   gap: 10px;
 }
 
 .tag {
   color: #fff;
+  text-align: center;
+  line-height: 1.2;
   padding: 1rem 1.5rem;
   border-radius: 4px;
   font-size: 1.4rem;
+  /* align-self: center; */
   background-color: #48527a;
 }
 
@@ -150,9 +138,8 @@
 *******************************/
 .trip-card-profile {
   position: absolute;
-  top: -49.9px;
-  left: 46.1px;
-  transform: translateY(-60%);
+  top: -6.5rem;
+  left: 0;
   display: flex;
   align-items: end;
   gap: 0.1px;
@@ -182,9 +169,10 @@
   z-index: 2;
   position: absolute;
   bottom: -14px;
-  right: 108px;
+  right: 1.5rem;
   display: flex;
   gap: 9px;
+  animation: slideInFromLeft 1.2s ease-out forwards;
 }
 
 .like-section,
@@ -223,14 +211,6 @@
   cursor: pointer;
 }
 
-.arrow-to-main {
-  position: absolute;
-  top: 50%;
-  left: 7.5%;
-  transform: translateY(-50%);
-  z-index: 5;
-}
-
 /*******************************
 / EXPANDED-TRIP SECTION
 *******************************/
@@ -241,18 +221,8 @@
   height: auto;
   margin: 0 8rem;
   backdrop-filter: blur(1rem);
+  will-change: backdrop-filter;
   animation: fadeInZoom 1s ease-out forwards;
-}
-
-@keyframes fadeInZoom {
-  from {
-    opacity: 0;
-    transform: scale(0.5);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
 }
 
 .trip-details-content {
@@ -270,7 +240,7 @@
   display: none;
 }
 
-.expanded-trip-day-details > .trip-day-description {
+.expanded-trip-day-details .trip-day-description {
   padding: 0 2rem;
   font-size: 1.6rem;
   color: #fff;
@@ -295,13 +265,13 @@
 
 .comments-input {
   position: relative;
-  width: 80%;
+  width: 50%;
 }
 .comments-input-field {
   outline: none;
   font-family: "Rubik", sans-serif;
-  width: 58%;
-  height: 4rem;
+  width: 100%;
+  height: 5rem;
   background: none;
   border-radius: 7px;
   margin: 3rem 0;
@@ -319,8 +289,8 @@
 }
 .submit-icon-box {
   position: absolute;
-  top: 31px;
-  right: 35rem;
+  top: 3.6rem;
+  right: -2rem;
   cursor: pointer;
 }
 
@@ -329,7 +299,7 @@
   grid-column: 1/2;
   display: flex;
   flex-direction: column;
-  gap: 4rem;
+  gap: 5.5rem;
   align-items: stretch;
   padding: 3rem 2rem 3rem 0;
   margin-bottom: 1rem;
@@ -348,10 +318,10 @@
 }
 
 .delete-comment {
-  background-color: #6fe31d;
-  color: #0b1703;
+  background-color: #48527a;
+  color: #f4f6fe;
   position: absolute;
-  bottom: -2.9rem;
+  bottom: -3.2rem;
   right: 0;
   border-radius: 5px;
   padding: 4px;
@@ -363,8 +333,8 @@
 }
 
 .delete-comment:hover {
-  background-color: #48527a;
-  color: #f4f6fe;
+  background-color: #6fe31d;
+  color: #0b1703;
 }
 
 .comment-details {
@@ -392,12 +362,8 @@
 *******************************/
 
 .photos-btn {
-  position: absolute;
-  top: 0.4rem;
-  right: 42rem;
   color: #0b1703;
   background-color: #6fe31d;
-  border: none;
   cursor: pointer;
   transition: all 0.3s;
 }
@@ -408,22 +374,19 @@
 }
 
 .image-gallery {
-  position: relative;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  width: 100%;
   grid-column: 1/-1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 2rem;
   padding: 5rem;
-  margin: 2rem auto;
-  border-radius: 9px;
-  justify-content: center;
-  align-items: center;
+  margin: 1rem auto;
+
   backdrop-filter: blur(1rem);
-  animation: slideInFromLeft 2s ease-out forwards;
+  animation: slideInFromLeft 1.5s ease-out forwards;
 }
 
-@keyframes slideInFromLeft {
+/* @keyframes slideInFromLeft {
   from {
     transform: translateX(-100%);
     opacity: 0;
@@ -432,7 +395,7 @@
     transform: translateX(0);
     opacity: 1;
   }
-}
+} */
 
 .close-btn {
   position: absolute;
@@ -442,16 +405,63 @@
 }
 
 .img-trip {
-  width: 100%;
-  height: 200px;
-  max-height: 200px;
-  object-fit: cover;
-  border-radius: 8px;
-  background-color: #f8f8f8;
+  flex: 1 1 30rem; /* כל תמונה תכבד את המינימום של 200px רוחב, אבל גם תתארך עד כדי כך שתתאים למרווח הזמין */
+  height: 30rem; /* גובה קבוע לתמונות */
+  object-fit: cover; /* מבטיח שהתמונות לא יאבדו את יחס הגודל הנכון שלהן */
+  border-radius: 8px; /* עיגול הפינות */
+  background-color: #f8f8f8; /* רקע לתמונות */
 }
 
 .img-trip:hover {
   opacity: 0.8; /* שינוי שקיפות */
   transform: scale(1.05); /* הגדלה קלה */
   transition: transform 0.3s ease, opacity 0.3s ease; /* אנימציה חלקה */
+}
+
+.pop-up {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 35rem;
+  height: 15rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #6e8efb, #5edb0a);
+  color: #fff;
+  border-radius: 9px;
+  padding: 2rem 2rem 0.5rem 2rem;
+}
+
+.pop-up p {
+  font-size: 1.6rem;
+  color: #ebe9f9;
+  grid-column: 1/-1;
+  text-align: center;
+}
+
+.pop-up-buttons {
+  grid-column: 1/-1;
+  justify-self: center;
+  display: flex;
+  gap: 3rem;
+}
+
+.pop-up-buttons button {
+  border: none;
+  background: linear-gradient(135deg, #a777e3, #6e8efb);
+  color: #0f3d03;
+  font-size: 1.6rem;
+  height: 3.5rem;
+  width: 10rem;
+  border-radius: 9px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.pop-up-buttons button:hover {
+  background: linear-gradient(135deg, #adb9e2, #b793e3);
+  color: #fff;
 }

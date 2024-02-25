@@ -9,8 +9,16 @@
   grid-row: 1;
   padding-left: 2rem;
   text-align: start;
+  margin-top: 2rem;
 }
 
 .heading-secondry-hidden {
   display: none;
+}
+
+@media (max-width: 48em) {
+  .heading-secondry {
+    grid-column: 1/-1;
+    text-align: center;
+  }
 }

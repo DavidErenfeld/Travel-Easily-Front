@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import IconPersonalAriea from "../icons/IconPersonalAriea";
+import IconPersonalAriea from "../icons/PersonalArieaIcon";
 import "./Header.css";
 import Navigation from "./Navigation";
 import tripsService from "../../services/tripsService";
