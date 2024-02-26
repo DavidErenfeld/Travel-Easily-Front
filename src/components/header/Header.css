@@ -8,20 +8,12 @@ header {
 
   align-self: self-start;
   padding: 1rem;
-  /* background-color: #fff; */
   border-radius: 4px;
 }
 
-.personal-area-logo {
-  height: 3.5rem;
-  width: 3.5rem;
-  cursor: pointer;
-  stroke: #6fe31d !important;
-}
-
 .img-logo {
-  max-height: 90px;
-  width: 200px;
+  max-height: 9rem;
+  width: 20rem;
   border-radius: 9px;
 }
 
@@ -117,8 +109,7 @@ header > .user-profile-personal > .profile-name {
 }
 
 .btn-edit {
-  height: 4rem;
-  width: 10rem;
+  padding: 1rem 2rem;
   color: #fff;
   background-color: #6e8efb;
   border: none;
@@ -142,4 +133,20 @@ header > .user-profile-personal > .profile-name {
   height: 2rem;
   width: 2rem;
   fill: #050d2a;
+}
+
+@media (max-width: 27em) {
+  header {
+    margin: 2rem 2rem;
+  }
+  .img-logo {
+    max-height: 7rem;
+    width: 13rem;
+    border-radius: 9px;
+  }
+
+  header > .user-profile-personal > .profile-picture {
+    height: 3.5rem;
+    width: 3.5rem;
+  }
 }

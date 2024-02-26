@@ -238,6 +238,32 @@ TRIP-LOCATION SECTION
   animation: slideInFromRight 1s ease-out;
 }
 
+.successful-message p {
+  color: #2c5b0c;
+  font-size: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.btn-homepage {
+  background-color: #0f3d03;
+  box-shadow: none;
+}
+
+.btn-homepage:hover {
+  background-color: #6fe31d;
+  box-shadow: none;
+}
+
+.successful-message .btn {
+  width: 20rem;
+}
+
 @keyframes fadeIn {
   0% {
     opacity: 0;
@@ -267,21 +293,65 @@ TRIP-LOCATION SECTION
   }
 }
 
-.successful-message p {
-  color: #2c5b0c;
-  font-size: 2rem;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  line-height: 1.6;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
+@media (max-width: 27em) {
+  .buttons-container {
+    gap: 10rem;
+  }
+  .arrow-to-main .left-arrow-icon {
+    left: -3.6rem;
+  }
+  .successful-message {
+    padding: 1rem;
+  }
+
+  .successful-message > h1 {
+    font-size: 3rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .successful-message > h2 {
+    font-size: 2rem;
+    line-height: 1.5;
+  }
+
+  .successful-message p {
+    font-size: 1.6rem;
+  }
 }
 
-.btn-homepage {
-  position: absolute;
-  bottom: -60px;
-  left: 50%;
-  transform: translateX(-50%);
+@media (max-width: 24em) {
+  .type-trip-title {
+    font-size: 2rem;
+  }
+
+  .selection-box::placeholder {
+    font-size: 1.6rem;
+  }
+
+  .country-list {
+    max-height: 8rem;
+    width: 80%;
+    font-size: 1.4rem;
+    padding: 1rem;
+  }
+
+  .country-list div {
+    padding: 1rem;
+  }
+
+  arrow-icon {
+    height: 3rem;
+    width: 3rem;
+  }
+  .left-arrow-icon {
+    left: -5.7rem;
+  }
+  .right-rrow-icon {
+    right: -5.7rem;
+  }
+
+  .successful-message > h1 {
+    font-size: 2.4rem;
+  }
 }

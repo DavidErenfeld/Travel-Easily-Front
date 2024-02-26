@@ -14,13 +14,12 @@ function SuccessfulCompletion({
 }: SuccessfulCompletionProps) {
   return (
     <section className="successful-message">
-      <button onClick={onClickHomePage} className="btn btn-homepage">
-        {buttonText}
-      </button>
-
       <h1>{title}</h1>
       <h2>{secondaryTitle}</h2>
       <p>{text}</p>
+      <button onClick={onClickHomePage} className="btn btn-homepage">
+        {buttonText}
+      </button>
     </section>
   );
 }

@@ -136,7 +136,7 @@ function Register({ onClickClose, goToLogin, onLogin }: RegisterProps) {
       <div className="close-icon">
         <CloseIcon onClick={onClickClose} />
       </div>
-      <h3 className="title">Register</h3>
+      <p className="title">Register</p>
 
       <div className="image-box">
         <div
@@ -145,7 +145,6 @@ function Register({ onClickClose, goToLogin, onLogin }: RegisterProps) {
         >
           <AddImgsIcon />
         </div>
-
         <input
           {...register("image", { required: true })}
           type="file"
@@ -154,20 +153,7 @@ function Register({ onClickClose, goToLogin, onLogin }: RegisterProps) {
           style={{ display: "none" }}
           onChange={handleChange}
         />
-        {imgSrc && (
-          <img
-            src={imgSrc}
-            alt="Preview"
-            style={{
-              border: "2px solid #fff",
-              borderRadius: "50%",
-              width: "100px",
-              height: "100px",
-              objectFit: "cover",
-              objectPosition: "center",
-            }}
-          />
-        )}
+        {imgSrc && <img src={imgSrc} alt="Preview" className="register-img" />}
       </div>
       {/* Input fields for user details */}
       <div className="input-box">

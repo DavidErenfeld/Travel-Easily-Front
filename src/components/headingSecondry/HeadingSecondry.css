@@ -22,3 +22,16 @@
     text-align: center;
   }
 }
+
+@media (max-width: 37em) {
+  .heading-secondry {
+    font-size: 4rem;
+  }
+}
+
+@media (max-width: 23em) {
+  .heading-secondry {
+    padding: 0;
+    font-size: 4rem;
+  }
+}

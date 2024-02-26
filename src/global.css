@@ -17,6 +17,9 @@ body {
   overflow-x: hidden;
   height: 100vh;
 }
+main {
+  max-height: 100vh;
+}
 
 .background {
   position: fixed; /* או absolute, תלוי בצרכים שלך */
@@ -42,11 +45,6 @@ body {
   height: 75vh;
   margin: auto 5rem;
 }
-
-/* .main {
-  position: relative;
-  width: 100%;
-} */
 
 .container {
   position: relative;

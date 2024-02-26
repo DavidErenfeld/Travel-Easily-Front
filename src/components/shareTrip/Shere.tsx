@@ -123,7 +123,7 @@ function Share({
       setFinish(true);
     }
   };
-  const trip2: ITrips = {
+  const newtrip: ITrips = {
     userName: userName,
     imgUrl: imgUrl,
     typeTraveler: selectedTravelerType ?? "",
@@ -138,13 +138,13 @@ function Share({
 
   const send = async () => {
     try {
-      const response = await TripsService.postTrip(trip2);
+      const response = await TripsService.postTrip(newtrip);
       console.log(response); // להדפיס את התגובה או להשתמש בה לפעולה הבאה
+      setSendSuccessMessage(true);
     } catch (error) {
       console.error("Failed to post trip:", error);
       // טיפול בשגיאה, למשל על ידי הצגת הודעה למשתמש
     }
-    setSendSuccessMessage(true);
   };
   const onClickHomePage = () => {
     goToMainPage();

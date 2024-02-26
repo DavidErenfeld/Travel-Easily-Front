@@ -3,12 +3,10 @@ form {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  max-height: 50rem;
   opacity: 1;
   pointer-events: auto;
   visibility: visible;
-  /* transform: translateY(-50%); */
-  /* height: 40rem; */
-  /* width: 35rem; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -16,24 +14,24 @@ form {
   gap: 2rem;
   border-radius: 8px;
   z-index: 15;
-  /* backdrop-filter: blur(1rem); */
   background: linear-gradient(135deg, #6e8efb, #5edb0a);
   padding: 3rem;
 }
 
-form > img {
-  position: absolute;
-  top: 9rem;
-  left: 50%;
-  transform: translateX(-50%);
+.register-img {
+  border: 2px solid #fff;
+  border-radius: 50%;
+  width: 10rem;
+  height: 10rem;
+  object-fit: cover;
+  object-position: center;
 }
 
 .title {
   font-size: 2rem;
   text-align: center;
-  margin-top: 2rem;
+  /* margin-top: 2rem; */
   color: #fff;
-  margin-bottom: 120px;
 }
 
 .user-name,
@@ -94,16 +92,10 @@ form > img {
   color: #fff;
 }
 
-.image-box {
-  position: absolute;
-  top: 8.3rem;
-  left: 35%;
-}
-
 .icon-select-img {
   position: absolute;
-  top: 9rem;
-  right: -10rem;
+  top: 11.8rem;
+  right: 3.3rem;
 }
 
 .icon-select-img > .icons-descripton-trip {
@@ -116,3 +108,22 @@ form > img {
   right: 2rem;
   cursor: pointer;
 }
+
+@media (max-width: 75em) {
+  form {
+    max-height: 45rem;
+    gap: 1rem;
+  }
+
+  .register-img {
+    width: 8rem;
+    height: 8rem;
+  }
+}
+
+/* @media (max-width: 56em) {
+  .icon-select-img {
+    top: 12rem;
+    right: -6rem;
+  }
+} */

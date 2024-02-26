@@ -94,7 +94,7 @@ function MyTrips({
   };
 
   return (
-    <>
+    <main>
       <Header
         userName={userName}
         imgUrl={imgUrl}
@@ -119,7 +119,7 @@ function MyTrips({
         <section className="my-trip-section">
           {trips.map((trip) => (
             <div className="trip-list-item" key={trip._id}>
-              <span className="buttons-box">
+              <div className="buttons-box">
                 <button
                   onClick={() => goToUpdateTrip(trip._id || "")}
                   className="btn-update"
@@ -132,22 +132,21 @@ function MyTrips({
                 >
                   delete
                 </button>
-              </span>
-              <div className="my-trip-box">
-                <TripBox
-                  key={trip._id}
-                  trip={trip}
-                  updateTripCommentsCount={updateTripCommentsCount}
-                  isUserConnected={isUserConnected}
-                  onCommentsSelect={() => console.log("onCommentsSelect")}
-                  onSelect={() => console.log("onSelect")}
-                />
               </div>
+
+              <TripBox
+                key={trip._id}
+                trip={trip}
+                updateTripCommentsCount={updateTripCommentsCount}
+                isUserConnected={isUserConnected}
+                onCommentsSelect={() => console.log("onCommentsSelect")}
+                onSelect={() => console.log("onSelect")}
+              />
             </div>
           ))}
         </section>
       )}
-    </>
+    </main>
   );
 }
 

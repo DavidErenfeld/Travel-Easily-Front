@@ -1,9 +1,3 @@
-/**************************/
-/* BELOW 1200px (Smaller desktops) */
-/**************************/
-
-/* 1250 / 16 = 84 */
-
 @media (max-width: 75em) {
   .buttons-container {
     gap: 26rem;
@@ -36,20 +30,27 @@
   html {
     font-size: 45%;
   }
-  .btn {
-    width: 18rem;
-  }
 }
+
 @media (max-width: 51em) {
+  .arrow-to-main .left-arrow-icon {
+    left: -5.5rem;
+  }
   .right-rrow-icon {
     right: -9.5rem;
   }
   .heading-secondry {
     font-size: 5rem;
   }
+  .search-btns-section {
+    display: none;
+  }
 }
 
 @media (max-width: 48em) {
+  .arrow-to-main .left-arrow-icon {
+    left: -4.5rem;
+  }
   .container {
     grid-column: 2/3;
     width: 100%;
@@ -59,5 +60,38 @@
   }
 }
 
-@media (max-width: 45em) {
+@media (max-width: 37em) {
+  .arrow-to-main .left-arrow-icon {
+    left: -3.2rem;
+  }
+  .container {
+    grid-column: 1/-1;
+    width: 90%;
+  }
+  .right-rrow-icon {
+    right: -6rem;
+  }
+  .left-arrow-icon {
+    left: -6rem;
+  }
+}
+
+@media (max-width: 27em) {
+  .buttons-container {
+    gap: 10rem;
+  }
+  .arrow-to-main .left-arrow-icon {
+    left: -2.8rem;
+  }
+}
+
+@media (max-width: 24em) {
+  .btn {
+    font-size: 1.4rem;
+    padding: 1.3rem 0.9rem;
+    border-radius: 1rem;
+  }
+  .arrow-to-main .left-arrow-icon {
+    left: -2rem;
+  }
 }

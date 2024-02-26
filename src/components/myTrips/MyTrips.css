@@ -9,10 +9,14 @@
   grid-column: 1/2;
 }
 
+.my-trip-section .trip-list-item .trip-card {
+  width: 84%;
+}
+
 .buttons-box {
   position: absolute;
-  top: 10px;
-  right: -84px;
+  top: 0.9rem;
+  right: -13rem;
   display: flex;
   flex-direction: column;
   gap: 9rem;
@@ -21,32 +25,26 @@
 .btn-update {
   height: 5rem;
   width: 15rem;
-  color: #6fe31d;
+  color: #0b1703;
   backdrop-filter: blur(1rem);
   background: none;
-  /* background-color: #6fe31d; */
+  background-color: #6fe31d;
   border-radius: 7px;
   font-size: 1.8rem;
   border: none;
-  box-shadow: 0.1px 2px 5px 0.01px rgba(185, 186, 187, 0.76);
   cursor: pointer;
   transition: all 0.3s;
 }
 
 .btn-delete:hover,
 .btn-update:hover {
+  background-color: #48527a;
   color: #fff;
-  box-shadow: 0.1px 2px 5px 0.01px rgba(14, 189, 11, 0.76);
 }
 
 /************************
 UPDATE-TRIP SECTION
 ***********************/
-/* .update-trip-section {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  margin: 9rem 7rem;
-} */
 
 .update-trip-details {
   position: relative;
@@ -132,4 +130,110 @@ UPDATE-TRIP SECTION
 /******************************************/
 .my-trip-box .trip-interactions {
   display: none;
+}
+
+@media (max-width: 44em) {
+  .update-trip-details {
+    margin: 8rem 15rem;
+  }
+  .save-changes-btn {
+    left: -10rem;
+  }
+  .update-trip-details .right-arrow-icon {
+    right: -0.1rem;
+  }
+}
+
+@media (max-width: 40em) {
+  .my-trip-section {
+    grid-template-columns: 1fr;
+    margin-top: 8rem;
+  }
+
+  .my-trip-section .trip-list-item {
+    margin-bottom: 8rem;
+  }
+
+  .my-trip-section .trip-list-item .trip-card {
+    width: auto;
+  }
+
+  .my-trip-section .trip-list-item .trip-card .trip-card-details {
+    width: 100%;
+  }
+
+  .buttons-box {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    top: 23rem;
+    left: 50%;
+    transform: translateX(-50%);
+    gap: 0;
+    justify-content: space-around;
+  }
+
+  .btn-delete,
+  .btn-update {
+    height: 4rem;
+    width: 13rem;
+  }
+}
+
+@media (max-width: 34em) {
+  .update-trip-details {
+    margin: 8rem 10rem;
+  }
+  .save-changes-btn {
+    left: -8rem;
+  }
+  .save-changes-btn {
+    padding: 1rem 1rem;
+  }
+  .options {
+    height: 3.5rem;
+    width: 12rem;
+    font-size: 1.6rem;
+  }
+}
+@media (max-width: 26em) {
+  .update-trip-details {
+    margin: 8rem 5rem;
+  }
+
+  .update-trip-details .right-arrow-icon .arrow-icon {
+    height: 2.5rem;
+    width: 2.5rem;
+    box-shadow: 0px 0.1px 1px 2px #6fe31d;
+  }
+
+  .update-trip-details .right-arrow-icon {
+    right: 2.2rem;
+  }
+  .my-trip-section .trip-list-item .trip-card .trip-interactions {
+    bottom: -9.7px;
+    right: 1.5rem;
+  }
+  .btn-delete,
+  .btn-update {
+    height: 3rem;
+    width: 9rem;
+  }
+
+  .save-changes-btn {
+    left: -4rem;
+    bottom: -13rem;
+  }
+}
+
+@media (max-width: 24em) {
+  .my-trip-section .trip-list-item .trip-card {
+    position: relative;
+    width: 80%;
+    margin: 0 3.6rem 8rem 3.6rem;
+  }
+
+  .update-trip-details .right-arrow-icon {
+    right: 0.9rem;
+  }
 }
