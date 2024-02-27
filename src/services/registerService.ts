@@ -21,7 +21,6 @@ export const registerUser = (user: IUser) => {
       .post("/auth/register", user)
       .then((response) => {
         console.log(response);
-        // localStorage.setItem("loggedUserId", response.data._id);
         resolve(response.data);
       })
       .catch((error) => {

@@ -10,6 +10,7 @@
   padding-left: 2rem;
   text-align: start;
   margin-top: 2rem;
+  animation: fadeIn 1s ease-out;
 }
 
 .heading-secondry-hidden {

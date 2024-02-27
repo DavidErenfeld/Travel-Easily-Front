@@ -20,18 +20,16 @@ function PersonalArea({ imgUrl, goToMainPage }: PersonalAreaProps) {
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       setButtonClicede(true);
-      setImgFile(e.target.files[0]); // Store the File object
-      setImgSrc(URL.createObjectURL(e.target.files[0])); // Update display URL
-      console.log(`isButtonClicede: ${isButtonClicede}`);
-      // let imgUrl :string
+      setImgFile(e.target.files[0]);
+      setImgSrc(URL.createObjectURL(e.target.files[0]));
     }
   };
+
   const onClickSave = async () => {
     if (imgFile) {
       imgUrl = (await handleUploadImage(imgFile)) || "";
     }
     try {
-      console.log(loggedUserId);
       const response = await updateUser(loggedUserId || "", { imgUrl: imgUrl });
       console.log(response);
       setButtonClicede(false);
@@ -44,17 +42,15 @@ function PersonalArea({ imgUrl, goToMainPage }: PersonalAreaProps) {
     try {
       const uploadedUrl = await uploadPhoto(imgFile);
       console.log(`Image uploaded successfully: ${uploadedUrl}`);
-
-      return uploadedUrl; // החזר את ה-URL של התמונה המועלה
+      return uploadedUrl;
     } catch (error) {
       console.error("Upload failed:", error);
       alert("Failed to upload image.");
-      return null; // במקרה של כשלון, החזר null
+      return null;
     }
   };
 
   useEffect(() => {
-    // Cleanup URL.createObjectURL to avoid memory leaks
     return () => {
       if (imgSrc) URL.revokeObjectURL(imgSrc);
     };
@@ -73,11 +69,7 @@ function PersonalArea({ imgUrl, goToMainPage }: PersonalAreaProps) {
         <div className="close-icon">
           <CloseIcon onClick={goToMainPage} />
         </div>
-        {/* <div onClick={() => imgRef.current?.click()} className="edit-icon-box">
-          <EditIcon />
-        </div> */}
         <img className="profile-img" src={imgSrc} alt="img profile" />
-
         <p className="profile-name">{userName}</p>
         <div className="edit-box">
           <button onClick={() => imgRef.current?.click()} className="btn-edit">

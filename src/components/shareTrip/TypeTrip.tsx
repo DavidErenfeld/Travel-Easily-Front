@@ -1,6 +1,6 @@
 import Button from "../button/Button";
-import LeftArrow from "../icons/LeftArrow";
-import RightArrow from "../icons/RightArrow";
+import LeftArrow from "../icons/LeftArrowIcon";
+import RightArrow from "../icons/RightArrowIcon";
 import "./Share.css";
 
 export interface TypeTripProps {

@@ -1,10 +1,10 @@
 import "./Search.css";
 import { useState } from "react";
 import CommentsIcon from "../icons/CommentsIcon";
-import Like from "../icons/Like";
+import Like from "../icons/LikeIcon";
 import TripsService, { ITrips } from "../../services/tripsService";
 
-interface TripBoxProps {
+interface TripListProps {
   trip: ITrips;
   onSelect: () => void;
   onCommentsSelect: (trip: ITrips) => void;
@@ -12,12 +12,12 @@ interface TripBoxProps {
   updateTripCommentsCount: (tripId: string, newNumOfComments: number) => void;
 }
 
-function TripBox({
+function TripList({
   trip,
   onSelect,
   onCommentsSelect,
   isUserConnected,
-}: TripBoxProps) {
+}: TripListProps) {
   const [numOfLikes, setNumOfLikes] = useState(trip.numOfLikes);
 
   const onCommentsClick = () => {
@@ -34,7 +34,6 @@ function TripBox({
         console.log(numOfLikes);
       } catch (error) {
         console.error("Failed to add like:", error);
-        // טיפול בשגיאה, למשל על ידי הצגת הודעה למשתמש
       }
     }
   };
@@ -74,4 +73,4 @@ function TripBox({
   );
 }
 
-export default TripBox;
+export default TripList;

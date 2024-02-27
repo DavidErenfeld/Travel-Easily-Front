@@ -21,6 +21,7 @@
   flex-direction: column;
   gap: 9rem;
 }
+
 .btn-delete,
 .btn-update {
   height: 5rem;
@@ -42,10 +43,6 @@
   color: #fff;
 }
 
-/************************
-UPDATE-TRIP SECTION
-***********************/
-
 .update-trip-details {
   position: relative;
   margin: 9rem 30rem;
@@ -57,13 +54,11 @@ UPDATE-TRIP SECTION
   width: 100%;
   font-size: 1.6rem;
   padding: 1.6rem;
-  /* margin-right: 10px; */
   height: 20rem;
   border-radius: 7px;
   background: none;
   color: #fff;
   backdrop-filter: blur(1rem);
-  /* font-family: "Rubik", sans-serif; */
 }
 
 .update-buttons {
@@ -87,6 +82,7 @@ UPDATE-TRIP SECTION
   color: #fff;
   transition: all 0.3s;
 }
+
 .options:hover,
 .options:active {
   background-color: #6fe31d;
@@ -125,11 +121,6 @@ UPDATE-TRIP SECTION
   left: 1px;
   color: #6fe31d;
   font-size: 3rem;
-}
-
-/******************************************/
-.my-trip-box .trip-interactions {
-  display: none;
 }
 
 @media (max-width: 44em) {
@@ -180,6 +171,46 @@ UPDATE-TRIP SECTION
   }
 }
 
+.share-trip-cta {
+  grid-column: 1/-1;
+  margin: 7rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #6e8efb, #a777e3);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 1s ease-out;
+}
+
+/* .share-trip-cta:hover {
+  transform: translateY(-5px);
+} */
+
+.cta-text {
+  color: #0f3d03;
+  font-size: 18px;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.cta-button {
+  padding: 10px 20px;
+  background-color: #0f3d03;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+  background-color: #6fe31d;
+}
+
 @media (max-width: 34em) {
   .update-trip-details {
     margin: 8rem 10rem;
@@ -195,7 +226,22 @@ UPDATE-TRIP SECTION
     width: 12rem;
     font-size: 1.6rem;
   }
+
+  .share-trip-cta {
+    grid-column: 1/-1;
+    margin: auto 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 1s ease-out;
+  }
 }
+
 @media (max-width: 26em) {
   .update-trip-details {
     margin: 8rem 5rem;

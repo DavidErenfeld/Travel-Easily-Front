@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import IconPersonalAriea from "../icons/PersonalArieaIcon";
 import "./Header.css";
 import Navigation from "./Navigation";
-import tripsService from "../../services/tripsService";
 
 export interface HeaderProps {
   userName: string;
@@ -13,8 +12,8 @@ export interface HeaderProps {
   goToLogin: () => void;
   goToRegister: () => void;
   goToShare: () => void;
-  endaleLogOut: () => void;
   goToMyTrips: () => void;
+  endaleLogOut: () => void;
 }
 
 function Header({
@@ -30,11 +29,10 @@ function Header({
   userName,
 }: HeaderProps) {
   const [isNavigationClicked, setNavigationClicked] = useState(false);
-  const personalAreaRef = useRef<HTMLDivElement>(null); // מציין שה-ref הוא של אלמנט div
+  const personalAreaRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      // הוספת סוג ל-event
       if (
         personalAreaRef.current &&
         !personalAreaRef.current.contains(event.target as Node)
@@ -43,10 +41,8 @@ function Header({
       }
     };
 
-    // הוספת event listener
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      // הסרת event listener כאשר הקומפוננטה יוסרת מה-DOM
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isNavigationClicked]);

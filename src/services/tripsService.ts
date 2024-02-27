@@ -40,6 +40,9 @@ export interface IUpdateTrips {
   tripDescription?: string[];
 }
 
+const accessToken = localStorage.getItem("token");
+const refreshToken = localStorage.getItem("refreshToken");
+
 const getAllTrips = () => {
   const abortController = new AbortController();
   const req = apiClient.get<ITrips[]>("trips", {
@@ -49,8 +52,6 @@ const getAllTrips = () => {
 };
 
 const getByOwnerId = (userId: string) => {
-  const accessToken = localStorage.getItem("token"); // או לקבל את הטוקן כפרמטר אם אתה מעדיף
-
   return new Promise((resolve, reject) => {
     console.log("Get By Id...");
     apiClient
@@ -71,8 +72,6 @@ const getByOwnerId = (userId: string) => {
 };
 
 const getByTripId = (tripId: string) => {
-  const accessToken = localStorage.getItem("token"); // או לקבל את הטוקן כפרמטר אם אתה מעדיף
-
   return new Promise<ITrips>((resolve, reject) => {
     console.log("Get By Id...");
     apiClient
@@ -93,8 +92,6 @@ const getByTripId = (tripId: string) => {
 };
 
 const postTrip = (trip: ITrips) => {
-  const accessToken = localStorage.getItem("token"); // או לקבל את הטוקן כפרמטר אם אתה מעדיף
-
   return new Promise<ITrips>((resolve, reject) => {
     console.log("Post...");
     console.log(trip);
@@ -117,8 +114,6 @@ const postTrip = (trip: ITrips) => {
 };
 
 const updateTrip = (trip: IUpdateTrips) => {
-  const accessToken = localStorage.getItem("token"); // או לקבל את הטוקן כפרמטר אם אתה מעדיף
-
   return new Promise<ITrips>((resolve, reject) => {
     console.log("Update Trip...");
     apiClient
@@ -139,8 +134,6 @@ const updateTrip = (trip: IUpdateTrips) => {
 };
 
 const deleteTrip = (tripId: string) => {
-  const accessToken = localStorage.getItem("token"); // או לקבל את הטוקן כפרמטר אם אתה מעדיף
-
   return new Promise<void>((resolve, reject) => {
     console.log("Delete Trip...");
     apiClient
@@ -161,8 +154,6 @@ const deleteTrip = (tripId: string) => {
 };
 
 const logout = () => {
-  const refreshToken = localStorage.getItem("refreshToken"); // או לקבל את הטוקן כפרמטר אם אתה מעדיף
-
   return new Promise<ITrips>((resolve, reject) => {
     console.log("log out...");
     apiClient
@@ -189,8 +180,6 @@ const logout = () => {
 };
 
 const addComment = (tripId: string, comment: IComment) => {
-  const accessToken = localStorage.getItem("token"); // או לקבל את הטוקן כפרמטר אם אתה מעדיף
-
   return new Promise<IComment>((resolve, reject) => {
     console.log("Add Comment...");
     apiClient
@@ -215,8 +204,6 @@ const addComment = (tripId: string, comment: IComment) => {
 };
 
 const deleteComment = (tripId: string, commentId: string) => {
-  const accessToken = localStorage.getItem("token"); // או לקבל את הטוקן כפרמטר אם אתה מעדיף
-
   return new Promise<void>((resolve, reject) => {
     console.log("Delete Comment...");
     apiClient
@@ -237,8 +224,6 @@ const deleteComment = (tripId: string, commentId: string) => {
 };
 
 const addLike = (trip: string) => {
-  const accessToken = localStorage.getItem("token"); // או לקבל את הטוקן כפרמטר אם אתה מעדיף
-
   return new Promise<ITrips>((resolve, reject) => {
     console.log("addLick...");
     apiClient

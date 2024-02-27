@@ -1,8 +1,8 @@
 import { useState } from "react";
 import "./Share.css";
 import Country from "./Country";
-import RightArrow from "../icons/RightArrow";
-import LeftArrow from "../icons/LeftArrow";
+import RightArrow from "../icons/RightArrowIcon";
+import LeftArrow from "../icons/LeftArrowIcon";
 
 export interface NumOfDaysProps {
   onClickSave: (days: number) => void;
@@ -17,7 +17,7 @@ function NumOfDays({
   const [days, setDays] = useState(0);
 
   const handleSaveClick = () => {
-    onClickSave(days); // שליחת מספר הימים לפונקציה ב-Share
+    onClickSave(days);
   };
   return (
     <section className="container">

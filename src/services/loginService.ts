@@ -1,12 +1,6 @@
 import { apiClient } from "./apiClient";
 import { IUser } from "./registerService";
 
-// export interface IUserLogin {
-//   email: string;
-//   password: string;
-
-// }
-
 export const loginUser = (user: IUser) => {
   return new Promise<IUser>((resolve, reject) => {
     console.log("Login...");

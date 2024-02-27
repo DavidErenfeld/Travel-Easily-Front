@@ -8,6 +8,7 @@ import Description from "./Description";
 import SuccessfulCompletion from "./SuccessfulCompletion";
 import TripsService, { ITrips } from "../../services/tripsService";
 import "../../queries.css";
+
 export interface ShareProps {
   imgUrl: string;
   userName: string;
@@ -35,6 +36,10 @@ function Share({
   goToRegister,
   endaleLogOut,
 }: ShareProps) {
+  const [isNumOfDaysSelected, setIsNumOfDaysSelected] = useState(false);
+  const [selectedCountry, setSelectedCountry] = useState(false);
+  const [sendSuccessMessage, setSendSuccessMessage] = useState(false);
+  const [finish, setFinish] = useState(false);
   const [isTravelerTypeSelected, setIsTravelerTypeSelected] = useState(false);
   const [selectedTravelerType, setSelectedTravelerType] = useState<
     string | null
@@ -62,16 +67,7 @@ function Share({
     console.log(description);
   };
 
-  useEffect(() => {
-    console.log(description); // ידפיס את הערכים המעודכנים של description
-  }, [description]);
-
-  const [isNumOfDaysSelected, setIsNumOfDaysSelected] = useState(false);
-
-  const [selectedCountry, setSelectedCountry] = useState(false);
-
-  const [sendSuccessMessage, setSendSuccessMessage] = useState(false);
-  const [finish, setFinish] = useState(false);
+  useEffect(() => {}, [description]);
 
   const handleCountrySelect = (country: string) => {
     console.log("Selected Country:", country);
@@ -79,7 +75,6 @@ function Share({
       setSelectedCountry(true);
       setCountry(country);
     }
-    // כאן תוכל לבצע פעולות נוספות עם המדינה הנבחרת
   };
 
   const onClickLeftArrow1 = () => {
@@ -96,7 +91,7 @@ function Share({
   };
 
   const onClickRightArrow1 = () => {
-    goToMainPage(); // שימוש בפונקציה לחזרה ל-MainPage
+    goToMainPage();
   };
 
   const onClickRightArrow2 = () => {

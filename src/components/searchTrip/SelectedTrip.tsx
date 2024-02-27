@@ -13,29 +13,26 @@ export interface IComment {
   date: Date;
 }
 
-export interface TripProps {
+export interface selectedTripProps {
   trip: ITrips;
   onSelect: () => void;
   focusOnComments: boolean;
   updateTripCommentsCount: () => void;
-  // updateCommentsForTrip: (tripId: string, newComments: IComment[]) => void;
-  // isPhotosOpen: () => void;
   closePhotos: () => void;
   showPhotos: () => void;
   photos: boolean;
 }
 
-function Trip({
+function SelectedTrip({
   closePhotos,
   photos,
   showPhotos,
   trip,
   focusOnComments,
   updateTripCommentsCount,
-}: TripProps) {
+}: selectedTripProps) {
   const userName = localStorage.getItem("userName") || "";
   const loggedUserId = localStorage.getItem("loggedUserId") || "";
-  // const [comments, setComments] = useState<IComment[]>(trip.comments || []);
   const [comment, setComment] = useState("");
 
   const [flag, setFlag] = useState(false);
@@ -48,14 +45,6 @@ function Trip({
 
   const submitComment = async () => {
     if (comment && trip._id && userName) {
-      console.log(
-        "Submitting comment:",
-        comment,
-        "for trip ID:",
-        trip._id,
-        "by user:",
-        userName
-      );
       try {
         await tripsService.addComment(trip._id, {
           owner: userName,
@@ -116,11 +105,6 @@ function Trip({
     const date = new Date(dateString);
     return date.toLocaleString("he-IL");
   };
-
-  // const showPhotos = () => {
-  //   setPhotos(true);
-  //   isPhotosOpen();
-  // };
 
   useEffect(() => {
     if (focusOnComments && commentsInputRef.current) {
@@ -207,4 +191,4 @@ function Trip({
   );
 }
 
-export default Trip;
+export default SelectedTrip;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import z from "zod";
@@ -22,7 +22,6 @@ interface LoginProps {
 
 function Login({ onClickRegister, onClickClose, onLogin }: LoginProps) {
   const [loginError, setLoginError] = useState<string | null>(null);
-  // const [imgUrl, setEmgUrl] = useState("");
 
   const userName = localStorage.getItem("userName") || "";
   const imgUrl = localStorage.getItem("umgUrl") || "";
@@ -34,7 +33,7 @@ function Login({ onClickRegister, onClickClose, onLogin }: LoginProps) {
 
   const onSubmit = async (data: LoginFormData) => {
     try {
-      const response = await loginUser({
+      await loginUser({
         email: data.email,
         password: data.password,
         userName: userName,
@@ -44,12 +43,9 @@ function Login({ onClickRegister, onClickClose, onLogin }: LoginProps) {
       onLogin(true);
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
-        // גישה לתוכן השגיאה מתוך ה-response
         const errorMessage = error.response.data;
-        // הצגת הודעת השגיאה למשתמש
         setLoginError(errorMessage + " Please try again");
       } else {
-        // הצגת הודעת שגיאה כללית אם השגיאה אינה מסוג AxiosError
         setLoginError("An unexpected error occurred. Please try again.");
       }
     }

@@ -9,18 +9,8 @@ import { googleSignin, registerUser } from "../../services/registerService";
 import axios from "axios";
 import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
 
-// Interface for props of the Register component
-interface RegisterProps {
-  onClickClose: () => void;
-  goToLogin: () => void;
-  onLogin: (isConnect: boolean) => void;
-  // isUserConect: boolean
-}
+const defaultImage = "/imgs/new_worlld.jpg";
 
-// Default image source
-const defaultImage = "/imgs/new_worlld.jpg"; // Can be a local path like '/images/default.jpg'
-
-// Schema for form validation using Zod
 const schema = z.object({
   userName: z
     .string()
@@ -33,16 +23,19 @@ const schema = z.object({
     .regex(/[a-z]/, "Password must include a lowercase letter"),
 });
 
-// FormData type, combining schema inference and image file
 type FormData = z.infer<typeof schema> & {
   image: FileList;
-  imgUrl?: string; // עכשיו הטיפוס כולל גם את המאפיין imgUrl כאופציונלי
+  imgUrl?: string;
 };
 
+interface RegisterProps {
+  onClickClose: () => void;
+  goToLogin: () => void;
+  onLogin: (isConnect: boolean) => void;
+}
+
 function Register({ onClickClose, goToLogin, onLogin }: RegisterProps) {
-  // State for managing the File object
   const [imgFile, setImgFile] = useState<File | null>(null);
-  // State for managing the display URL of the image
   const [imgSrc, setImgSrc] = useState(defaultImage);
   const [registerError, setRegisterError] = useState<string | null>(null);
 
@@ -50,22 +43,18 @@ function Register({ onClickClose, goToLogin, onLogin }: RegisterProps) {
     register,
     handleSubmit,
     formState: { errors },
-    // watch,
   } = useForm<FormData>({ resolver: zodResolver(schema) });
 
   const imageRef = useRef<HTMLInputElement>(null);
-  // const [image] = watch(["image"]);
 
-  // Handle change in image input
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
-      setImgFile(e.target.files[0]); // Store the File object
-      setImgSrc(URL.createObjectURL(e.target.files[0])); // Update display URL
+      setImgFile(e.target.files[0]);
+      setImgSrc(URL.createObjectURL(e.target.files[0]));
     }
   };
 
   useEffect(() => {
-    // Cleanup URL.createObjectURL to avoid memory leaks
     return () => {
       if (imgSrc) URL.revokeObjectURL(imgSrc);
     };
@@ -75,11 +64,11 @@ function Register({ onClickClose, goToLogin, onLogin }: RegisterProps) {
     try {
       const uploadedUrl = await uploadPhoto(imgFile);
       console.log(`Image uploaded successfully: ${uploadedUrl}`);
-      return uploadedUrl; // החזר את ה-URL של התמונה המועלה
+      return uploadedUrl;
     } catch (error) {
       console.error("Upload failed:", error);
       alert("Failed to upload image.");
-      return null; // במקרה של כשלון, החזר null
+      return null;
     }
   };
 
@@ -97,17 +86,12 @@ function Register({ onClickClose, goToLogin, onLogin }: RegisterProps) {
         imgUrl: imgUrl,
       });
       console.log("user is registered: ", registerResult);
-
       goToLogin();
     } catch (error) {
-      // בדיקה אם השגיאה היא מסוג AxiosError וקיימת בה תגובה מהשרת
       if (axios.isAxiosError(error) && error.response) {
-        // גישה לתוכן השגיאה מתוך ה-response
         const errorMessage = error.response.data;
-        // הצגת הודעת השגיאה למשתמש
         setRegisterError(errorMessage + " Please try again");
       } else {
-        // הצגת הודעת שגיאה כללית אם השגיאה אינה מסוג AxiosError
         setRegisterError("An unexpected error occurred. Please try again.");
       }
     }
@@ -118,7 +102,7 @@ function Register({ onClickClose, goToLogin, onLogin }: RegisterProps) {
   ) => {
     console.log(credentialResponse);
     try {
-      const res = await googleSignin(credentialResponse);
+      await googleSignin(credentialResponse);
       console.log("user is logt");
       onLogin(true);
     } catch (e) {
@@ -127,7 +111,7 @@ function Register({ onClickClose, goToLogin, onLogin }: RegisterProps) {
   };
 
   const onGoogleLoginFailure = () => {
-    console.log("Googel login failde");
+    console.log("Google login failed");
   };
 
   return (
@@ -141,7 +125,7 @@ function Register({ onClickClose, goToLogin, onLogin }: RegisterProps) {
       <div className="image-box">
         <div
           className="icon-select-img"
-          onClick={() => imageRef.current?.click()} // Trigger file input on icon click
+          onClick={() => imageRef.current?.click()}
         >
           <AddImgsIcon />
         </div>
@@ -155,7 +139,6 @@ function Register({ onClickClose, goToLogin, onLogin }: RegisterProps) {
         />
         {imgSrc && <img src={imgSrc} alt="Preview" className="register-img" />}
       </div>
-      {/* Input fields for user details */}
       <div className="input-box">
         <input
           {...register("userName")}

@@ -4,7 +4,7 @@ import tripsService, {
   IUpdateTrips,
 } from "../../services/tripsService";
 import Header from "../header/Header";
-import RightArrow from "../icons/RightArrow";
+import RightArrow from "../icons/RightArrowIcon";
 import SuccessfulCompletion from "../shareTrip/SuccessfulCompletion";
 
 export interface UpdateTripProps {
@@ -36,10 +36,10 @@ function UpdateTrip({
   endaleLogOut,
 }: UpdateTripProps) {
   const [currentDay, setCurrentDay] = useState(0);
-  // const [tripDetails, setTripDetails] = useState<ITrips | null>(null);
   const [descriptions, setDescriptions] = useState<string[]>([]);
   const [tripIsUpdated, setTripIsUpdated] = useState(false);
   const [tripDetails, setTripDetails] = useState<ITrips>();
+
   const onClickRightArrow = () => {
     goToMyTrips();
   };
@@ -107,9 +107,9 @@ function UpdateTrip({
             value={descriptions[currentDay] || ""}
             onChange={(e) => handleDescriptionChange(e, currentDay)}
             style={{
-              fontSize: "16px", // גודל פונט
-              lineHeight: "1.6", // גובה שורה
-              fontFamily: "Arial, sans-serif", // גופן
+              fontSize: "16px",
+              lineHeight: "1.6",
+              fontFamily: "Arial, sans-serif",
             }}
           ></textarea>
           <div className="update-buttons">

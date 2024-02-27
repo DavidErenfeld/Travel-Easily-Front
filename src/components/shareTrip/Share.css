@@ -61,7 +61,7 @@ TRIP-LOCATION SECTION
   background: none;
   color: #fff;
   backdrop-filter: blur(0.5rem);
-  animation: slideInFromLeft 1.2s ease-out forwards;
+  animation: fadeIn 1s ease-out;
   width: 100%;
 }
 
@@ -84,8 +84,8 @@ TRIP-LOCATION SECTION
   border: none;
   color: #fff;
 
-  scrollbar-width: none; /* עבור דפדפני Firefox */
-  -ms-overflow-style: none; /* עבור Internet Explorer 10+ */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .country-list::-webkit-scrollbar {
@@ -105,8 +105,8 @@ TRIP-LOCATION SECTION
 
 .selection-box::placeholder {
   font-size: 2rem;
-  color: #fff; /* שינוי צבע ה-placeholder */
-  opacity: 1; /* אופציונלי - קובע את שקיפות הטקסט */
+  color: #fff;
+  opacity: 1;
 }
 
 .selected {
@@ -129,22 +129,18 @@ TRIP-LOCATION SECTION
   background: none;
   color: #fff;
   backdrop-filter: blur(1rem);
-  animation: slideInFromLeft 1.2s ease-out forwards;
-  /* font-family: "Rubik", sans-serif; */
-}
-
-.description-box::placeholder {
-  font-size: 1.6rem; /* שינוי גודל הגופן */
-  color: #fff; /* שינוי צבע הגופן */
-  text-align: start; /* הטקסט יתחיל מהצד השמאלי */
-  vertical-align: top; /* הטקסט יתחיל מהחלק העליון */
-  opacity: 1; /* אופציונלי - קובע את שקיפות הטקסט */
+  animation: fadeIn 1s ease-out;
   font-family: "Rubik", sans-serif;
 }
 
-/* .save-description {
-  border-radius: 9px !important;
-} */
+.description-box::placeholder {
+  font-size: 1.6rem;
+  color: #fff;
+  text-align: start;
+  vertical-align: top;
+  opacity: 1;
+  font-family: "Rubik", sans-serif;
+}
 
 .change-day-description-block {
   position: absolute;
@@ -164,7 +160,7 @@ TRIP-LOCATION SECTION
   padding: 5px 15px;
   background-color: #6fe31d;
   transition: all 0.3s;
-  animation: slideInFromLeft 1.2s ease-out forwards;
+  animation: fadeIn 1s ease-out;
 }
 
 .change-day-button:hover {

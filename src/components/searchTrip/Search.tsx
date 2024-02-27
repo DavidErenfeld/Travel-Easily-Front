@@ -1,15 +1,14 @@
 // Importing necessary libraries and components
 import { useEffect, useState } from "react";
 import Header from "../header/Header";
-import TripBox from "./TripList";
-import LeftArrow from "../icons/LeftArrow";
-import Trip, { IComment } from "./SelectedTrip";
+import TripList from "./TripList";
+import LeftArrow from "../icons/LeftArrowIcon";
+import SelectedTrip from "./SelectedTrip";
 import SearchButton from "./SearchButton";
 import tripsService, {
   CanceledError,
   ITrips,
 } from "../../services/tripsService";
-import { number } from "zod";
 
 // Interface for Search component props
 interface SearchProps {
@@ -116,7 +115,7 @@ function Search({
     return trips.map((trip) => (
       <article className="trip-list-item" key={trip._id}>
         {/* Changed div to article for semantic meaning */}
-        <TripBox
+        <TripList
           isUserConnected={isUserConnected}
           onCommentsSelect={() => selectTripForComment(trip)}
           trip={trip}
@@ -179,7 +178,7 @@ function Search({
         isUserConnected={isUserConnected}
       />
       {isTripSelected && selectedTrip && isUserConnected ? (
-        <Trip
+        <SelectedTrip
           photos={photos}
           closePhotos={closePhotos}
           showPhotos={showPhotos}

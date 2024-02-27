@@ -30,7 +30,6 @@ form {
 .title {
   font-size: 2rem;
   text-align: center;
-  /* margin-top: 2rem; */
   color: #fff;
 }
 
@@ -55,7 +54,6 @@ form {
   font-size: 1.6rem;
   padding: 8px 8px;
   width: 20rem;
-  /* margin-bottom: 2rem; */
   border-radius: 9px;
   background: linear-gradient(135deg, #6e8efb, #a777e3);
   color: #fff;
@@ -81,6 +79,7 @@ form {
   background-color: #64cc1a;
   color: #fff;
 }
+
 .text-login-register {
   position: absolute;
   top: 50%;
@@ -88,7 +87,6 @@ form {
   transform: translate(-50%, -50%);
   font-size: 1.6rem;
   font-weight: 500;
-
   color: #fff;
 }
 
@@ -120,10 +118,3 @@ form {
     height: 8rem;
   }
 }
-
-/* @media (max-width: 56em) {
-  .icon-select-img {
-    top: 12rem;
-    right: -6rem;
-  }
-} */

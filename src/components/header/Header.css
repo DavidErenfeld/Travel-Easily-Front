@@ -5,7 +5,6 @@ header {
   grid-column: 1/ -1;
   grid-row: 1;
   margin: 2rem 4rem;
-
   align-self: self-start;
   padding: 1rem;
   border-radius: 4px;
@@ -31,10 +30,6 @@ header > .user-profile-personal > .profile-name {
   font-weight: 500;
 }
 
-/*************************
- NAVIGATION SECTION
-*************************/
-
 .navigation {
   position: absolute;
   top: 2rem;
@@ -43,7 +38,7 @@ header > .user-profile-personal > .profile-name {
   list-style-type: none;
   display: flex;
   flex-direction: column;
-  z-index: 2;
+  z-index: 3;
   animation: slideInFromRight 1s ease-out forwards;
 }
 
@@ -70,9 +65,6 @@ header > .user-profile-personal > .profile-name {
   background-color: #2b3149;
 }
 
-/*************************
- PERSONAL-AREA SECTION
-*************************/
 .personal-area-section {
   position: relative;
   display: flex;
@@ -85,6 +77,7 @@ header > .user-profile-personal > .profile-name {
   gap: 2rem;
   background: linear-gradient(135deg, #6e8efb, #5edb0a);
   border-radius: 9px;
+  animation: fadeIn 1s ease-out;
 }
 
 .personal-area-section > .profile-img {
@@ -95,8 +88,10 @@ header > .user-profile-personal > .profile-name {
   object-fit: cover;
   object-position: center;
 }
+
 .personal-area-section > .profile-name {
   font-size: 2rem;
+  color: #0f3d03;
 }
 
 .edit-box {
@@ -109,9 +104,10 @@ header > .user-profile-personal > .profile-name {
 }
 
 .btn-edit {
-  padding: 1rem 2rem;
+  width: 10rem;
+  padding: 1rem 1rem;
   color: #fff;
-  background-color: #6e8efb;
+  background-color: #0f3d03;
   border: none;
   border-radius: 6px;
   cursor: pointer;

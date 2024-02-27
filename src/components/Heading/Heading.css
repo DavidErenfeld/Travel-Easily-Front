@@ -8,11 +8,13 @@
   color: #e6e6f1;
   text-align: center;
 }
+
 @media (max-width: 27em) {
   .hero-title {
     font-size: 4rem;
   }
 }
+
 @media (max-width: 17em) {
   .hero-title {
     font-size: 3rem;

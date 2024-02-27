@@ -1,10 +1,7 @@
 import "./MyTrips.css";
 import { useEffect, useState } from "react";
-import tripsService, {
-  CanceledError,
-  ITrips,
-} from "../../services/tripsService";
-import TripBox from "../searchTrip/TripList";
+import tripsService, { ITrips } from "../../services/tripsService";
+import TripList from "../searchTrip/TripList";
 import Header from "../header/Header";
 
 interface MyTripsProps {
@@ -117,33 +114,45 @@ function MyTrips({
         </div>
       ) : (
         <section className="my-trip-section">
-          {trips.map((trip) => (
-            <div className="trip-list-item" key={trip._id}>
-              <div className="buttons-box">
-                <button
-                  onClick={() => goToUpdateTrip(trip._id || "")}
-                  className="btn-update"
-                >
-                  update
-                </button>
-                <button
-                  onClick={() => handleDeleteClicked(trip._id || "")}
-                  className="btn-delete"
-                >
-                  delete
-                </button>
-              </div>
-
-              <TripBox
-                key={trip._id}
-                trip={trip}
-                updateTripCommentsCount={updateTripCommentsCount}
-                isUserConnected={isUserConnected}
-                onCommentsSelect={() => console.log("onCommentsSelect")}
-                onSelect={() => console.log("onSelect")}
-              />
+          {trips.length === 0 ? (
+            <div className="share-trip-cta">
+              <p className="cta-text">
+                Have you gone on any exciting trips recently? We'd love to see
+                them!
+              </p>
+              <button className="cta-button" onClick={goToShare}>
+                Share Your Adventure
+              </button>
             </div>
-          ))}
+          ) : (
+            trips.map((trip) => (
+              <div className="trip-list-item" key={trip._id}>
+                <div className="buttons-box">
+                  <button
+                    onClick={() => goToUpdateTrip(trip._id || "")}
+                    className="btn-update"
+                  >
+                    update
+                  </button>
+                  <button
+                    onClick={() => handleDeleteClicked(trip._id || "")}
+                    className="btn-delete"
+                  >
+                    delete
+                  </button>
+                </div>
+
+                <TripList
+                  key={trip._id}
+                  trip={trip}
+                  updateTripCommentsCount={updateTripCommentsCount}
+                  isUserConnected={isUserConnected}
+                  onCommentsSelect={() => console.log("onCommentsSelect")}
+                  onSelect={() => console.log("onSelect")}
+                />
+              </div>
+            ))
+          )}
         </section>
       )}
     </main>

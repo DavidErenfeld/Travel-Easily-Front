@@ -1,7 +1,6 @@
 import "./Share.css";
 import AddImgs from "../icons/AddImgsIcon";
-import AddPicture from "../icons/AddPicture";
-import RightArrow from "../icons/RightArrow";
+import RightArrow from "../icons/RightArrowIcon";
 import { useEffect, useRef, useState } from "react";
 import { uploadPhoto } from "../../services/fileService";
 
@@ -31,7 +30,6 @@ function Description({
   const imgRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    // בודק אם יש רק יום אחד ומעדכן את isLastDay בהתאם
     if (dayNumber === 1) {
       setIsLastDay(true);
     }
