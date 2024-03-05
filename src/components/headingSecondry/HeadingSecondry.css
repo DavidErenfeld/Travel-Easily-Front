@@ -26,7 +26,7 @@
 
 @media (max-width: 37em) {
   .heading-secondry {
-    font-size: 4rem;
+    display: none;
   }
 }
 

@@ -8,7 +8,7 @@ export const loginUser = (user: IUser) => {
     apiClient
       .post("/auth/login", user)
       .then((response: any) => {
-        localStorage.setItem("token", response.data.accessToken);
+        localStorage.setItem("accessToken", response.data.accessToken);
         localStorage.setItem("refreshToken", response.data.refreshToken);
         localStorage.setItem("loggedUserId", response.data.user_Id);
         localStorage.setItem("imgUrl", response.data.imgUrl);

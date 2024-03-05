@@ -1,3 +1,7 @@
+/* .arrow-in-description-box {
+  display: none;
+} */
+
 .share-title {
   grid-column: 1/-1;
   font-size: 2.6rem;
@@ -290,64 +294,139 @@ TRIP-LOCATION SECTION
 }
 
 @media (max-width: 27em) {
-  .buttons-container {
-    gap: 10rem;
+  .btn {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
   }
-  .arrow-to-main .left-arrow-icon {
-    left: -3.6rem;
-  }
-  .successful-message {
-    padding: 1rem;
-  }
-
-  .successful-message > h1 {
-    font-size: 3rem;
-    margin-left: auto;
-    margin-right: auto;
+  .arrow-icon {
+    width: 6rem;
+    height: 6rem;
   }
 
-  .successful-message > h2 {
-    font-size: 2rem;
-    line-height: 1.5;
+  .left-arrow-icon {
+    left: 20%;
+    top: 110%;
   }
 
-  .successful-message p {
-    font-size: 1.6rem;
+  .right-rrow-icon {
+    right: 20%;
+    top: 110%;
   }
-}
 
-@media (max-width: 24em) {
   .type-trip-title {
     font-size: 2rem;
   }
 
-  .selection-box::placeholder {
-    font-size: 1.6rem;
+  .numOfDays-country-box {
+    /* grid-column: 1 / -1; */
+    display: flex;
+    gap: 3rem;
+    flex-direction: column;
   }
 
-  .country-list {
-    max-height: 8rem;
-    width: 80%;
-    font-size: 1.4rem;
-    padding: 1rem;
+  .type-trip-title {
+    font-size: 2rem;
   }
 
-  .country-list div {
-    padding: 1rem;
+  .arrow-in-description-box {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    width: 100%;
+    padding: 3rem;
   }
 
-  arrow-icon {
-    height: 3rem;
-    width: 3rem;
+  .arrow-in-description-box .right-rrow-icon {
+    right: 4rem;
+    top: 135%;
   }
-  .left-arrow-icon {
-    left: -5.7rem;
+
+  .arrow-in-description-box .description-box {
+    width: 100%;
+    height: 40rem;
+    justify-self: stretch;
+    align-self: stretch;
   }
-  .right-rrow-icon {
-    right: -5.7rem;
+
+  .container .change-day-description-block {
+    bottom: -3rem;
+    left: 3.3rem;
+  }
+
+  .change-day-button {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    font-size: 2.2rem;
+  }
+
+  .description-box::placeholder {
+    font-size: 2.4rem;
+  }
+
+  .description-box {
+    font-size: 2.4rem;
+  }
+
+  .icons-descripton-trip {
+    height: 4rem;
+    width: 4rem;
+  }
+
+  .icons-description-box {
+    bottom: 4rem;
+    right: 4.5rem;
+  }
+
+  .arrow-to-main .left-arrow-icon {
+    left: -3.6rem;
+  }
+
+  .successful-message {
+    padding: 3rem;
+    width: 45rem;
+    height: 50rem;
   }
 
   .successful-message > h1 {
+    font-size: 4rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 4.2rem;
+  }
+
+  .successful-message > h2 {
+    font-size: 3rem;
+    line-height: 1.5;
+    margin-bottom: 2rem;
+  }
+
+  .successful-message p {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+  }
+
+  .successful-message .btn {
+    width: 30rem;
     font-size: 2.4rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+}
+
+@media (max-width: 24em) {
+  .left-arrow-icon {
+    left: -30%;
+    top: 35%;
+  }
+
+  .right-rrow-icon {
+    right: -30%;
+    top: 35%;
+  }
+
+  .selection-box::placeholder {
+    font-size: 1.6rem;
   }
 }

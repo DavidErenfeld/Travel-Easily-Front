@@ -25,6 +25,7 @@ function Description({
   handleFinish,
 }: DescriptionProps) {
   const [num, setNum] = useState(1);
+  const [send, setSend] = useState(false);
   const [descriptions, setDescriptions] = useState(Array(dayNumber).fill(""));
   const [tripPhotos, setTripPhotos] = useState<string[]>([]);
   const imgRef = useRef<HTMLInputElement>(null);
@@ -79,9 +80,16 @@ function Description({
       setIsLastDay(false); // If going back, definitely not the last day
     }
   };
+
+  const handleSendclick = () => {
+    updateDescriptions(descriptions);
+    console.log(` =============descriptions: ${descriptions}`);
+    setSend(true);
+  };
   return (
-    <section className="container">
+    <section className="arrow-in-description-box container">
       <RightArrow onClickRightArrow={onClickRightArrow} />
+
       <textarea
         className="description-box"
         placeholder={`Share with us what you did on day ${num}`}
@@ -114,9 +122,15 @@ function Description({
       ) : isLastDay ? (
         // Adding "Previous Day" button even on the last day
         <div className="change-day-description-block">
-          <p className="change-day-button" onClick={handleFinish}>
-            Send
-          </p>
+          {!send ? (
+            <p className="change-day-button" onClick={handleSendclick}>
+              finish
+            </p>
+          ) : (
+            <p className="change-day-button" onClick={handleFinish}>
+              send
+            </p>
+          )}
           <p onClick={updateDayBefore} className="change-day-button">
             Previous Day
           </p>

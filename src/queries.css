@@ -1,3 +1,9 @@
+@media (max-width: 90em) {
+  html {
+    font-size: 56%;
+  }
+}
+
 @media (max-width: 75em) {
   .buttons-container {
     gap: 26rem;
@@ -10,9 +16,9 @@
 }
 
 @media (max-width: 70em) {
-  html {
+  /* html {
     font-size: 50%;
-  }
+  } */
 
   .selection-box {
     width: 97%;
@@ -77,15 +83,16 @@
 }
 
 @media (max-width: 27em) {
-  .buttons-container {
-    gap: 10rem;
+  .hero-section {
+    grid-template-columns: 1fr;
   }
-  .arrow-to-main .left-arrow-icon {
-    left: -2.8rem;
+  .container {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
   }
 }
 
-@media (max-width: 24em) {
+/* @media (max-width: 24em) {
   .btn {
     font-size: 1.4rem;
     padding: 1.3rem 0.9rem;
@@ -94,4 +101,4 @@
   .arrow-to-main .left-arrow-icon {
     left: -2rem;
   }
-}
+} */

@@ -9,6 +9,7 @@ import tripsService, {
   CanceledError,
   ITrips,
 } from "../../services/tripsService";
+import RightArrow from "../icons/RightArrowIcon";
 
 // Interface for Search component props
 interface SearchProps {
@@ -139,9 +140,12 @@ function Search({
 
   // Component return statement
   return (
-    <>
+    <main>
       <div className={arrowClass}>
         <LeftArrow onClickLeftArrow={onClickLeftArrow} />
+        {/* <button className="go-back-button" onClick={onClickLeftArrow}>
+          go beck
+        </button> */}
       </div>
       <section className={searchBtnsSectionClass}>
         <SearchButton
@@ -190,7 +194,7 @@ function Search({
       ) : (
         <main className="main-search-section">{renderTrips()}</main>
       )}
-    </>
+    </main>
   );
 }
 

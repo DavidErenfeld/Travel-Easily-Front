@@ -61,6 +61,10 @@
   z-index: 2;
 }
 
+.go-back-button {
+  display: none;
+}
+
 /*******************************
 / TRIP CARD
 *******************************/
@@ -214,7 +218,7 @@
   grid-template-columns: 1fr 1fr;
   grid-column: 1/-1;
   height: auto;
-  margin: 0 8rem;
+  margin: 6rem 8rem 0 8rem;
   backdrop-filter: blur(1rem);
   will-change: backdrop-filter;
   animation: fadeInZoom 1s ease-out forwards;
@@ -315,14 +319,16 @@
 .comment-box::-webkit-scrollbar {
   z-index: -1;
 }
-
-.delete-comment {
+.delete-comment,
+.delete-comment:link,
+.delete-comment:visited {
   background-color: #48527a;
   color: #f4f6fe;
   position: absolute;
   bottom: -3.2rem;
   right: 0;
   border-radius: 5px;
+  border: none;
   padding: 4px;
   width: 8rem;
   font-size: 1.6rem;
@@ -330,7 +336,8 @@
   transition: all 0.3s;
 }
 
-.delete-comment:hover {
+.delete-comment:hover,
+.delete-comment:active {
   background-color: #6fe31d;
   color: #0b1703;
 }
@@ -490,6 +497,50 @@
 }
 @media (max-width: 27em) {
   .arrow-to-main .left-arrow-icon {
-    left: -1.9rem;
+    display: none;
+  }
+
+  main {
+    padding: 2rem 2rem;
+  }
+
+  .trip-card {
+    width: 100%;
+    margin: 0 0 9rem 0;
+  }
+
+  .trip-details-modal {
+    grid-template-columns: 1fr;
+    margin: 8rem 1rem 0 1rem;
+  }
+
+  .image-gallery {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+@media (max-width: 27em) {
+  .arrow-to-main .left-arrow-icon {
+    display: none;
+  }
+
+  main {
+    padding: 2rem 2rem;
+  }
+
+  .trip-card {
+    width: 100%;
+    margin: 0 0 9rem 0;
+  }
+
+  .trip-details-modal {
+    grid-template-columns: 1fr;
+    margin: 8rem 0 0 0;
+  }
+
+  .image-gallery {
+    padding: 0;
+    margin: 0;
   }
 }

@@ -82,7 +82,7 @@ function UpdateTrip({
   };
 
   return (
-    <>
+    <main>
       <Header
         userName={userName}
         imgUrl={imgUrl}
@@ -149,7 +149,7 @@ function UpdateTrip({
           />
         </div>
       )}
-    </>
+    </main>
   );
 }
 

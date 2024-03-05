@@ -4,16 +4,22 @@ header {
   justify-content: space-between;
   grid-column: 1/ -1;
   grid-row: 1;
-  margin: 2rem 4rem;
+  /* margin: 2rem 3rem 0 3rem; */
+
   align-self: self-start;
-  padding: 1rem;
   border-radius: 4px;
 }
 
 .img-logo {
   max-height: 9rem;
-  width: 20rem;
+  width: 24rem;
   border-radius: 9px;
+}
+
+.personal-area-logo {
+  height: 5rem;
+  width: 5rem;
+  cursor: pointer;
 }
 
 header > .user-profile-personal {
@@ -21,8 +27,8 @@ header > .user-profile-personal {
 }
 
 header > .user-profile-personal > .profile-picture {
-  height: 5rem;
-  width: 5rem;
+  height: 6rem;
+  width: 6rem;
 }
 
 header > .user-profile-personal > .profile-name {
@@ -66,18 +72,19 @@ header > .user-profile-personal > .profile-name {
 }
 
 .personal-area-section {
-  position: relative;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
-  margin: 10rem auto;
-  width: 25rem;
-  height: 30rem;
+  width: 30rem;
+  height: 40rem;
   align-items: center;
   padding-top: 6rem;
   gap: 2rem;
   background: linear-gradient(135deg, #6e8efb, #5edb0a);
   border-radius: 9px;
-  animation: fadeIn 1s ease-out;
 }
 
 .personal-area-section > .profile-img {
@@ -87,6 +94,7 @@ header > .user-profile-personal > .profile-name {
   border: 2px solid #5edb0a;
   object-fit: cover;
   object-position: center;
+  margin-top: 4rem;
 }
 
 .personal-area-section > .profile-name {
@@ -96,15 +104,16 @@ header > .user-profile-personal > .profile-name {
 
 .edit-box {
   position: absolute;
-  left: 5px;
-  bottom: 5px;
+  left: 50%;
+  bottom: 3rem;
+  transform: translateX(-50%);
   display: flex;
-  gap: 4rem;
+  gap: 2rem;
   align-items: center;
 }
 
 .btn-edit {
-  width: 10rem;
+  width: 13rem;
   padding: 1rem 1rem;
   color: #fff;
   background-color: #0f3d03;
@@ -132,17 +141,13 @@ header > .user-profile-personal > .profile-name {
 }
 
 @media (max-width: 27em) {
-  header {
-    margin: 2rem 2rem;
-  }
   .img-logo {
-    max-height: 7rem;
-    width: 13rem;
+    height: 7rem;
+    width: 19rem;
     border-radius: 9px;
   }
 
-  header > .user-profile-personal > .profile-picture {
-    height: 3.5rem;
-    width: 3.5rem;
+  header > .user-profile-personal > .profile-name {
+    font-size: 1.8rem;
   }
 }

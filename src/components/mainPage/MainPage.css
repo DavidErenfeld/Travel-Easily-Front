@@ -1,15 +1,5 @@
 .main-page--section {
   position: relative;
-  height: 100vh;
-}
-
-.hero-section {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4.8rem;
-  justify-content: center;
-  align-items: center;
-  margin: auto 5rem;
 }
 
 .buttons-container {
@@ -17,12 +7,15 @@
   gap: 40rem;
   grid-row: 3;
   grid-column: 1/-1;
-  align-self: center;
+  align-self: end;
   justify-self: center;
 }
 
 .buttons-container .btn {
-  width: 19rem;
+  width: 22rem;
+  font-size: 2rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
   animation: none;
 }
 
@@ -51,6 +44,9 @@
   .hero-section {
     grid-template-columns: 1fr 3fr 1fr;
   }
+  .buttons-container {
+    gap: 14rem;
+  }
 }
 
 @media (max-width: 37em) {
@@ -61,12 +57,29 @@
 
 @media (max-width: 27em) {
   .buttons-container {
-    gap: 10rem;
+    flex-direction: column;
+    width: 100%;
+    gap: 4rem;
   }
+
   .buttons-container .btn {
-    width: 14rem;
-    font-size: 1.6rem;
-    padding: 1rem 1rem;
+    width: 100%;
+    height: 8rem;
+    font-size: 3rem;
+    font-weight: 500;
+    padding: 0;
+    border-radius: 3rem;
+    background: linear-gradient(135deg, #6e8efb, #5edb0a);
+    color: #0f3d03;
+  }
+
+  .buttons-container .btn:last-child {
+    background: linear-gradient(135deg, #5edb0a, #6e8efb);
+  }
+
+  .buttons-container .btn:hover {
+    background: none;
+    color: #fff;
   }
 }
 

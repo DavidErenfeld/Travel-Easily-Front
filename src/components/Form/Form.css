@@ -92,7 +92,7 @@ form {
 
 .icon-select-img {
   position: absolute;
-  top: 11.8rem;
+  top: 14.8rem;
   right: 3.3rem;
 }
 
@@ -116,5 +116,12 @@ form {
   .register-img {
     width: 8rem;
     height: 8rem;
+  }
+}
+
+@media (max-width: 27em) {
+  .icon-select-img {
+    top: 10.5rem;
+    right: 3.4rem;
   }
 }

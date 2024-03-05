@@ -11,6 +11,8 @@ node_modules
 dist
 dist-ssr
 *.local
+public/imgs/Sizzy-72.2.0.exe
+
 
 # Editor directories and files
 .vscode/*

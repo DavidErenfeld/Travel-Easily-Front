@@ -242,9 +242,9 @@
   }
 }
 
-@media (max-width: 26em) {
+@media (max-width: 27em) {
   .update-trip-details {
-    margin: 8rem 5rem;
+    margin: 20rem 5rem;
   }
 
   .update-trip-details .right-arrow-icon .arrow-icon {
@@ -260,26 +260,37 @@
     bottom: -9.7px;
     right: 1.5rem;
   }
+
+  .update-buttons {
+    position: absolute;
+    bottom: -7rem;
+  }
+
   .btn-delete,
   .btn-update {
-    height: 3rem;
-    width: 9rem;
+    height: 6rem;
+    width: 18rem;
+    font-size: 2.2rem;
+  }
+
+  .save-changes-btn,
+  .options {
+    height: 6rem;
+    width: 17rem;
+    font-size: 2rem;
   }
 
   .save-changes-btn {
-    left: -4rem;
-    bottom: -13rem;
+    bottom: -18rem;
+    left: -3rem;
+  }
+  .update-trip-details textarea {
+    height: 30rem;
   }
 }
 
 @media (max-width: 24em) {
-  .my-trip-section .trip-list-item .trip-card {
-    position: relative;
-    width: 80%;
-    margin: 0 3.6rem 8rem 3.6rem;
-  }
-
-  .update-trip-details .right-arrow-icon {
-    right: 0.9rem;
+  .update-trip-details {
+    margin: 15rem 5rem;
   }
 }

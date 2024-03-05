@@ -9,8 +9,6 @@ function IconPersonalAriea({ onClick }: PersonalAreaProps) {
         className="personal-area-logo"
         enableBackground="new 0 0 189.524 189.524"
         viewBox="0 0 189.524 189.524"
-        height="3.5rem"
-        width="3.5rem"
       >
         <g>
           <g>

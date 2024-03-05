@@ -23,7 +23,7 @@ function addSubscriber(callback: (accessToken: string) => void): void {
 }
 
 export const apiClient = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "https://10.10.248.179",
 });
 
 apiClient.interceptors.response.use(

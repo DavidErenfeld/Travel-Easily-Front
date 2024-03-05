@@ -30,19 +30,19 @@ function MainPage({
 }: MainPageProps) {
   return (
     <section className="main-page-section">
-      <Header
-        goToPersonalArea={goToPersonalArea}
-        userName={userName}
-        imgUrl={imgUrl}
-        endaleLogOut={endaleLogOut}
-        goToShare={goToShare}
-        goToMyTrips={goToMyTrips}
-        goToRegister={goToRegister}
-        goToLogin={goToLogin}
-        goToSearch={goToSearch}
-        isUserConnected={isUserConnected}
-      />
       <div className="hero-section">
+        <Header
+          goToPersonalArea={goToPersonalArea}
+          userName={userName}
+          imgUrl={imgUrl}
+          endaleLogOut={endaleLogOut}
+          goToShare={goToShare}
+          goToMyTrips={goToMyTrips}
+          goToRegister={goToRegister}
+          goToLogin={goToLogin}
+          goToSearch={goToSearch}
+          isUserConnected={isUserConnected}
+        />
         <Heading text="The new way to travel" />
         <div className="buttons-container">
           <button className="btn" onClick={goToShare}>

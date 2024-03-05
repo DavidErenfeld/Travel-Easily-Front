@@ -40,7 +40,7 @@ export interface IUpdateTrips {
   tripDescription?: string[];
 }
 
-const accessToken = localStorage.getItem("token");
+const accessToken = localStorage.getItem("accessToken");
 const refreshToken = localStorage.getItem("refreshToken");
 
 const getAllTrips = () => {

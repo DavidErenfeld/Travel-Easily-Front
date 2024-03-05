@@ -119,8 +119,8 @@ function Share({
     }
   };
   const newtrip: ITrips = {
-    userName: userName,
     imgUrl: imgUrl,
+    userName: userName,
     typeTraveler: selectedTravelerType ?? "",
     country: country ?? "",
     typeTrip: selectedTripType ?? "",
@@ -134,6 +134,7 @@ function Share({
   const send = async () => {
     try {
       const response = await TripsService.postTrip(newtrip);
+      console.log(`----------user name: ${userName}`);
       console.log(response); // להדפיס את התגובה או להשתמש בה לפעולה הבאה
       setSendSuccessMessage(true);
     } catch (error) {
@@ -150,7 +151,7 @@ function Share({
     : "heading-secondry-hidden";
 
   return (
-    <>
+    <main>
       <Header
         userName={userName}
         imgUrl={imgUrl}
@@ -209,7 +210,7 @@ function Share({
           />
         )}
       </section>
-    </>
+    </main>
   );
 }
 
