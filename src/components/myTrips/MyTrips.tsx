@@ -66,6 +66,7 @@ function MyTrips({
         .catch((err) => {
           console.error("", err);
           setErrors(err.message);
+          console.log(errors);
         });
     } catch (error) {
       console.log("faild");

@@ -52,7 +52,7 @@ apiClient.interceptors.response.use(
           isTokenRefreshing = false;
         }
       } else {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
           addSubscriber((accessToken: string) => {
             if (originalRequest.headers) {
               originalRequest.headers["Authorization"] = `JWT ${accessToken}`;

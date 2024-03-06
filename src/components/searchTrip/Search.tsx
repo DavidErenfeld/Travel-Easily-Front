@@ -9,7 +9,6 @@ import tripsService, {
   CanceledError,
   ITrips,
 } from "../../services/tripsService";
-import RightArrow from "../icons/RightArrowIcon";
 
 // Interface for Search component props
 interface SearchProps {
@@ -51,7 +50,7 @@ function Search({
 
   // Fetching trips data from the server
   const refreshData = async () => {
-    const { req, abort } = tripsService.getAllTrips();
+    const { req } = tripsService.getAllTrips();
     req
       .then((res) => {
         console.log(res.data);
@@ -61,6 +60,7 @@ function Search({
         console.log(err);
         if (err instanceof CanceledError) return;
         setErrors(err.message);
+        console.log(errors);
       });
   };
 

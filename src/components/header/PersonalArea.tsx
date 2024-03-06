@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import CloseIcon from "../icons/CloseIcon";
 import { uploadPhoto } from "../../services/fileService";
-import EditIcon from "../icons/EditIcon";
 import { updateUser } from "../../services/usersService";
 
 interface PersonalAreaProps {

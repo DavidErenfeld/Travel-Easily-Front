@@ -59,7 +59,7 @@ function App() {
 
   const endaleLogOut = async () => {
     try {
-      const response = await tripsService.logout();
+      await tripsService.logout();
       setIsUserConnected(false);
       goToMainPage();
     } catch (error) {
