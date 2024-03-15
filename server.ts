@@ -8,7 +8,7 @@ const PORT = 80; // שימוש בפורט 80
 app.use(express.static(path.join(__dirname, "dist")));
 
 // נתיב כללי שמחזיר את הדף הראשי לכל בקשת GET
-app.get("*", (req, res) => {
+app.get("*", (_req, res) => {
   res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
 
