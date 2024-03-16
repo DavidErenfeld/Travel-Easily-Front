@@ -12,6 +12,8 @@ node_modules
 dist-ssr
 *.local
 public/imgs/Sizzy-72.2.0.exe
+client-cert.pem
+client-key.pem
 
 
 # Editor directories and files

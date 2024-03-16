@@ -1,18 +1,32 @@
 import express from "express";
+import dotenv from "dotenv";
+import fs from "fs";
+import https from "https";
 import path from "path";
 
-const app = express();
-const PORT = 80; // שימוש בפורט 80
+dotenv.config();
 
-// הגדרת תיקיית ה'assets' כתיקייה סטטית
+const app = express();
+const { SSL_KEY_PATH, SSL_CERT_PATH, HTTPS_PORT } = process.env;
+
+if (!SSL_KEY_PATH || !SSL_CERT_PATH || !HTTPS_PORT) {
+  console.error("One or more environment variables are missing.");
+  process.exit(1);
+}
+
 app.use(express.static(path.join(__dirname, "dist")));
 
-// נתיב כללי שמחזיר את הדף הראשי לכל בקשת GET
 app.get("*", (_req, res) => {
   res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
 
-// האזנה לפורט 80
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+const httpsOptions = {
+  key: fs.readFileSync(SSL_KEY_PATH),
+  cert: fs.readFileSync(SSL_CERT_PATH),
+};
+
+https.createServer(httpsOptions, app).listen(HTTPS_PORT, () => {
+  console.log(
+    `Server running in production on https://localhost:${HTTPS_PORT}`
+  );
 });
