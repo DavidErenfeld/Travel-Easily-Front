@@ -23,7 +23,7 @@ function addSubscriber(callback: (accessToken: string) => void): void {
 }
 
 export const apiClient = axios.create({
-  baseURL: "https://10.10.248.179",
+  baseURL: "https://node19.cs.colman.ac.il:443",
 });
 
 apiClient.interceptors.response.use(
