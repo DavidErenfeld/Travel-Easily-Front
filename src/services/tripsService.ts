@@ -97,7 +97,7 @@ const postTrip = (trip: ITrips) => {
     console.log(trip);
     console.log(accessToken);
     apiClient
-      .post("trips", trip, {
+      .post("trips/", trip, {
         headers: {
           Authorization: `jwt ${accessToken}`,
         },
