@@ -46,12 +46,11 @@ function SelectedTrip({
   const submitComment = async () => {
     if (comment && trip._id && userName) {
       try {
-        const newComment: IComment = {
+        await tripsService.addComment(trip._id, {
           owner: userName,
           comment,
           date: new Date(),
-        };
-        await tripsService.addComment(trip._id, newComment);
+        });
         updateTripCommentsCount();
         setComment("");
         setFlag(!flag);
