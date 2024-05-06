@@ -23,7 +23,7 @@ function addSubscriber(callback: (accessToken: string) => void): void {
 }
 
 export const apiClient = axios.create({
-  baseURL: "https://enigmatic-island-56921-258869278475.herokuapp.com/",
+  baseURL: "https://enigmatic-island-56921-258869278475.herokuapp.com",
 });
 
 apiClient.interceptors.response.use(

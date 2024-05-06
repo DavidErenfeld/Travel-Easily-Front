@@ -75,7 +75,7 @@ const getByTripId = (tripId: string) => {
   return new Promise<ITrips>((resolve, reject) => {
     console.log("Get By Id...");
     apiClient
-      .get(`trips/trip/${tripId}`, {
+      .get(`/trips/trip/${tripId}`, {
         headers: {
           Authorization: `jwt ${accessToken}`,
         },
@@ -97,7 +97,7 @@ const postTrip = (trip: ITrips) => {
     console.log(trip);
     console.log(accessToken);
     apiClient
-      .post("trips/", trip, {
+      .post("/trips", trip, {
         headers: {
           Authorization: `jwt ${accessToken}`,
         },
@@ -117,7 +117,7 @@ const updateTrip = (trip: IUpdateTrips) => {
   return new Promise<ITrips>((resolve, reject) => {
     console.log("Update Trip...");
     apiClient
-      .put(`trips/${trip._id}`, trip, {
+      .put(`/trips/${trip._id}`, trip, {
         headers: {
           Authorization: `jwt ${accessToken}`,
         },
@@ -137,7 +137,7 @@ const deleteTrip = (tripId: string) => {
   return new Promise<void>((resolve, reject) => {
     console.log("Delete Trip...");
     apiClient
-      .delete(`trips/${tripId}`, {
+      .delete(`/trips/${tripId}`, {
         headers: {
           Authorization: `jwt ${accessToken}`,
         },
@@ -158,7 +158,7 @@ const logout = () => {
     console.log("log out...");
     apiClient
       .post(
-        `auth/logout`,
+        `/auth/logout`,
         {},
         {
           headers: {
@@ -184,7 +184,7 @@ const addComment = (tripId: string, comment: IComment) => {
     console.log("Add Comment...");
     apiClient
       .post(
-        `trips/comments/${tripId}`,
+        `/trips/comments/${tripId}`,
         { comment },
         {
           headers: {
@@ -207,7 +207,7 @@ const deleteComment = (tripId: string, commentId: string) => {
   return new Promise<void>((resolve, reject) => {
     console.log("Delete Comment...");
     apiClient
-      .delete(`trips/comments/${tripId}/${commentId}`, {
+      .delete(`/trips/comments/${tripId}/${commentId}`, {
         headers: {
           Authorization: `jwt ${accessToken}`,
         },
@@ -228,7 +228,7 @@ const addLike = (trip: string) => {
     console.log("addLick...");
     apiClient
       .post(
-        `trips/likes/${trip}`,
+        `/trips/likes/${trip}`,
         { owner: "david" },
         {
           headers: {
