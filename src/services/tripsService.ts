@@ -158,7 +158,7 @@ const logout = () => {
     console.log("log out...");
     apiClient
       .post(
-        `/auth/logout`,
+        `auth/logout`,
         {},
         {
           headers: {
