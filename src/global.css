@@ -228,7 +228,7 @@ main {
   .hero-section {
     grid-template-columns: 1fr;
     padding: 1.4rem 1.2rem;
-    height: 100vh;
+    height: 80vh;
   }
 
   .container {
