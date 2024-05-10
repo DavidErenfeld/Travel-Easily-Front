@@ -9,13 +9,17 @@ html {
   overflow-x: hidden;
 }
 
+#root {
+  height: 100vh;
+}
+
 body {
   font-family: "Hanken+Grotesk", sans-serif;
   line-height: 1;
   font-weight: 400;
   color: #555;
   overflow-x: hidden;
-  height: 100vh;
+  /* height: 100vh; */
 }
 main {
   max-height: 100vh;
