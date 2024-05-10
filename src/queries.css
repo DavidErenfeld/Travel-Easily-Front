@@ -91,14 +91,3 @@
     gap: 2.5rem;
   }
 }
-
-/* @media (max-width: 24em) {
-  .btn {
-    font-size: 1.4rem;
-    padding: 1.3rem 0.9rem;
-    border-radius: 1rem;
-  }
-  .arrow-to-main .left-arrow-icon {
-    left: -2rem;
-  }
-} */

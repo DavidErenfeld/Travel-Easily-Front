@@ -519,28 +519,3 @@
     margin: 0;
   }
 }
-
-@media (max-width: 27em) {
-  .arrow-to-main .left-arrow-icon {
-    display: none;
-  }
-
-  main {
-    padding: 2rem 2rem;
-  }
-
-  .trip-card {
-    width: 100%;
-    margin: 0 0 9rem 0;
-  }
-
-  .trip-details-modal {
-    grid-template-columns: 1fr;
-    margin: 8rem 0 0 0;
-  }
-
-  .image-gallery {
-    padding: 0;
-    margin: 0;
-  }
-}
