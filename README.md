@@ -1,30 +1,30 @@
-# React + TypeScript + Vite
+# Travel Easily - Share Your Journey
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## About the Project
 
-Currently, two official plugins are available:
+Travel Easily is a platform designed to help travelers plan multi-day trips easily and quickly. Instead of wasting time searching through excessive information on Google or suitable groups on Facebook, users can access posts from other travelers detailing their experiences day by day. Users can comment on posts, like them, and share their own travel stories.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Technologies
 
-## Expanding the ESLint configuration
+The site is built using React and TypeScript, with custom CSS design without relying on external libraries. All functionalities of the site operate in real-time, including the rendering of comments and updating of like statuses.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Features
 
-- Configure the top-level `parserOptions` property like this:
+- **Registration and Login**: Users can create an account, log in, and stay logged in until they log out.
+- **User Profile**: Each user can upload a profile picture and update it.
+- **Sharing Trips**: Users can share new trips by selecting parameters such as the type of trip, the country, the number of days, and entering a description for each day.
+- **Search for Trips**: Users can search for trips that have already been shared by others.
+- **Real-time Interaction**: The site handles real-time rendering of comments and updates to likes.
+- **User Interaction Control**: Users have the option to delete their own comments and manage their account settings.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+## Getting Started
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+To start using Travel Easily, visit [Travel Easily](https://travel-easily.netlify.app/) and sign up for a new account. Navigate through the site to explore trips shared by others or start sharing your own!
+
+## Challenges Overcome
+
+The project tackled challenges like real-time rendering of interactions and maintaining user sessions even after they leave the site, ensuring that they remain logged in until they decide to log out.
+
+## Design
+
+The website was designed independently using CSS without any design libraries, providing a unique and tailored user experience.
