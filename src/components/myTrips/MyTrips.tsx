@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import tripsService, { ITrips } from "../../services/tripsService";
 import TripList from "../searchTrip/TripList";
 import Header from "../header/Header";
+import LoadingDots from "../Loader";
 
 interface MyTripsProps {
   isUserConnected: boolean;
@@ -37,6 +38,7 @@ function MyTrips({
   const [isDeleteClicked, setIsDeleteClicked] = useState(false);
   const [tripId, setTripId] = useState("");
   const loggedUserId = localStorage.getItem("loggedUserId");
+  const [loading, setLoading] = useState(true);
 
   const updateTripCommentsCount = (
     tripId: string,
@@ -53,37 +55,38 @@ function MyTrips({
 
   useEffect(() => {
     if (!loggedUserId) {
-      console.log("User is not connecte");
+      console.log("User is not connected");
+      setLoading(false);
       return;
     }
-    try {
-      tripsService
-        .getByOwnerId(loggedUserId)
-        .then((data) => {
-          console.log(data);
-          setTrips(data as ITrips[]);
-        })
-        .catch((err) => {
-          console.error("", err);
-          setErrors(err.message);
-          console.log(errors);
-        });
-    } catch (error) {
-      console.log("faild");
-    }
+    setLoading(true);
+    tripsService
+      .getByOwnerId(loggedUserId)
+      .then((data) => {
+        console.log(data);
+        setTrips(data as ITrips[]);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Error loading trips:", err);
+        setErrors(err.message);
+        setLoading(false);
+      });
   }, [loggedUserId]);
 
   const handleDeleteTrip = (tripId: string) => {
+    setLoading(true);
     tripsService
       .deleteTrip(tripId)
       .then(() => {
-        // מחיקת הטיול מהרשימה בממשק המשתמש
         const updatedTrips = trips.filter((trip) => trip._id !== tripId);
         setTrips(updatedTrips);
+        setLoading(false);
         setIsDeleteClicked(false);
       })
       .catch((error) => {
         console.error("Error deleting trip:", error);
+        setLoading(false);
       });
   };
   const handleDeleteClicked = (tripId: string) => {
@@ -105,7 +108,11 @@ function MyTrips({
         goToSearch={goToSearch}
         isUserConnected={isUserConnected}
       />
-      {isDeleteClicked ? (
+      {loading ? (
+        <div className="main-loader-section">
+          <LoadingDots />
+        </div>
+      ) : isDeleteClicked ? (
         <div className="pop-up">
           <p>Are you sure you want to delete the trip?</p>
           <div className="pop-up-buttons">
@@ -142,7 +149,6 @@ function MyTrips({
                     delete
                   </button>
                 </div>
-
                 <TripList
                   key={trip._id}
                   trip={trip}
@@ -161,3 +167,4 @@ function MyTrips({
 }
 
 export default MyTrips;
+//

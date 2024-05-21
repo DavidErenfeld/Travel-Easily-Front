@@ -4,11 +4,11 @@ import Header from "../header/Header";
 import TripList from "./TripList";
 import LeftArrow from "../icons/LeftArrowIcon";
 import SelectedTrip from "./SelectedTrip";
-import SearchButton from "./SearchButton";
 import tripsService, {
   CanceledError,
   ITrips,
 } from "../../services/tripsService";
+import LoadingDots from "../Loader";
 
 // Interface for Search component props
 interface SearchProps {
@@ -47,9 +47,11 @@ function Search({
   const [focusOnComments, setFocusOnComments] = useState(false);
   const [opnePhotos, setOpnePhotos] = useState(false);
   const [photos, setPhotos] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   // Fetching trips data from the server
   const refreshData = async () => {
+    setLoading(true);
     const { req } = tripsService.getAllTrips();
     req
       .then((res) => {
@@ -57,11 +59,12 @@ function Search({
         setTrips(res.data);
       })
       .catch((err) => {
-        console.log(err);
         if (err instanceof CanceledError) return;
         setErrors(err.message);
         console.log(errors);
-      });
+        alert(err);
+      })
+      .finally(() => setLoading(false));
   };
 
   // Selection and UI interaction handlers
@@ -103,19 +106,9 @@ function Search({
     setOpnePhotos(true);
   };
 
-  const onCluckSearchByCountry = () => {
-    console.log("onCluckSearchByCountry");
-  };
-
-  const onClickSearchIcon = () => {
-    console.log("onClickSearchIcon");
-  };
-
-  // Rendering trips list
   const renderTrips = () => {
     return trips.map((trip) => (
       <article className="trip-list-item" key={trip._id}>
-        {/* Changed div to article for semantic meaning */}
         <TripList
           isUserConnected={isUserConnected}
           onCommentsSelect={() => selectTripForComment(trip)}
@@ -143,32 +136,8 @@ function Search({
     <main>
       <div className={arrowClass}>
         <LeftArrow onClickLeftArrow={onClickLeftArrow} />
-        {/* <button className="go-back-button" onClick={onClickLeftArrow}>
-          go beck
-        </button> */}
       </div>
-      <section className={searchBtnsSectionClass}>
-        <SearchButton
-          text="search by type traveler"
-          onClickSearchIcon={onClickSearchIcon}
-          onClickSearchInput={onCluckSearchByCountry}
-        />
-        <SearchButton
-          text="search by type trip"
-          onClickSearchIcon={onClickSearchIcon}
-          onClickSearchInput={onCluckSearchByCountry}
-        />
-        <SearchButton
-          text="search by country"
-          onClickSearchIcon={onClickSearchIcon}
-          onClickSearchInput={onCluckSearchByCountry}
-        />
-        <SearchButton
-          text="search by num of days"
-          onClickSearchIcon={onClickSearchIcon}
-          onClickSearchInput={onCluckSearchByCountry}
-        />
-      </section>
+
       <Header
         userName={userName}
         imgUrl={imgUrl}
@@ -181,6 +150,7 @@ function Search({
         goToMyTrips={goToMyTrips}
         isUserConnected={isUserConnected}
       />
+
       {isTripSelected && selectedTrip && isUserConnected ? (
         <SelectedTrip
           photos={photos}
@@ -191,6 +161,10 @@ function Search({
           onSelect={deselectTrip}
           focusOnComments={focusOnComments}
         />
+      ) : loading ? (
+        <div className="main-loader-section">
+          <LoadingDots />
+        </div>
       ) : (
         <main className="main-search-section">{renderTrips()}</main>
       )}

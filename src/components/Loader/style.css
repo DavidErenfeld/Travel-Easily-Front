@@ -1,0 +1,41 @@
+.loader {
+  display: flex;
+  justify-content: center;
+}
+
+.dot {
+  height: 1.2rem;
+  width: 1.2rem;
+  margin: 0 5px;
+  /* background-color: #48527a; */
+  background-color: #fff;
+  border-radius: 50%;
+  opacity: 0;
+  animation: fade 1.5s infinite;
+}
+
+.dot:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.dot:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.dot:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+.dot:nth-child(4) {
+  animation-delay: 0.3s;
+}
+
+@keyframes fade {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}

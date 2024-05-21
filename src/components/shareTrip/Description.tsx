@@ -3,6 +3,7 @@ import AddImgs from "../icons/AddImgsIcon";
 import RightArrow from "../icons/RightArrowIcon";
 import { useEffect, useRef, useState } from "react";
 import { uploadPhoto } from "../../services/fileService";
+import LoadingDots from "../Loader";
 
 // Type definitions for props
 interface DescriptionProps {
@@ -13,6 +14,7 @@ interface DescriptionProps {
   updateDescriptions: (descriptions: string[]) => void;
   updateTripPhotos: (newPhotos: string[]) => void;
   handleFinish: () => void;
+  loadingFlage: boolean;
 }
 
 function Description({
@@ -23,6 +25,7 @@ function Description({
   onClickRightArrow,
   onClickLastDay,
   handleFinish,
+  loadingFlage,
 }: DescriptionProps) {
   const [num, setNum] = useState(1);
   const [send, setSend] = useState(false);
@@ -43,31 +46,29 @@ function Description({
     }
   };
 
-  // Uploads image to server and updates state with new image URL
   const handleUploadImage = async (imgFile: File) => {
     try {
       const uploadedUrl = await uploadPhoto(imgFile);
       setTripPhotos((currentPhotos) => [...currentPhotos, uploadedUrl]);
-      updateTripPhotos([...tripPhotos, uploadedUrl]); // Update parent component with new photo URLs
+      updateTripPhotos([...tripPhotos, uploadedUrl]);
     } catch (error) {
       console.error("Upload failed:", error);
       alert("Failed to upload image.");
     }
   };
 
-  // Updates description for the current day
   const updateDescription = (day: number, newDescription: string) => {
     const updatedDescriptions = [...descriptions];
     updatedDescriptions[day - 1] = newDescription;
     setDescriptions(updatedDescriptions);
   };
   const [isLastDay, setIsLastDay] = useState(false);
-  // Function to update the current day and check if it's the last day
+
   const updateNextDay = () => {
     updateDescriptions(descriptions);
     if (num < dayNumber) {
       setNum(num + 1);
-      setIsLastDay(num + 1 === dayNumber); // Check if it's the last day
+      setIsLastDay(num + 1 === dayNumber);
     }
     if (num === dayNumber) {
       onClickLastDay(num);
@@ -77,15 +78,15 @@ function Description({
   const updateDayBefore = () => {
     if (num > 1) {
       setNum(num - 1);
-      setIsLastDay(false); // If going back, definitely not the last day
+      setIsLastDay(false);
     }
   };
 
   const handleSendclick = () => {
     updateDescriptions(descriptions);
-    console.log(` =============descriptions: ${descriptions}`);
     setSend(true);
   };
+
   return (
     <section className="arrow-in-description-box container">
       <RightArrow onClickRightArrow={onClickRightArrow} />
@@ -107,8 +108,8 @@ function Description({
           <AddImgs />
         </div>
       </div>
+
       {!finish && !isLastDay ? (
-        // Buttons for navigating between days when not on the last day and not finished
         <div className="change-day-description-block">
           <p onClick={updateNextDay} className="change-day-button">
             Next Day
@@ -120,21 +121,26 @@ function Description({
           )}
         </div>
       ) : isLastDay ? (
-        // Adding "Previous Day" button even on the last day
-        <div className="change-day-description-block">
-          {!send ? (
-            <p className="change-day-button" onClick={handleSendclick}>
-              finish
+        loadingFlage ? (
+          <div className="loader-section loader-section-mobile">
+            <LoadingDots />
+          </div>
+        ) : (
+          <div className="change-day-description-block">
+            {!send ? (
+              <p className="change-day-button" onClick={handleSendclick}>
+                finish
+              </p>
+            ) : (
+              <p className="change-day-button" onClick={handleFinish}>
+                send
+              </p>
+            )}
+            <p onClick={updateDayBefore} className="change-day-button">
+              Previous Day
             </p>
-          ) : (
-            <p className="change-day-button" onClick={handleFinish}>
-              send
-            </p>
-          )}
-          <p onClick={updateDayBefore} className="change-day-button">
-            Previous Day
-          </p>
-        </div>
+          </div>
+        )
       ) : null}
     </section>
   );

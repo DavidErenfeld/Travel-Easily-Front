@@ -18,8 +18,7 @@
 }
 
 .trip-list-item {
-  grid-column: 1/2;
-  margin-top: 2rem;
+  grid-column: 1/-1;
 }
 
 /*******************************
@@ -70,7 +69,7 @@
 *******************************/
 .trip-card {
   position: relative;
-  width: 72%;
+  /* width: 72%; */
   margin: 0 9.6rem 8rem 9.6rem;
 }
 
@@ -518,4 +517,11 @@
     padding: 0;
     margin: 0;
   }
+}
+
+.loader {
+  position: absolute;
+  top: 53%;
+  left: 40%;
+  transform: translate(-50%, -50%);
 }

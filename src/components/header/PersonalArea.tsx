@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import CloseIcon from "../icons/CloseIcon";
 import { uploadPhoto } from "../../services/fileService";
 import { updateUser } from "../../services/usersService";
+import LoadingDots from "../Loader";
 
 interface PersonalAreaProps {
   imgUrl: string;
@@ -15,6 +16,7 @@ function PersonalArea({ imgUrl, goToMainPage }: PersonalAreaProps) {
   const [imgSrc, setImgSrc] = useState(imgUrl);
   const [isButtonClicede, setButtonClicede] = useState(false);
   const loggedUserId = localStorage.getItem("loggedUserId");
+  const [loading, setLoading] = useState(false);
 
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -39,6 +41,8 @@ function PersonalArea({ imgUrl, goToMainPage }: PersonalAreaProps) {
 
   const handleUploadImage = async (imgFile: File) => {
     try {
+      setLoading(true);
+      setButtonClicede(false);
       const uploadedUrl = await uploadPhoto(imgFile);
       console.log(`Image uploaded successfully: ${uploadedUrl}`);
       return uploadedUrl;
@@ -46,6 +50,8 @@ function PersonalArea({ imgUrl, goToMainPage }: PersonalAreaProps) {
       console.error("Upload failed:", error);
       alert("Failed to upload image.");
       return null;
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -68,18 +74,29 @@ function PersonalArea({ imgUrl, goToMainPage }: PersonalAreaProps) {
         <div className="close-icon">
           <CloseIcon onClick={goToMainPage} />
         </div>
+
         <img className="profile-img" src={imgSrc} alt="img profile" />
         <p className="profile-name">{userName}</p>
-        <div className="edit-box">
-          <button onClick={() => imgRef.current?.click()} className="btn-edit">
-            Edit picture
-          </button>
-          {isButtonClicede && (
-            <button onClick={onClickSave} className="btn-edit">
-              Save
+        {loading ? (
+          <div className="loader-section">
+            <LoadingDots />
+          </div>
+        ) : (
+          <div className="edit-box">
+            <button
+              onClick={() => imgRef.current?.click()}
+              className="btn-edit"
+            >
+              Edit picture
             </button>
-          )}
-        </div>
+
+            {isButtonClicede && (
+              <button onClick={onClickSave} className="btn-edit">
+                Save
+              </button>
+            )}
+          </div>
+        )}
       </section>
     </>
   );

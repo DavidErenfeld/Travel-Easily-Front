@@ -44,6 +44,7 @@ function Share({
   const [selectedTravelerType, setSelectedTravelerType] = useState<
     string | null
   >(null);
+  const [loading, setLoading] = useState(false);
 
   // 1
   const [isTripTypeSelected, setIsTripTypeSelected] = useState(false);
@@ -64,7 +65,6 @@ function Share({
 
   const updateDescriptions = (newDescriptions: string[]) => {
     setDescription(newDescriptions);
-    console.log(description);
   };
 
   useEffect(() => {}, [description]);
@@ -133,15 +133,16 @@ function Share({
 
   const send = async () => {
     try {
-      const response = await TripsService.postTrip(newtrip);
-      console.log(`----------user name: ${userName}`);
-      console.log(response); // להדפיס את התגובה או להשתמש בה לפעולה הבאה
+      setLoading(true);
+      await TripsService.postTrip(newtrip);
       setSendSuccessMessage(true);
     } catch (error) {
-      console.error("Failed to post trip:", error);
-      // טיפול בשגיאה, למשל על ידי הצגת הודעה למשתמש
+      alert("Failed to post trip: " + error);
+    } finally {
+      setLoading(false);
     }
   };
+
   const onClickHomePage = () => {
     goToMainPage();
   };
@@ -197,6 +198,7 @@ function Share({
             onClickRightArrow={onClickRightArrow4}
             updateDescriptions={updateDescriptions}
             updateTripPhotos={updateTripPhotos}
+            loadingFlage={loading}
           />
         ) : (
           <SuccessfulCompletion

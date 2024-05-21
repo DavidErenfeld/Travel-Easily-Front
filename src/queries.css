@@ -81,13 +81,3 @@
     left: -6rem;
   }
 }
-
-@media (max-width: 27em) {
-  .hero-section {
-    grid-template-columns: 1fr;
-  }
-  .container {
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
-  }
-}

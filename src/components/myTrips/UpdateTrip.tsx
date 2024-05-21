@@ -6,6 +6,7 @@ import tripsService, {
 import Header from "../header/Header";
 import RightArrow from "../icons/RightArrowIcon";
 import SuccessfulCompletion from "../shareTrip/SuccessfulCompletion";
+import LoadingDots from "../Loader";
 
 export interface UpdateTripProps {
   tripId: string;
@@ -39,22 +40,24 @@ function UpdateTrip({
   const [descriptions, setDescriptions] = useState<string[]>([]);
   const [tripIsUpdated, setTripIsUpdated] = useState(false);
   const [tripDetails, setTripDetails] = useState<ITrips>();
+  const [loading, setLoading] = useState(true);
 
   const onClickRightArrow = () => {
     goToMyTrips();
   };
 
+  const fetchTripDetails = async () => {
+    try {
+      const newTrip = await tripsService.getByTripId(tripId);
+      setTripDetails(newTrip);
+      setDescriptions(newTrip.tripDescription);
+      setLoading(false);
+    } catch (err) {
+      console.log("Error fetching updated trip:", err);
+      setLoading(false);
+    }
+  };
   useEffect(() => {
-    const fetchTripDetails = async () => {
-      try {
-        const newTrip = await tripsService.getByTripId(tripId);
-        setTripDetails(newTrip);
-        setDescriptions(newTrip.tripDescription);
-      } catch (err) {
-        console.log("Error fetching updated trip:", err);
-      }
-    };
-
     fetchTripDetails();
   }, []);
 
@@ -73,11 +76,14 @@ function UpdateTrip({
         _id: tripId,
         tripDescription: descriptions,
       };
+      setLoading(true);
       await tripsService.updateTrip(updatedTrip);
       console.log("Trip updated successfully!");
       setTripIsUpdated(true);
+      setLoading(false);
     } catch (error) {
       console.error("Failed to update trip:", error);
+      setLoading(false);
     }
   };
 
@@ -95,8 +101,11 @@ function UpdateTrip({
         goToSearch={goToSearch}
         isUserConnected={isUserConnected}
       />
-
-      {!tripIsUpdated ? (
+      {loading ? (
+        <div className="main-loader-section">
+          <LoadingDots />
+        </div>
+      ) : !tripIsUpdated ? (
         <div className="update-trip-details">
           <div className="right-arrow-icon">
             <RightArrow onClickRightArrow={onClickRightArrow} />

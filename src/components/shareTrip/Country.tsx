@@ -13,10 +13,16 @@ function CountryComponent({ onCountrySelect }: CountryComponentProps) {
   const suggestionRefs = useRef<Array<HTMLDivElement | null>>([]);
 
   useEffect(() => {
-    fetch("https://restcountries.com/v3.1/all")
+    const headers = {
+      Authorization: `Bearer ND6HciJqx38g01MfFWQp5ruk1SgBNQURkdCXSBmJ`,
+    };
+    fetch("https://countryapi.io/api/all", { headers })
       .then((response) => response.json())
       .then((data) => {
-        const names = data.map((country: any) => country.name.common);
+        // המרת האובייקט למערך של ערכים
+        const countryArray = Object.values(data);
+        // ניצול הפונקציה 'map' על המערך כדי להשיג רשימה של שמות המדינות
+        const names = countryArray.map((country: any) => country.name);
         setCountries(names);
       })
       .catch((error) => console.error("Error fetching countries:", error));

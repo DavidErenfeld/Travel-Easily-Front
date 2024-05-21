@@ -57,20 +57,21 @@
 
 @media (max-width: 27em) {
   .buttons-container {
-    flex-direction: column;
-    width: 80%;
-    gap: 3rem;
-    margin-left: 2rem;
-    margin-right: 2rem;
+    flex-direction: row;
+    width: 75%;
+    gap: 4rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-bottom: 3rem;
   }
 
-  .buttons-container .btn {
+  .buttons-container > .btn {
     width: 100%;
-    font-size: 2rem;
+    font-size: 2.2rem;
     font-weight: 500;
-    padding: 1.2rem;
-    border-radius: 8px;
-    background: linear-gradient(135deg, #6e8efb, #5edb0a);
+    padding: 2rem 2.2rem;
+    border-radius: 6px;
+    /* background: linear-gradient(135deg, #6e8efb, #5edb0a); */
     color: #fff;
   }
 

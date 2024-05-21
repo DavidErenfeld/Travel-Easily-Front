@@ -4,8 +4,6 @@ header {
   justify-content: space-between;
   grid-column: 1/ -1;
   grid-row: 1;
-  /* margin: 2rem 3rem 0 3rem; */
-
   align-self: self-start;
   border-radius: 4px;
 }
@@ -110,6 +108,13 @@ header > .user-profile-personal > .profile-name {
   display: flex;
   gap: 2rem;
   align-items: center;
+}
+
+.loader-section {
+  position: absolute;
+  left: 50%;
+  bottom: 3rem;
+  transform: translateX(-50%);
 }
 
 .btn-edit {

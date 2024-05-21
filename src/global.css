@@ -185,6 +185,14 @@ main {
   text-align: start;
 }
 
+.main-loader-section {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  bottom: 0;
+  transform: translate(-50%, -50%);
+}
+
 @keyframes slideInFromRight {
   from {
     transform: translateX(50%);
@@ -235,10 +243,9 @@ main {
   }
 
   .container {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
     width: 100%;
     gap: 2.5rem;
-    grid-row: 1;
     justify-content: self-start;
     align-items: flex-start;
   }

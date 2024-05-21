@@ -1,7 +1,3 @@
-/* .arrow-in-description-box {
-  display: none;
-} */
-
 .share-title {
   grid-column: 1/-1;
   font-size: 2.6rem;
@@ -224,8 +220,7 @@ TRIP-LOCATION SECTION
   margin-left: 4rem;
   margin-right: 4rem;
 }
-
-.successful-message > h1 {
+loader-section .successful-message > h1 {
   margin-bottom: 1rem;
   font-size: 5rem;
   color: #6fe31d;
@@ -294,9 +289,14 @@ TRIP-LOCATION SECTION
 }
 
 @media (max-width: 27em) {
+  .container {
+    align-self: flex-start;
+    margin-top: 20rem;
+  }
   .btn {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
+    padding: 2rem 0.7rem;
+    border-radius: 5px;
+    font-size: 2rem;
   }
   .arrow-icon {
     width: 6rem;
@@ -305,12 +305,12 @@ TRIP-LOCATION SECTION
 
   .left-arrow-icon {
     left: 20%;
-    top: 110%;
+    top: 45rem;
   }
 
   .right-rrow-icon {
     right: 20%;
-    top: 110%;
+    top: 45rem;
   }
 
   .type-trip-title {
@@ -318,10 +318,14 @@ TRIP-LOCATION SECTION
   }
 
   .numOfDays-country-box {
-    /* grid-column: 1 / -1; */
     display: flex;
-    gap: 3rem;
+    gap: 6rem;
     flex-direction: column;
+  }
+
+  .selection-box {
+    font-size: 2.2rem;
+    padding: 2.4rem 1rem;
   }
 
   .type-trip-title {
@@ -330,16 +334,22 @@ TRIP-LOCATION SECTION
 
   .arrow-in-description-box {
     position: absolute;
-    top: 50%;
-    right: 0;
+    top: 30%;
     transform: translateY(-50%);
     width: 100%;
     padding: 3rem;
   }
 
+  .loader-section.loader-section-mobile {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+  }
+
   .arrow-in-description-box .right-rrow-icon {
     right: 4rem;
-    top: 135%;
+    top: 120%;
   }
 
   .arrow-in-description-box .description-box {
@@ -349,7 +359,7 @@ TRIP-LOCATION SECTION
     align-self: stretch;
   }
 
-  .container .change-day-description-block {
+  .change-day-description-block {
     bottom: -3rem;
     left: 3.3rem;
   }
@@ -386,6 +396,7 @@ TRIP-LOCATION SECTION
     padding: 3rem;
     width: 45rem;
     height: 50rem;
+    margin-bottom: 10rem;
   }
 
   .successful-message > h1 {
@@ -415,7 +426,7 @@ TRIP-LOCATION SECTION
   }
 }
 
-@media (max-width: 24em) {
+/* @media (max-width: 24em) {
   .left-arrow-icon {
     left: -30%;
     top: 35%;
@@ -429,4 +440,4 @@ TRIP-LOCATION SECTION
   .selection-box::placeholder {
     font-size: 1.6rem;
   }
-}
+} */
