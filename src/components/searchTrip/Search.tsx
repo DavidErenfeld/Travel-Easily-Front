@@ -120,10 +120,6 @@ function Search({
     ));
   };
 
-  // Conditional class names based on state
-  const searchBtnsSectionClass = !isTripSelected
-    ? "search-btns-section"
-    : "hidden";
   const arrowClass = !opnePhotos ? "arrow-to-main" : "hidden";
 
   // useEffect hook for initial data load

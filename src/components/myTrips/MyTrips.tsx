@@ -70,6 +70,7 @@ function MyTrips({
       .catch((err) => {
         console.error("Error loading trips:", err);
         setErrors(err.message);
+        console.log(errors);
         setLoading(false);
       });
   }, [loggedUserId]);
