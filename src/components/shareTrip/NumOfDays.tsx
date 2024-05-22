@@ -8,11 +8,13 @@ export interface NumOfDaysProps {
   onClickSave: (days: number) => void;
   onCountrySelect: (country: string) => void;
   onClickRightArrow: () => void;
+  flag: boolean;
 }
 function NumOfDays({
   onClickSave,
   onClickRightArrow,
   onCountrySelect,
+  flag,
 }: NumOfDaysProps) {
   const [days, setDays] = useState(0);
 
@@ -32,6 +34,11 @@ function NumOfDays({
           onChange={(e) => setDays(parseInt(e.target.value, 10))}
         />
         <Country onCountrySelect={onCountrySelect} />
+        {flag && (
+          <span className="text-danger">
+            pleese select a number of days and a country
+          </span>
+        )}
       </div>
     </section>
   );

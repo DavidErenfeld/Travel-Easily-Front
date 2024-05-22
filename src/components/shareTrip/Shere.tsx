@@ -45,6 +45,7 @@ function Share({
     string | null
   >(null);
   const [loading, setLoading] = useState(false);
+  const [flag, setFlag] = useState(false);
 
   // 1
   const [isTripTypeSelected, setIsTripTypeSelected] = useState(false);
@@ -84,9 +85,10 @@ function Share({
   const onClickLeftArrow2 = () => {
     if (selectedTripType) setIsTripTypeSelected(true);
   };
-
+  //////////////////////////////////////////////////////////////////
   const onClickLeftArrow3 = (days: number) => {
     if (numOfDays > 0 && selectedCountry) setIsNumOfDaysSelected(true);
+    setFlag(true);
     setNumOfDays(days);
   };
 
@@ -104,6 +106,8 @@ function Share({
 
   const onClickRightArrow4 = () => {
     setIsNumOfDaysSelected(false);
+    setNumOfDays(0);
+    setFlag(false);
   };
 
   const onClickButtonTypeTraveler = (TravelerType: string) => {
@@ -186,8 +190,9 @@ function Share({
         ) : !isNumOfDaysSelected ? (
           <NumOfDays
             onCountrySelect={handleCountrySelect}
-            onClickSave={onClickLeftArrow3}
+            onClickSave={onClickLeftArrow3} ////////////////////////////
             onClickRightArrow={onClickRightArrow3}
+            flag={flag}
           />
         ) : !sendSuccessMessage ? (
           <Description

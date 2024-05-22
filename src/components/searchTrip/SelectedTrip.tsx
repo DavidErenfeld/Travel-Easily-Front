@@ -34,8 +34,8 @@ function SelectedTrip({
   const userName = localStorage.getItem("userName") || "";
   const loggedUserId = localStorage.getItem("loggedUserId") || "";
   const [comment, setComment] = useState("");
-
   const [flag, setFlag] = useState(false);
+  const [commentFlag, setCommentFlag] = useState(false);
   const commentsInputRef = useRef<HTMLInputElement>(null);
   const [selectedTrip, setTrip] = useState(trip);
 
@@ -46,6 +46,7 @@ function SelectedTrip({
   const submitComment = async () => {
     if (comment && trip._id && userName) {
       try {
+        setCommentFlag(true);
         await tripsService.addComment(trip._id, {
           owner: userName,
           comment,
@@ -57,11 +58,13 @@ function SelectedTrip({
         try {
           const newTrip = await tripsService.getByTripId(trip._id);
           setTrip(newTrip);
+          setCommentFlag(false);
         } catch (err) {
-          console.log("Error fetching updated trip:", err);
+          alert("Error fetching updated trip:" + err);
         }
       } catch (error) {
-        console.error("Failed to add comment", error);
+        alert("Failed to add comment" + error);
+        setCommentFlag(false);
       }
     } else {
       console.log("Missing required fields: comment, trip ID, or user name.");
@@ -147,9 +150,11 @@ function SelectedTrip({
                 value={comment}
                 onChange={handleCommentChange}
               />
-              <div className="submit-icon-box" onClick={submitComment}>
-                <SubmitIcon />
-              </div>
+              {!commentFlag && (
+                <div className="submit-icon-box" onClick={submitComment}>
+                  <SubmitIcon />
+                </div>
+              )}
             </div>
           </section>
           {selectedTrip.numOfComments > 0 && (
