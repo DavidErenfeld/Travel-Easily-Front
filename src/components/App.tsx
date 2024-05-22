@@ -1,5 +1,5 @@
-import "../index.css";
 import "../queries.css";
+import "../index.css";
 import "../components/shareTrip/Share.css";
 import { useEffect, useState } from "react";
 import MainPage from "./mainPage/MainPage";
@@ -201,7 +201,7 @@ function App() {
   return (
     <>
       <div className="background"></div>
-      <div>{displayedPage}</div>
+      {displayedPage}
     </>
   );
 }

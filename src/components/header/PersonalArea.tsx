@@ -87,7 +87,7 @@ function PersonalArea({ imgUrl, goToMainPage }: PersonalAreaProps) {
               onClick={() => imgRef.current?.click()}
               className="btn-edit"
             >
-              Edit picture
+              Edit
             </button>
 
             {isButtonClicede && (

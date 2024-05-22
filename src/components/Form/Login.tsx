@@ -58,38 +58,33 @@ function Login({ onClickRegister, onClickClose, onLogin }: LoginProps) {
         <CloseIcon onClick={onClickClose} />
       </div>
       <h3 className="title">Login</h3>
-      <img
-        style={{
-          border: "2px solid #fff",
-          borderRadius: "50%",
-          width: "100px",
-          height: "100px",
-        }}
-        src="/imgs/user.png"
-        alt="user img"
-      />
-      <div className="input-box">
-        <input
-          {...register("email")}
-          type="email"
-          id="email"
-          placeholder="Email"
-          className="email"
-        />
-        {errors.email && <p className="text-danger">{errors.email.message}</p>}
-      </div>
-      <div className="input-box">
-        <input
-          {...register("password")}
-          type="password"
-          id="password"
-          placeholder="Password"
-          className="password"
-        />
-        {errors.password && (
-          <p className="text-danger">{errors.password.message}</p>
-        )}
-      </div>
+      <img src="/imgs/user.png" alt="user img" />
+      <section className="input-section">
+        <div className="input-box">
+          <input
+            {...register("email")}
+            type="email"
+            id="email"
+            placeholder="Email"
+            className="email"
+          />
+          {errors.email && (
+            <p className="text-danger">{errors.email.message}</p>
+          )}
+        </div>
+        <div className="input-box">
+          <input
+            {...register("password")}
+            type="password"
+            id="password"
+            placeholder="Password"
+            className="password"
+          />
+          {errors.password && (
+            <p className="text-danger">{errors.password.message}</p>
+          )}
+        </div>
+      </section>
       <div className="buttons-section">
         <button type="submit" className="submit-btn">
           Login

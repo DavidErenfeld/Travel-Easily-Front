@@ -123,12 +123,6 @@ function Register({ onClickClose, goToLogin, onLogin }: RegisterProps) {
       <p className="title">Register</p>
 
       <div className="image-box">
-        <div
-          className="icon-select-img"
-          onClick={() => imageRef.current?.click()}
-        >
-          <AddImgsIcon />
-        </div>
         <input
           {...register("image", { required: true })}
           type="file"
@@ -139,40 +133,50 @@ function Register({ onClickClose, goToLogin, onLogin }: RegisterProps) {
         />
         {imgSrc && <img src={imgSrc} alt="Preview" className="register-img" />}
       </div>
-      <div className="input-box">
-        <input
-          {...register("userName")}
-          type="text"
-          id="userName"
-          placeholder="User Name"
-          className="user-name"
-        />
-        {errors.userName && (
-          <p className="text-danger">{errors.userName.message}</p>
-        )}
-      </div>
-      <div className="input-box">
-        <input
-          {...register("email")}
-          type="email"
-          id="email"
-          placeholder="UserName@gmail.com"
-          className="email"
-        />
-        {errors.email && <p className="text-danger">{errors.email.message}</p>}
-      </div>
-      <div className="input-box">
-        <input
-          {...register("password")}
-          type="password"
-          id="password"
-          placeholder="Password"
-          className="password"
-        />
-        {errors.password && (
-          <p className="text-danger">{errors.password.message}</p>
-        )}
-      </div>
+      <section className="input-section">
+        <div
+          className="icon-select-img"
+          onClick={() => imageRef.current?.click()}
+        >
+          <AddImgsIcon />
+        </div>
+        <div className="input-box">
+          <input
+            {...register("userName")}
+            type="text"
+            id="userName"
+            placeholder="User Name"
+            className="user-name"
+          />
+          {errors.userName && (
+            <p className="text-danger">{errors.userName.message}</p>
+          )}
+        </div>
+        <div className="input-box">
+          <input
+            {...register("email")}
+            type="email"
+            id="email"
+            placeholder="UserName@gmail.com"
+            className="email"
+          />
+          {errors.email && (
+            <p className="text-danger">{errors.email.message}</p>
+          )}
+        </div>
+        <div className="input-box">
+          <input
+            {...register("password")}
+            type="password"
+            id="password"
+            placeholder="Password"
+            className="password"
+          />
+          {errors.password && (
+            <p className="text-danger">{errors.password.message}</p>
+          )}
+        </div>
+      </section>
       <button type="submit" className="submit-btn">
         Submit
       </button>

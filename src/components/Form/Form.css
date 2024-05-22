@@ -3,8 +3,6 @@ form {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  max-height: 50rem;
-  opacity: 1;
   pointer-events: auto;
   visibility: visible;
   display: flex;
@@ -16,9 +14,15 @@ form {
   z-index: 15;
   background: linear-gradient(135deg, #6e8efb, #5edb0a);
   padding: 3rem;
+  opacity: 1;
 }
 
-.register-img {
+image-box {
+  position: relative;
+}
+
+form image-box img,
+form img {
   border: 2px solid #fff;
   border-radius: 50%;
   width: 10rem;
@@ -43,6 +47,13 @@ form {
   border: none;
 }
 
+.input-section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
 .buttons-section {
   position: relative;
   display: flex;
@@ -52,8 +63,8 @@ form {
 
 .submit-btn {
   font-size: 1.6rem;
-  padding: 8px 8px;
-  width: 20rem;
+  padding: 1rem 6rem;
+  /* width: 20rem; */
   border-radius: 9px;
   background: linear-gradient(135deg, #6e8efb, #a777e3);
   color: #fff;
@@ -92,8 +103,8 @@ form {
 
 .icon-select-img {
   position: absolute;
-  top: 14.8rem;
-  right: 3.3rem;
+  top: -32px;
+  right: 5px;
 }
 
 .icon-select-img > .icons-descripton-trip {
@@ -108,20 +119,60 @@ form {
 }
 
 @media (max-width: 75em) {
-  form {
+  /* form {
     max-height: 45rem;
     gap: 1rem;
-  }
+  } */
 
-  .register-img {
-    width: 8rem;
-    height: 8rem;
+  form image-box img,
+  form img {
+    width: 15rem;
+    height: 15rem;
   }
 }
 
 @media (max-width: 27em) {
-  .icon-select-img {
-    top: 10.5rem;
-    right: 3.4rem;
+  form {
+    gap: 6rem;
+    padding: 4.5rem;
+  }
+
+  .title {
+    font-size: 4rem;
+  }
+
+  form image-box img,
+  form img {
+    width: 20rem;
+    height: 20rem;
+  }
+
+  .input-section {
+    gap: 4rem;
+  }
+  .user-name,
+  .email,
+  .password {
+    width: 45rem;
+    height: 7rem;
+  }
+
+  .text-danger {
+    font-size: 2.2rem;
+  }
+
+  .submit-btn {
+    font-size: 2.6rem;
+    padding: 2rem 9rem;
+  }
+
+  .text-login-register {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2.6rem;
+    font-weight: 500;
+    color: #fff;
   }
 }

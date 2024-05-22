@@ -86,13 +86,13 @@ header > .user-profile-personal > .profile-name {
 }
 
 .personal-area-section > .profile-img {
-  height: 8rem;
-  width: 8rem;
+  height: 10rem;
+  width: 10rem;
   border-radius: 50%;
   border: 2px solid #5edb0a;
   object-fit: cover;
   object-position: center;
-  margin-top: 4rem;
+  margin-top: 2rem;
 }
 
 .personal-area-section > .profile-name {
@@ -110,16 +110,8 @@ header > .user-profile-personal > .profile-name {
   align-items: center;
 }
 
-.loader-section {
-  position: absolute;
-  left: 50%;
-  bottom: 3rem;
-  transform: translateX(-50%);
-}
-
 .btn-edit {
-  width: 13rem;
-  padding: 1rem 1rem;
+  padding: 1rem 4rem;
   color: #fff;
   background-color: #0f3d03;
   border: none;
@@ -146,13 +138,32 @@ header > .user-profile-personal > .profile-name {
 }
 
 @media (max-width: 27em) {
-  .img-logo {
-    height: 7rem;
-    width: 19rem;
-    border-radius: 9px;
+  header > .user-profile-personal > .profile-name {
+    font-size: 2.2rem;
   }
 
-  header > .user-profile-personal > .profile-name {
-    font-size: 1.8rem;
+  .personal-area-section {
+    width: 50rem;
+    height: 70rem;
+    padding-top: 6rem;
+  }
+
+  .personal-area-section > .profile-name {
+    font-size: 3.6rem;
+    color: #fff;
+  }
+
+  .personal-area-section > .profile-img {
+    height: 20rem;
+    width: 20rem;
+    margin-top: 4rem;
+  }
+
+  .edit-box {
+    margin-bottom: 2rem;
+  }
+
+  .btn-edit {
+    padding: 2rem 6rem;
   }
 }

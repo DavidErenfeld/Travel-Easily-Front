@@ -8,9 +8,10 @@ html {
   font-size: 62.5%;
   overflow-x: hidden;
 }
+
 @media (max-width: 37em) {
   html {
-    font-size: 42%;
+    font-size: 35%;
   }
   .arrow-to-main .left-arrow-icon {
     left: -3.2rem;
@@ -28,9 +29,9 @@ html {
 }
 
 @media (max-width: 24em) {
-  html {
+  /* html {
     font-size: 35%;
-  }
+  } */
 }
 
 #root {
@@ -43,8 +44,8 @@ body {
   font-weight: 400;
   color: #555;
   overflow-x: hidden;
-  /* height: 100vh; */
 }
+
 main {
   max-height: 100vh;
   padding: 5rem 5rem;
@@ -257,6 +258,25 @@ main {
   to {
     transform: translateX(0);
     opacity: 1;
+  }
+}
+
+@media (max-width: 27em) {
+  html {
+    font-size: 35%;
+  }
+  .arrow-to-main .left-arrow-icon {
+    left: -3.2rem;
+  }
+  .container {
+    grid-column: 1/-1;
+    width: 90%;
+  }
+  .right-rrow-icon {
+    right: -6rem;
+  }
+  .left-arrow-icon {
+    left: -6rem;
   }
 }
 
