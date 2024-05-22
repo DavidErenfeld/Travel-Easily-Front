@@ -1,4 +1,4 @@
-import "../global.css";
+import "../index.css";
 import "../queries.css";
 import "../components/shareTrip/Share.css";
 import { useEffect, useState } from "react";
