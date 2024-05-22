@@ -67,6 +67,9 @@
 }
 
 @media (max-width: 37em) {
+  html {
+    font-size: 35%;
+  }
   .arrow-to-main .left-arrow-icon {
     left: -3.2rem;
   }
