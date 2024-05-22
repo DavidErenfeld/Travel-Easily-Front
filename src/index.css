@@ -10,7 +10,7 @@ html {
 }
 @media (max-width: 37em) {
   html {
-    font-size: 35%;
+    font-size: 42%;
   }
   .arrow-to-main .left-arrow-icon {
     left: -3.2rem;
@@ -24,6 +24,12 @@ html {
   }
   .left-arrow-icon {
     left: -6rem;
+  }
+}
+
+@media (max-width: 24em) {
+  html {
+    font-size: 35%;
   }
 }
 
