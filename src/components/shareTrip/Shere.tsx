@@ -158,6 +158,7 @@ function Share({
   return (
     <main>
       <Header
+        goToMainPage={goToMainPage}
         userName={userName}
         imgUrl={imgUrl}
         endaleLogOut={endaleLogOut}

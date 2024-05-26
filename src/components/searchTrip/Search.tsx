@@ -138,6 +138,7 @@ function Search({
         userName={userName}
         imgUrl={imgUrl}
         endaleLogOut={endaleLogOut}
+        goToMainPage={goToMainPage}
         goToShare={goToShare}
         goToPersonalArea={goToPersonalArea}
         goToRegister={goToRegister}

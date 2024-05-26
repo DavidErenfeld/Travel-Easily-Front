@@ -36,7 +36,7 @@ function NumOfDays({
         <Country onCountrySelect={onCountrySelect} />
         {flag && (
           <span className="text-danger">
-            pleese select a number of days and a country
+            please select a number of days and a country
           </span>
         )}
       </div>

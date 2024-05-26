@@ -14,6 +14,7 @@ export interface HeaderProps {
   goToShare: () => void;
   goToMyTrips: () => void;
   endaleLogOut: () => void;
+  goToMainPage: () => void;
 }
 
 function Header({
@@ -27,6 +28,7 @@ function Header({
   endaleLogOut,
   imgUrl,
   userName,
+  goToMainPage,
 }: HeaderProps) {
   const [isNavigationClicked, setNavigationClicked] = useState(false);
   const personalAreaRef = useRef<HTMLDivElement>(null);
@@ -84,6 +86,7 @@ function Header({
         className="img-logo"
         src="/imgs/TRAVEL_easily_logo.jpg"
         alt="TRAVEL easily logo"
+        onClick={goToMainPage}
       />
       {!isNavigationClicked ? (
         !isUserConnected ? (

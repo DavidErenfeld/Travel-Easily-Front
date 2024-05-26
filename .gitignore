@@ -7,20 +7,25 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Node modules
 node_modules
 
+# Build output directories
 dist-ssr
+
+# Environment variables and certificates
 *.local
-public/imgs/Sizzy-72.2.0.exe
+.env
 client-cert.pem
 client-key.pem
 
+# Specific files
+public/imgs/Sizzy-72.2.0.exe
 
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
 .idea
-.env
 .DS_Store
 *.suo
 *.ntvs*

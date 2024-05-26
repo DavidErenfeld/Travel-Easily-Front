@@ -6,6 +6,7 @@ import "./Form.css";
 import CloseIcon from "../icons/CloseIcon";
 import { loginUser } from "../../services/loginService";
 import axios from "axios";
+import LoadingDots from "../Loader";
 
 const loginSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
@@ -30,23 +31,27 @@ function Login({ onClickRegister, onClickClose, onLogin }: LoginProps) {
     handleSubmit,
     formState: { errors },
   } = useForm<LoginFormData>({ resolver: zodResolver(loginSchema) });
+  const [loading, setLoading] = useState(false);
 
   const onSubmit = async (data: LoginFormData) => {
     try {
+      setLoading(true);
       await loginUser({
         email: data.email,
         password: data.password,
         userName: userName,
         imgUrl: imgUrl,
       });
-      console.log("user is logt");
       onLogin(true);
+      setLoading(false);
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         const errorMessage = error.response.data;
         setLoginError(errorMessage + " Please try again");
+        setLoading(false);
       } else {
         setLoginError("An unexpected error occurred. Please try again.");
+        setLoading(false);
       }
     }
   };
@@ -85,15 +90,21 @@ function Login({ onClickRegister, onClickClose, onLogin }: LoginProps) {
           )}
         </div>
       </section>
-      <div className="buttons-section">
-        <button type="submit" className="submit-btn">
-          Login
-        </button>
-        <p className="text-login-register">or</p>
-        <button onClick={onClickRegister} className="submit-btn rerister-btn">
-          Register
-        </button>
-      </div>
+      {loading ? (
+        <div className="main-loader-section">
+          <LoadingDots />
+        </div>
+      ) : (
+        <div className="buttons-section">
+          <button type="submit" className="submit-btn">
+            Login
+          </button>
+          <p className="text-login-register">or</p>
+          <button onClick={onClickRegister} className="submit-btn rerister-btn">
+            Register
+          </button>
+        </div>
+      )}
     </form>
   );
 }

@@ -28,6 +28,7 @@ function UpdateTrip({
   isUserConnected,
   imgUrl,
   userName,
+  goToMainPage,
   goToPersonalArea,
   goToShare,
   goToSearch,
@@ -90,6 +91,7 @@ function UpdateTrip({
   return (
     <main>
       <Header
+        goToMainPage={goToMainPage}
         userName={userName}
         imgUrl={imgUrl}
         endaleLogOut={endaleLogOut}

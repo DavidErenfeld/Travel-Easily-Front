@@ -3,6 +3,7 @@ import "./MainPage.css";
 import Heading from "../Heading/Heading";
 
 export interface MainPageProps {
+  goToMainPage: () => void;
   goToPersonalArea: () => void;
   goToSearch: () => void;
   goToShare: () => void;
@@ -26,12 +27,14 @@ function MainPage({
   goToMyTrips,
   goToRegister,
   endaleLogOut,
+  goToMainPage,
 }: MainPageProps) {
   return (
     <>
       <section className="main-page-section">
         <div className="hero-section">
           <Header
+            goToMainPage={goToMainPage}
             goToPersonalArea={goToPersonalArea}
             userName={userName}
             imgUrl={imgUrl}

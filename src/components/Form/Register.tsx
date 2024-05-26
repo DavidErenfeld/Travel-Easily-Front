@@ -8,6 +8,7 @@ import AddImgsIcon from "../icons/AddImgsIcon";
 import { googleSignin, registerUser } from "../../services/registerService";
 import axios from "axios";
 import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
+import LoadingDots from "../Loader";
 
 const defaultImage = "/imgs/new_worlld.jpg";
 
@@ -38,6 +39,7 @@ function Register({ onClickClose, goToLogin, onLogin }: RegisterProps) {
   const [imgFile, setImgFile] = useState<File | null>(null);
   const [imgSrc, setImgSrc] = useState(defaultImage);
   const [registerError, setRegisterError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
   const {
     register,
@@ -77,21 +79,23 @@ function Register({ onClickClose, goToLogin, onLogin }: RegisterProps) {
     if (imgFile) {
       imgUrl = (await handleUploadImage(imgFile)) || defaultImage;
     }
-
     try {
-      const registerResult = await registerUser({
+      setLoading(true);
+      await registerUser({
         userName: data.userName,
         email: data.email,
         password: data.password,
         imgUrl: imgUrl,
       });
-      console.log("user is registered: ", registerResult);
+      setLoading(false);
       goToLogin();
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         const errorMessage = error.response.data;
+        setLoading(false);
         setRegisterError(errorMessage + " Please try again");
       } else {
+        setLoading(false);
         setRegisterError("An unexpected error occurred. Please try again.");
       }
     }
@@ -177,9 +181,15 @@ function Register({ onClickClose, goToLogin, onLogin }: RegisterProps) {
           )}
         </div>
       </section>
-      <button type="submit" className="submit-btn">
-        Submit
-      </button>
+      {loading ? (
+        <div className="loader-section">
+          <LoadingDots />
+        </div>
+      ) : (
+        <button type="submit" className="submit-btn">
+          Submit
+        </button>
+      )}
 
       <GoogleLogin
         onSuccess={onGoogleLoginSuccess}

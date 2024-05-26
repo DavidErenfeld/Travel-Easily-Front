@@ -19,6 +19,7 @@ header {
   max-height: 9rem;
   width: 24rem;
   border-radius: 9px;
+  cursor: pointer;
 }
 
 .personal-area-logo {

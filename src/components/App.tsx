@@ -26,6 +26,7 @@ function App() {
   };
   const goToMainPage = () => {
     setCurrentPage("mainPage");
+    console.log("aa");
   };
   const goToPersonalArea = () => {
     setCurrentPage("personalArea");
@@ -184,6 +185,7 @@ function App() {
     default:
       displayedPage = (
         <MainPage
+          goToMainPage={goToMainPage}
           goToPersonalArea={goToPersonalArea}
           userName={userName}
           imgUrl={imgUrl}

@@ -32,6 +32,7 @@ function MyTrips({
   goToRegister,
   endaleLogOut,
   goToUpdateTrip,
+  goToMainPage,
 }: MyTripsProps) {
   const [trips, setTrips] = useState<ITrips[]>([]);
   const [errors, setErrors] = useState();
@@ -98,6 +99,7 @@ function MyTrips({
   return (
     <main>
       <Header
+        goToMainPage={goToMainPage}
         userName={userName}
         imgUrl={imgUrl}
         endaleLogOut={endaleLogOut}
